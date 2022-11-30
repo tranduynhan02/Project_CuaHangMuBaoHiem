@@ -42,7 +42,7 @@ To change this template use File | Settings | File Templates.
 
 <!-- Login Start -->
 <section>
-    <div class="form-container bg-img">
+    <div class="form-container">
         <div class="form-login">
             <form action="">
                 <div class="title">Đăng nhập</div>
@@ -57,7 +57,7 @@ To change this template use File | Settings | File Templates.
                     <input type="password" class="form-control" placeholder="Mật khẩu" name="pass">
                 </div>
                 <div class="form-group text-md-right">
-                    <a href="#">Quên mật khẩu?</a>
+                    <a href="forgot-password.jsp">Quên mật khẩu?</a>
                 </div>
                 <div class="form-group">
                     <button type="submit"> Đăng nhập</button>

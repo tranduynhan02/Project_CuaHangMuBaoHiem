@@ -42,30 +42,21 @@ To change this template use File | Settings | File Templates.
 
 <!-- Login Start -->
 <section>
-    <div class="form-container">
+    <div class="form-container bg-dangnhap">
         <div class="form-login">
             <form action="">
-                <div class="title">Đăng nhập</div>
+                <div class="title">Đặt lại mật khẩu</div>
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
-                        <span class="fa-solid fa-user"></span></div>
-                    <input type="text" class="form-control" placeholder="Tên đăng nhập" name="user">
+                        <span class="fa-solid fa-envelope"></span></div>
+                    <input type="text" class="form-control" placeholder="Email" name="email">
                 </div>
                 <div class="form-group">
-                    <div class="icon d-flex align-items-center justify-content-center">
-                        <span class="fa-solid fa-lock"></span></div>
-                    <input type="password" class="form-control" placeholder="Mật khẩu" name="pass">
-                </div>
-                <div class="form-group text-md-right">
-                    <a href="forgot-password.jsp">Quên mật khẩu?</a>
-                </div>
-                <div class="form-group">
-                    <button type="submit"> Đăng nhập</button>
+                    <button type="submit">Gửi</button>
                 </div>
             </form>
             <div class="form-footer">
-                <p>Bạn chưa có tài khoản?</p>
-                <a href="register.jsp">Đăng ký</a>
+                <a href="login.jsp">Đăng nhập</a>
             </div>
         </div>
     </div>

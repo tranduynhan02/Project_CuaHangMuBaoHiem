@@ -3,23 +3,25 @@
     margin: auto;
     font-size: 14px;
     justify-content: center;
-    background-color: black;
     padding: 60px;
+    border-radius: 5px;
+    background-image: url("http://localhost:8080/WebProject_war/img/login/nendangnhap.png");
+    /*opacity: 0.5;*/
 }
+
 .title{
     text-align: center;
     color: #FFD333;
     font-size: 40px;
     padding-bottom: 20px;
     font-weight: bold;
-
 }
 .form-login{
     width: 400px;
     background-color: whitesmoke;
     border-radius: 10px;
     margin: auto;
-    padding: 40px 30px;
+    padding: 30px;
 }
 .form-group{
     padding-bottom: 10px;
@@ -34,6 +36,7 @@
     padding-left: 10px;
 }
 .form-group input {
+    margin-bottom: 10px;
     padding-left: 30px;
     border-bottom: 1px solid #FFD333;
 }
@@ -58,7 +61,6 @@
     font-size: 22px;
     color: #6c757d;
     font-weight: bold;
-    border: none;
 }
 .form-group button:hover{
     color: #FFD333;

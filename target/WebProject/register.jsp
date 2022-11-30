@@ -42,7 +42,7 @@ To change this template use File | Settings | File Templates.
 
 <!-- Login Start -->
 <section>
-    <div class="form-container bg-img">
+    <div class="form-container">
         <div class="form-login">
             <form action="">
                 <div class="title">Đăng ký</div>
@@ -64,7 +64,7 @@ To change this template use File | Settings | File Templates.
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
                         <span class="fa-solid fa-lock"></span></div>
-                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="confirmpw">
+                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu" name="confirm-pw">
                 </div>
                 <div class="form-group">
                     <button type="submit"> Đăng ký</button>
