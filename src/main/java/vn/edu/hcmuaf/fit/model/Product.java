@@ -16,10 +16,12 @@ public class Product{
     private int amount;
     private List<String> comment;
 
+    private String decrispe;
+
     public Product() {
     }
 
-    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, List<String> img, double star, int amount, List<String> comment) {
+    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, List<String> img, double star, int amount, List<String> comment, String decrispe) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -32,6 +34,7 @@ public class Product{
         this.star = star;
         this.amount = amount;
         this.comment = comment;
+        this.decrispe =decrispe;
     }
 
     public int getId() {
@@ -128,5 +131,13 @@ public class Product{
 
     public void setComment(List<String> comment) {
         this.comment = comment;
+    }
+
+    public String getDecrispe() {
+        return decrispe;
+    }
+
+    public void setDecrispe(String decrispe) {
+        this.decrispe = decrispe;
     }
 }
