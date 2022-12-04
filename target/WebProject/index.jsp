@@ -94,7 +94,7 @@
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Giảm 20%</h6>
                     <h3 class="text-white mb-3">Ưu đãi đặc biệt</h3>
-                    <a href="" class="btn btn-primary"Mua ngay></a>
+                    <a href="" class="btn btn-primary">Mua ngay</a>
                 </div>
             </div>
             <div class="product-offer mb-30" style="height: 200px;">
