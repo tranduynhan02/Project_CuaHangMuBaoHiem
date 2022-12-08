@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.model;
+package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.controller.ListProduct;
 import vn.edu.hcmuaf.fit.model.Product;

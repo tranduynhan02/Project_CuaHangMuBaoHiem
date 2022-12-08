@@ -1,6 +1,10 @@
-package vn.edu.hcmuaf.fit.Model;
+package vn.edu.hcmuaf.fit.model;
+
+import vn.edu.hcmuaf.fit.model.Bill;
+import vn.edu.hcmuaf.fit.model.Cart;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Customer {
     private String id;
@@ -14,10 +18,12 @@ public class Customer {
     private Cart cart;
     private List<Bill> listBill;
 
+    private String email;
+
     public Customer() {
     }
 
-    public Customer(String id, String name, int phone, String address, String userName, String password, int permission) {
+    public Customer(String id, String name, int phone, String address, String userName, String password, int permission, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -27,6 +33,7 @@ public class Customer {
         this.permission = permission;
         this.cart = new Cart();
         this.listBill = new ArrayList<Bill>();
+        this.email = email;
     }
 
     public String getId() {
@@ -107,5 +114,13 @@ public class Customer {
 
     public void setListBill(List<Bill> listBill) {
         this.listBill = listBill;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -1,6 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.ProductService" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %><%--
   Created by IntelliJ IDEA.
   User: ACER
   Date: 11/6/2022
