@@ -72,7 +72,7 @@
             </a>
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">
-                    <a href="shop.jsp" class="nav-item nav-link">Nónbaoaor hiểm fullface</a>
+                    <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm fullface</a>
                     <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm 3/4</a>
                     <a href="shop.jsp" class="nav-item nav-link">Nón nửa đầu</a>
                     <a href="shop.jsp" class="nav-item nav-link">Nón trẻ em</a>
@@ -92,7 +92,7 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
                         <a href="shop.jsp" class="nav-item nav-link">Sản phẩm</a>
-                        <a href="pushop.jsp.jsp" class="nav-item nav-link">Thương hiệu</a>
+                        <a href="publicshop.jsp" class="nav-item nav-link">Thương hiệu</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
