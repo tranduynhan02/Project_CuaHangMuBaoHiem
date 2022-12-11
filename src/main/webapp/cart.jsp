@@ -1,3 +1,8 @@
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Collection" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,16 +33,18 @@
 </head>
 
 <body>
-   
 
+    <!-- Header Star -->
+    <%@include file="header.jsp"%>
+    <!-- Header End -->
 
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="index.html">Trang chủ</a>
-                    <a class="breadcrumb-item text-dark" href="shop.html">Cửa hàng</a>
+                    <a class="breadcrumb-item text-dark" href="index.jsp">Trang chủ</a>
+                    <a class="breadcrumb-item text-dark" href="/Project_CuaHangMuBaoHiem_war/list-product">Sản phẩm</a>
                     <span class="breadcrumb-item active">Giỏ hàng</span>
                 </nav>
             </div>
@@ -54,81 +61,54 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Sản phẩm</th>
-                            <th>Giá tiền</th>
-                            <th>Số lượng</th>
+                         </th>   <th>Giá tiền</th>
+                            <th>Số lượng
                             <th>Tổng tiền</th>
                             <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody class="align-middle">
+                        <% NumberFormat nf = new NumberFormat();
+                            for(Product p: cart.getListProduct()){
+                        %>
                         <tr>
-                            <td class="align-middle"><img src="https://nontaidat.vn/image/cache/catalog/non-bao-hiem/kyt/venom/kyt-thitipong-2016-6-150x150.jpg" alt="" style="width: 50px;"> KYT Venom Thitipong 2016</td>
-                            <td class="align-middle">1.990.000đ</td>
+                            <td class="align-middle"><div style="float: left"><img src="<%= p.getImg().get(0) %>" alt="" style="width: 50px;"> <%= p.getName() %></div></td>
+                            <td class="align-middle"><%=nf.numberFormat(p.getPrice())%>đ</td>
                             <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
+
+
+                                <div class="input-group mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
+                                        <form action="/Project_CuaHangMuBaoHiem_war/Minus" method="get">
+                                            <input type="hidden" name="minus" value="<%= p.getId() %>">
+                                            <button type="submit" class="btn btn-sm btn-primary btn"> <i class="fa fa-minus"></i></button>
+                                        </form>
                                     </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
+                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="<%= p.getQuantity() %>">
                                     <div class="input-group-btn">
+                                        <form method="get" action="/Project_CuaHangMuBaoHiem_war/Plus">
+                                            <input type="hidden" name="plus" value="<%= p.getId() %>">
                                         <button class="btn btn-sm btn-primary btn-plus">
                                             <i class="fa fa-plus"></i>
                                         </button>
+                                        </form>
                                     </div>
                                 </div>
+
                             </td>
-                            <td class="align-middle">1.990.000đ</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                        </tr>
-                        <tr>
-                            <td class="align-middle"><img src="https://nontaidat.vn/image/cache/catalog/non-bao-hiem/LS2/ff800/ls2-storm-ff800-nepa-1-150x150.jpg" alt="" style="width: 50px;"> LS2 Storm Nepa</td>
-                            <td class="align-middle">2.900.000đ</td>
+                            <td class="align-middle"><%= nf.numberFormat(p.getPrice()*p.getQuantity()) %>đ</td>
                             <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">2.900.000đ</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                <form method="get" action="/Project_CuaHangMuBaoHiem_war/Delete">
+                                <input type="hidden" name="delete" value="<%= p.getId() %>">
+                                <button class="btn btn-sm btn-danger" ><i class="fa fa-times"></i></button>
+                            </form></td>
                         </tr>
-                        <tr>
-                            <td class="align-middle"><img src="https://nontaidat.vn/image/cache/catalog/non-bao-hiem/LS2/ff800/ls2-storm-ff800-sprinter-1-150x150.jpg" alt="" style="width: 50px;"> LS2 Storm Sprinter</td>
-                            <td class="align-middle">2.900.000đ</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">2.900.000đ</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                        </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-30" action="">
+                <form class="mb-30" >
                     <div class="input-group">
                         <input type="text" class="form-control border-0 p-4" placeholder="Mã giảm giá">
                         <div class="input-group-append">
@@ -141,25 +121,37 @@
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Tổng tiền hàng</h6>
-                            <h6>7.790.000đ</h6>
+                            <h6><%=  nf.numberFormat(cart.getTotal()) %>đ</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Phí vận chuyển</h6>
+                            <% if(cart.getQuanlity()==0){%>
+                            <h6 class="font-weight-medium">0đ</h6>
+                            <%}else{%>
                             <h6 class="font-weight-medium">50.000đ</h6>
+                            <%}%>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Tổng thanh toán</h5>
-                            <h5>7.840.000đ</h5>
+                            <%if(cart.getQuanlity()==0){%>
+                            <h5><%= nf.numberFormat(cart.getTotal()) %>đ</h5>
+                            <%}else{%>
+                            <h5><%= nf.numberFormat(cart.getTotal() + 50000) %>đ</h5>
+                            <%}%>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiến hành thanh toán</button>
+                        <a href="checkout.jsp" style="text-decoration: none"><button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiến hành thanh toán</button></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Cart End -->
+
+    <!-- Footer Start -->
+    <%@include file="footer.jsp" %>
+    <!-- Footer End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>

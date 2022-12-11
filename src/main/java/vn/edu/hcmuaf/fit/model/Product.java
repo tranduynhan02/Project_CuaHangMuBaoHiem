@@ -3,7 +3,7 @@ package vn.edu.hcmuaf.fit.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product{
+public class Product {
     private int id;
     private String name;
     private String brand;
@@ -19,27 +19,29 @@ public class Product{
 
     private String decrispe;
 
+    private int quantity;
+
     public Product() {
     }
 
-    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, List<String> img, double star, int amount, String decrispe) {
+    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, double star, int amount, String decrispe) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.brand = brand;
-        this. size = size;
+        this.size = size;
         this.color = color;
         this.type = type;
         this.discount = discount;
-        this.img = img;
+        this.img = new ArrayList<String>();
         this.star = star;
         this.amount = amount;
         this.comment = new ArrayList<Comment>();
-        this.decrispe =decrispe;
+        this.decrispe = decrispe;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -140,5 +142,25 @@ public class Product{
 
     public void setDecrispe(String decrispe) {
         this.decrispe = decrispe;
+    }
+
+    public void addImg(String img) {
+        this.img.add(img);
+    }
+
+    public String toString() {
+        return id + " " + name;
+    }
+
+    public String getKey() {
+        return Integer.toString(this.id);
+    }
+
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
