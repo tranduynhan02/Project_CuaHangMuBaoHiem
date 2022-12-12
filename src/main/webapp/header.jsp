@@ -42,13 +42,12 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left pt-2" style="margin-top: 8px">
-            <form action="">
+            <form action="/find-Product" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm">
+                    <input type="text" name="text" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm">
                     <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+                            <input type="submit" value="Tìm kiếm" class="input-group-text bg-transparent text-primary">
+<%--                                <i class="fa fa-search"></i>--%>
                     </div>
                 </div>
             </form>

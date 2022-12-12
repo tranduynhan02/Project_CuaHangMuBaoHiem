@@ -1,10 +1,11 @@
 package vn.edu.hcmuaf.fit.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Product{
-    private int id;
+    private String id;
     private String name;
     private String brand;
     private long price;
@@ -18,11 +19,13 @@ public class Product{
     private List<Comment> comment;
 
     private String decrispe;
+    private Date release;
+    private int count;
 
     public Product() {
     }
 
-    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, List<String> img, double star, int amount, String decrispe) {
+    public Product(String id, String name, long price, String brand, int size, String color, String type, double discount, double star, int amount, String decrispe, Date release, int count) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -31,18 +34,20 @@ public class Product{
         this.color = color;
         this.type = type;
         this.discount = discount;
-        this.img = img;
+        this.img = new ArrayList<String>();
         this.star = star;
         this.amount = amount;
         this.comment = new ArrayList<Comment>();
         this.decrispe =decrispe;
+        this.release = release;
+        this.count = count;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -140,5 +145,21 @@ public class Product{
 
     public void setDecrispe(String decrispe) {
         this.decrispe = decrispe;
+    }
+
+    public Date getRelease() {
+        return release;
+    }
+
+    public void setRelease(Date release) {
+        this.release = release;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

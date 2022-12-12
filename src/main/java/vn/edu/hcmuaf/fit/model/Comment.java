@@ -2,10 +2,12 @@ package vn.edu.hcmuaf.fit.model;
 
 public class Comment {
     private String id;
+    private String idCus;
     private String comment;
 
-    public Comment(String id, String comment) {
+    public Comment(String id, String idCus, String comment) {
         this.id = id;
+        this.idCus =idCus;
         this.comment = comment;
     }
 
@@ -23,5 +25,13 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getIdCus() {
+        return idCus;
+    }
+
+    public void setIdCus(String idCus) {
+        this.idCus = idCus;
     }
 }

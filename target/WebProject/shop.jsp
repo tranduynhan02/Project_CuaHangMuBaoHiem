@@ -62,37 +62,37 @@
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <!-- Price Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo giá tiền</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="price-all">
-                        <label class="custom-control-label" for="price-all">All Price</label>
+                        <input type="radio" name="price" class="custom-control-input" checked id="price-all" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="price-all">Tất cả</label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-1">
-                        <label class="custom-control-label" for="price-1">$0 - $100</label>
+                        <input type="radio" name="price" class="custom-control-input" id="price-1" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="price-1">0VND - 100.000VND</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-2">
-                        <label class="custom-control-label" for="price-2">$100 - $200</label>
+                        <input type="radio" name="price" class="custom-control-input" id="price-2" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="price-2">100.000VND - 200.000VND</label>
                         <span class="badge border font-weight-normal">295</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-3">
-                        <label class="custom-control-label" for="price-3">$200 - $300</label>
+                        <input type="radio" name="price" class="custom-control-input" id="price-3" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="price-3">200.000VND - 300.000VND</label>
                         <span class="badge border font-weight-normal">246</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="price-4">
-                        <label class="custom-control-label" for="price-4">$300 - $400</label>
+                        <input type="radio" name="price" class="custom-control-input" id="price-4" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="price-4">300.000VND - 400.000VND</label>
                         <span class="badge border font-weight-normal">145</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="price-5">
-                        <label class="custom-control-label" for="price-5">$400 - $500</label>
+                        <input type="radio" name="price" class="custom-control-input" id="price-5" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="price-5">400.000VND - 500.000VND</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
                 </form>
@@ -100,37 +100,37 @@
             <!-- Price End -->
 
             <!-- Star Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo sao</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="price-all">All Color</label>
+                        <input type="radio" name="star" class="custom-control-input" checked id="star-all" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="star-all">Tất cả</label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-1">
-                        <label class="custom-control-label" for="color-1">5 sao</label>
+                        <input type="radio" name="star" class="custom-control-input" id="star-5" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="star-5">5 sao</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-2">
-                        <label class="custom-control-label" for="color-2">4 sao</label>
+                        <input type="radio" name="star" class="custom-control-input" id="star-4" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="star-4">4 sao</label>
                         <span class="badge border font-weight-normal">295</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-3">
-                        <label class="custom-control-label" for="color-3">3 sao</label>
+                        <input type="radio" name="star" class="custom-control-input" id="star-3" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="star-3">3 sao</label>
                         <span class="badge border font-weight-normal">246</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-4">
-                        <label class="custom-control-label" for="color-4">2 sao</label>
+                        <input type="radio" name="star" class="custom-control-input" id="star-2" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="star-2">2 sao</label>
                         <span class="badge border font-weight-normal">145</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="color-5">
-                        <label class="custom-control-label" for="color-5">1 sao</label>
+                        <input type="radio" name="star" class="custom-control-input" id="star-1" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <label class="custom-control-label" for="star-1">1 sao</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
                 </form>
@@ -152,25 +152,26 @@
                         </div>
                         <div class="ml-2">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
+                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" style="width: 108px">Sắp xếp</button>
+                                <div class="dropdown-menu dropdown-menu-right" style="min-width: 0">
+                                    <a class="dropdown-item" href="#">Mới nhất</a>
+                                    <a class="dropdown-item" href="#">Phổ biến</a>
+                                    <a class="dropdown-item" href="#">Số sao</a>
                                 </div>
                             </div>
-                            <div class="btn-group ml-2">
-                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">10</a>
-                                    <a class="dropdown-item" href="#">20</a>
-                                    <a class="dropdown-item" href="#">30</a>
-                                </div>
-                            </div>
+<%--                            <div class="btn-group ml-2">--%>
+<%--                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>--%>
+<%--                                <div class="dropdown-menu dropdown-menu-right">--%>
+<%--                                    <a class="dropdown-item" href="#">10</a>--%>
+<%--                                    <a class="dropdown-item" href="#">20</a>--%>
+<%--                                    <a class="dropdown-item" href="#">30</a>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                         </div>
                     </div>
                 </div>
-                <% List<Product> list = ProductService.getData();
+
+                <%  List<Product> list = ProductService.getData();
                     for (int i=0;i< list.size();i++){%>
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
@@ -203,11 +204,11 @@
                 <div class="col-12">
                     <nav>
                         <ul class="pagination justify-content-center">
-                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Sau</a></li>
                         </ul>
                     </nav>
                 </div>

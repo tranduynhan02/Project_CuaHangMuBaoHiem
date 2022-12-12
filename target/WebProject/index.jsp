@@ -1,4 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.controller.ListProduct" %>
+<%@ page import="vn.edu.hcmuaf.fit.controller.FilterProduct" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="java.util.List" %><%--
