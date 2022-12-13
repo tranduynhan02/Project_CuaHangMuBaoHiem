@@ -1,15 +1,12 @@
 package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.Database.DBConnect;
-import vn.edu.hcmuaf.fit.model.Comment;
 import vn.edu.hcmuaf.fit.model.Product;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ProductService {
 
@@ -19,40 +16,65 @@ public class ProductService {
         return list;
     }
 
+    public static Product getProduct(String idp) throws SQLException {
+        Product p = new Product();
+        List<String> img = new ArrayList<String>();
+        Map<String, List<String>> comment = new HashMap<String, List<String>>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        Statement statement = dbConnect.get();
+        try{
+            ResultSet rsImg = statement.executeQuery("select img from image where id = idp");
+            while (rsImg.next()){
+                img.add(rsImg.getString("img"));
+            }
+            ResultSet rsIdCus = statement.executeQuery("select idCus from comment where id = idp");
+            while (rsIdCus.next()){
+                List<String> listComment = new ArrayList<String>();
+                comment.put(rsIdCus.getString("idCus"),listComment);
+            }
+            for(String idc: comment.keySet()){
+                ResultSet resultSet = statement.executeQuery("select comment from comment where id = idp and idCus = idc");
+                List<String> listCom = comment.get(idc);
+                while ((resultSet.next())){
+                    listCom.add(resultSet.getString("comment"));
+                }
+                comment.put(idc, listCom);
+            }
+            ResultSet rsProduct = statement.executeQuery("select p.id, p.name, p.branch, p.price, p.size,\" +\n" +
+                    "                    \" p.color, p.type, p.discount, p.star,\" +\n" +
+                    "                    \" p.amount, p.decirspe from product p where id = idp");
+            while (rsProduct.next()){
+                p.setId(idp);
+                p.setName(rsProduct.getString("name"));
+                p.setBrand(rsProduct.getString("brand"));
+                p.setPrice(rsProduct.getLong("price"));
+                p.setSize(rsProduct.getString("size"));
+                p.setColor(rsProduct.getString("color"));
+                p.setType(rsProduct.getString("type"));
+                p.setDiscount(rsProduct.getDouble("discount"));
+                p.setImg(img);
+                p.setStar(rsProduct.getDouble("star"));
+                p.setAmount(rsProduct.getInt("amount"));
+                p.setComment(comment);
+                p.setDecrispe(rsProduct.getString("decrispe"));
+                p.setRelease(rsProduct.getDate("release"));
+                p.setCount(rsProduct.getInt("count"));
+               break;
+            }
+            return p;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static List<Product> findProduct(String para){
         List<Product> list = new ArrayList<Product>();
-        List<String> img = new ArrayList<String>();
-        List<Comment> comment = new ArrayList<Comment>();
-        String idp;
         DBConnect dbConnect = DBConnect.getInstance();
         Statement statement = dbConnect.get();
         try {
-            ResultSet rs = statement.executeQuery("select p.id, p.name, p.branch, p.price, p.size," +
-                    " p.color, p.type, p.discount, p.star," +
-                    " p.amount, p.decirspe from product p where name like '%para%'");
+            ResultSet rs = statement.executeQuery("select id from product p where name like '%para%'");
             while(rs.next()){
-               idp = rs.getString("id") ;
-               break;
-            }
-            rs.first();
-            ResultSet i = statement.executeQuery("setlet img from img where id = idp");
-            while(i.next()){
-                img.add(rs.getString("img"));
-            }
-            ResultSet c = statement.executeQuery("setlet img from comment where idPro = idp");
-            while(c.next()){
-                comment.add(new Comment(c.getString("idPro"),c.getString("idCus"),
-                        c.getString("comment")));
-            }
-            while (rs.next()){
-                list.add(new Product(rs.getString("id"),rs.getString("name"),rs.getLong("price"),
-                        rs.getString("brand"),rs.getInt("size"),rs.getString("color"),
-                        rs.getString("type"),rs.getDouble("discount"),rs.getDouble("star"),
-                        rs.getInt("amount"),rs.getString("decrispe"),rs.getDate("release"),rs.getInt("count")));
-            }
-            for(Product p :list){
-                p.setImg(img);
-                p.setComment(comment);
+               list.add(getProduct(rs.getString("id")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -63,7 +85,7 @@ public class ProductService {
         List<Product> result = new ArrayList<Product>();
         DBConnect dbConnect = DBConnect.getInstance();
         Statement statement = dbConnect.get();
-        ResultSet rs;
+        ResultSet rs = null;
         try{
             switch (filter){
                 case "price-all": rs = statement.executeQuery("select id from product");
@@ -78,6 +100,9 @@ public class ProductService {
                 case "star-3" : rs = statement.executeQuery("select id from product where star between 2 and 3");
                 case "star-4" : rs = statement.executeQuery("select id from product where star between 3 and 4");
                 case "star-5" : rs = statement.executeQuery("select id from product where star between 4 and 5");
+            }
+            while(rs.next()){
+                result.add(getProduct(rs.getString("id")));
             }
 
         } catch (SQLException e) {

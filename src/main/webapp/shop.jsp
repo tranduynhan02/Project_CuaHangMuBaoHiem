@@ -66,32 +66,32 @@
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="price" class="custom-control-input" checked id="price-all" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="price" class="custom-control-input" checked id="price-all">
                         <label class="custom-control-label" for="price-all">Tất cả</label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="price" class="custom-control-input" id="price-1" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="price" class="custom-control-input" id="price-1">
                         <label class="custom-control-label" for="price-1">0VND - 100.000VND</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="price" class="custom-control-input" id="price-2" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="price" class="custom-control-input" id="price-2">
                         <label class="custom-control-label" for="price-2">100.000VND - 200.000VND</label>
                         <span class="badge border font-weight-normal">295</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="price" class="custom-control-input" id="price-3" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="price" class="custom-control-input" id="price-3">
                         <label class="custom-control-label" for="price-3">200.000VND - 300.000VND</label>
                         <span class="badge border font-weight-normal">246</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="price" class="custom-control-input" id="price-4" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="price" class="custom-control-input" id="price-4">
                         <label class="custom-control-label" for="price-4">300.000VND - 400.000VND</label>
                         <span class="badge border font-weight-normal">145</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="radio" name="price" class="custom-control-input" id="price-5" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="price" class="custom-control-input" id="price-5">
                         <label class="custom-control-label" for="price-5">400.000VND - 500.000VND</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
@@ -104,32 +104,32 @@
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="star" class="custom-control-input" checked id="star-all" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="star" class="custom-control-input" checked id="star-all">
                         <label class="custom-control-label" for="star-all">Tất cả</label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="star" class="custom-control-input" id="star-5" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="star" class="custom-control-input" id="star-5">
                         <label class="custom-control-label" for="star-5">5 sao</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="star" class="custom-control-input" id="star-4" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="star" class="custom-control-input" id="star-4">
                         <label class="custom-control-label" for="star-4">4 sao</label>
                         <span class="badge border font-weight-normal">295</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="star" class="custom-control-input" id="star-3" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="star" class="custom-control-input" id="star-3">
                         <label class="custom-control-label" for="star-3">3 sao</label>
                         <span class="badge border font-weight-normal">246</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="radio" name="star" class="custom-control-input" id="star-2" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="star" class="custom-control-input" id="star-2">
                         <label class="custom-control-label" for="star-2">2 sao</label>
                         <span class="badge border font-weight-normal">145</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="radio" name="star" class="custom-control-input" id="star-1" href="<%= response.encodeURL("/vn/edu/hcmuaf/fit/controller/ListProduct.java?filter="+this)%>">
+                        <input type="radio" name="star" class="custom-control-input" id="star-1">
                         <label class="custom-control-label" for="star-1">1 sao</label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
@@ -159,14 +159,6 @@
                                     <a class="dropdown-item" href="#">Số sao</a>
                                 </div>
                             </div>
-<%--                            <div class="btn-group ml-2">--%>
-<%--                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>--%>
-<%--                                <div class="dropdown-menu dropdown-menu-right">--%>
-<%--                                    <a class="dropdown-item" href="#">10</a>--%>
-<%--                                    <a class="dropdown-item" href="#">20</a>--%>
-<%--                                    <a class="dropdown-item" href="#">30</a>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
                         </div>
                     </div>
                 </div>
