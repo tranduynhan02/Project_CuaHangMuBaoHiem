@@ -1,0 +1,30 @@
+package vn.edu.hcmuaf.fit.controller;
+
+import vn.edu.hcmuaf.fit.model.Cart;
+import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.service.ProductService;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+@WebServlet(name = "Add", value = "/Add")
+public class Add extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        Product p = ProductService.getProductById(id);
+        p.setQuantity(1);
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        cart.put(p);
+//        request.getSession().setAttribute("cart",cart);
+        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/list-product");
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}

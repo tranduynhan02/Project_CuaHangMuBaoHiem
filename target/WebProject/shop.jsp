@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %><%--
   Created by IntelliJ IDEA.
   User: ACER
   Date: 11/6/2022
@@ -170,31 +171,34 @@
                         </div>
                     </div>
                 </div>
-                <% List<Product> list = ProductService.getData();
-                    for (int i=0;i< list.size();i++){%>
+                <% NumberFormat nf = new NumberFormat();
+                    List<Product> list =(List<Product>) request.getAttribute("list");
+                    for(Product p : list){
+                %>
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="<%=list.get(i).getImg()%>" alt="">
+                            <img class="img-fluid w-100" src="<%=p.getImg().get(0)%>" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" +p.getId()%>"><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href="detail.jsp"><i class="fa fa-search"></i></a>
+                                <a class="btn btn-outline-dark btn-square" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><i class="fa fa-search"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href=""><%=list.get(i).getName()%>></a>
+                            <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><%=p.getName()%></a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5><%=list.get(i).getPrice()%></h5><h6 class="text-muted ml-2"><del><%=list.get(i).getPrice()%></del></h6>
+                                <h5><%=nf.numberFormat(p.getPrice())%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p.getPrice())%>đ</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
+                                <%
+                                    for(int i = 0; i<p.getStar();i++){
+                                %>
                                 <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
+
+                                <% } %>
+                                <small>(<%=p.getAmount()%>)</small>
                             </div>
                         </div>
                     </div>

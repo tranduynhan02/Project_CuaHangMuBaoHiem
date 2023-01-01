@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.Database;
 
-import vn.edu.hcmuaf.fit.Model.Product;
+import vn.edu.hcmuaf.fit.model.Product;
 
 import java.sql.*;
 

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %><%--
 Created by IntelliJ IDEA.
 User: ACER
 Date: 11/6/2022
@@ -45,16 +46,17 @@ To change this template use File | Settings | File Templates.
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Home</a>
-                <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                <span class="breadcrumb-item active">Shop Detail</span>
+                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                <a class="breadcrumb-item text-dark" href="#">Sản phẩm</a>
+                <span class="breadcrumb-item active">Chi tiết sản phẩm</span>
             </nav>
         </div>
     </div>
 </div>
 <!-- Breadcrumb End -->
 
-
+<% NumberFormat nf = new NumberFormat();
+    Product p= (Product) request.getAttribute("product"); %>
 <!-- Shop Detail Start -->
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
@@ -62,17 +64,14 @@ To change this template use File | Settings | File Templates.
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="img/product1.png" alt="Image">
+                        <img class="w-100 h-100" src="<%= p.getImg().get(0)%>" alt="Image">
                     </div>
+                    <% for(int i = 1;i<p.getImg().size();i++){%>
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product2.jpg" alt="Image">
+                        <img class="w-100 h-100" src="<%=p.getImg().get(i)%>" alt="Image">
                     </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product3.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product4.png" alt="Image">
-                    </div>
+
+                    <%}%>
                 </div>
                 <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                     <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -85,7 +84,7 @@ To change this template use File | Settings | File Templates.
 
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
-                <h3>Tên sản phẩm</h3>
+                <h3><%=p.getName()%></h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -94,12 +93,12 @@ To change this template use File | Settings | File Templates.
                         <small class="fas fa-star-half-alt"></small>
                         <small class="far fa-star"></small>
                     </div>
-                    <small class="pt-1">(99 Reviews)</small>
+                    <small class="pt-1">(<%= p.getAmount() %> Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat(p.getPrice()) %>đ</h3>
                 <p class="mb-4">Mô tả sản phẩm</p>
                 <div class="d-flex mb-3">
-                    <strong class="text-dark mr-3">Sizes:</strong>
+                    <strong class="text-dark mr-3">Kích thước:</strong>
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="size-2" name="size">
@@ -120,7 +119,7 @@ To change this template use File | Settings | File Templates.
                     </form>
                 </div>
                 <div class="d-flex mb-4">
-                    <strong class="text-dark mr-3">Colors:</strong>
+                    <strong class="text-dark mr-3">Màu sắc:</strong>
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="color-1" name="color">
@@ -147,29 +146,35 @@ To change this template use File | Settings | File Templates.
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary border-0 text-center" style="height: 30px" value="1">
+
+                        <input type="text" class="form-control bg-secondary border-0 text-center" name="quantity" style="height: 30px" value="1">
+
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</button>
+
+
+                   <a href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" + p.getId()%>"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
+                       giỏ hàng</button></a>
+
+
                 </div>
                 <div class="d-flex pt-2">
-                    <strong class="text-dark mr-2">Share on:</strong>
+                    <strong class="text-dark mr-2">Chia sẻ:</strong>
                     <div class="d-inline-flex">
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://facebook.com" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://twitter.com" target="_blank">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://linkedin.com" target="_blank">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://pinterest.com" target="_blank">
                             <i class="fab fa-pinterest"></i>
                         </a>
                     </div>
@@ -187,8 +192,7 @@ To change this template use File | Settings | File Templates.
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
-                        <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                        <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                        <p><%=p.getDecrispe()%></p>
                     </div>
 
                     <div class="tab-pane fade" id="tab-pane-3">

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.model.Cart" %><%--
   Created by IntelliJ IDEA.
   User: ACER
   Date: 11/6/2022
@@ -91,7 +91,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
-                        <a href="shop.jsp" class="nav-item nav-link">Sản phẩm</a>
+                        <a href="/Project_CuaHangMuBaoHiem_war/list-product" class="nav-item nav-link">Sản phẩm</a>
                         <a href="publicshop.jsp" class="nav-item nav-link">Thương hiệu</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
@@ -99,9 +99,15 @@
                         <a href="login.jsp" class="btn px-0">
                             <i class="fas fa-user text-primary"></i>
                         </a>
-                        <a href="cart.jsp" class="btn px-0 ml-3">
+                        <a href="/Project_CuaHangMuBaoHiem_war/ListProductInCart" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                            <% Cart cart = (Cart) request.getSession().getAttribute("cart");
+                            if(cart== null){
+                                cart = new Cart();
+                            }
+                                request.getSession().setAttribute("cart",cart);
+                            %>
+                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><%=cart.getQuanlity()%></span>
                         </a>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 
 <head>
@@ -26,6 +27,11 @@
 </head>
 
 <body>
+
+    <!-- Header Star -->
+    <%@include file="header.jsp"%>
+    <!-- Header End -->
+
 
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
@@ -158,9 +164,9 @@
     </div>
     <!-- Checkout End -->
 
-
-
-
+    <!-- Footer Start -->
+    <%@include file="footer.jsp" %>
+    <!-- Footer End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
