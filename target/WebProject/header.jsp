@@ -42,7 +42,7 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left pt-2" style="margin-top: 8px">
-            <form action="/find-Product" method="get">
+            <form action="/Project_CuaHangMuBaoHiem_war/find-product" method="get">
                 <div class="input-group">
                     <input type="text" name="text" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm">
                     <div class="input-group-append">

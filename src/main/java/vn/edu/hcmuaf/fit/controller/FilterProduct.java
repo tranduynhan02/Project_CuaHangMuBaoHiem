@@ -9,12 +9,14 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ListProduct", value = "/list-product")
+@WebServlet(name = "FilterProduct", value = "/filter-product")
 public class FilterProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String filter = request.getParameter("filter");
-        request.setAttribute("list",ProductService.filterProduct(filter));
+        String filter = request.getParameter("id");
+        String[] price = request.getParameterValues("price");
+        String[] star = request.getParameterValues("star");
+        request.setAttribute("list",ProductService.filterProduct(price,star));
         request.getRequestDispatcher("shop.jsp").forward(request,response);
     }
 

@@ -160,4 +160,25 @@ public class Product{
     public void setCount(int count) {
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", size='" + size + '\'' +
+                ", color='" + color + '\'' +
+                ", type='" + type + '\'' +
+                ", discount=" + discount +
+                ", img=" + img +
+                ", star=" + star +
+                ", amount=" + amount +
+                ", comment=" + comment +
+                ", decrispe='" + decrispe + '\'' +
+                ", release=" + release +
+                ", count=" + count +
+                '}';
+    }
 }
