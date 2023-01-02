@@ -128,8 +128,8 @@
             <!-- Star End -->
             <input type="submit" value="Lọc" style="width: 150px; margin-left: 96px; color: white; background: #FFD333; border: 1px solid #dee2e6">
             </form>
-            </div>
-            <!-- Star End -->
+        </div>
+        <!-- Star End -->
 
 
         <!-- Shop Sidebar End -->

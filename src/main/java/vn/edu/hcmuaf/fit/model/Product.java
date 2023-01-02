@@ -7,8 +7,7 @@ public class Product{
     private String name;
     private String brand;
     private long price;
-    private String size;
-    private String color;
+
     private String type;
     private double discount;
     private List<String> img;
@@ -18,18 +17,17 @@ public class Product{
 
     private String decrispe;
     private Date release;
-    private int count;
+    private List<DetailProduct> detail;
+    private int quantity;
 
     public Product() {
     }
 
-    public Product(String id, String name, long price, String brand, String size, String color, String type, double discount, double star, int amount, String decrispe, Date release, int count) {
+    public Product(String id, String name, long price, String brand, String type, double discount, double star, int amount, String decrispe, Date release) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.brand = brand;
-        this. size = size;
-        this.color = color;
         this.type = type;
         this.discount = discount;
         this.img = new ArrayList<String>();
@@ -38,11 +36,11 @@ public class Product{
         this.comment = new HashMap<String, List<String>>();
         this.decrispe =decrispe;
         this.release = release;
-        this.count = count;
+        this.detail = new ArrayList<DetailProduct>();
     }
 
     public String getId() {
-        return id;
+        return detail.get(0).getId();
     }
 
     public void setId(String id) {
@@ -71,22 +69,6 @@ public class Product{
 
     public void setPrice(long price) {
         this.price = price;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getType() {
@@ -153,12 +135,20 @@ public class Product{
         this.release = release;
     }
 
-    public int getCount() {
-        return count;
+    public List<DetailProduct> getDetail() {
+        return detail;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setDetail(List<DetailProduct> detail) {
+        this.detail = detail;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -168,8 +158,6 @@ public class Product{
                 ", name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", price=" + price +
-                ", size='" + size + '\'' +
-                ", color='" + color + '\'' +
                 ", type='" + type + '\'' +
                 ", discount=" + discount +
                 ", img=" + img +
@@ -178,7 +166,7 @@ public class Product{
                 ", comment=" + comment +
                 ", decrispe='" + decrispe + '\'' +
                 ", release=" + release +
-                ", count=" + count +
+                ", detail=" + detail +
                 '}';
     }
 }

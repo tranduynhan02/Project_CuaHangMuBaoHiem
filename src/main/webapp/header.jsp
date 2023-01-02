@@ -46,8 +46,8 @@
                 <div class="input-group">
                     <input type="text" name="text" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm">
                     <div class="input-group-append">
-                        <input type="submit" value="Tìm kiếm" class="input-group-text bg-transparent text-primary">
-                        <%--                                <i class="fa fa-search"></i>--%>
+                            <input type="submit" value="Tìm kiếm" class="input-group-text bg-transparent text-primary">
+<%--                                <i class="fa fa-search"></i>--%>
                     </div>
                 </div>
             </form>

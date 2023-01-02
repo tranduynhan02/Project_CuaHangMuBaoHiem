@@ -19,7 +19,7 @@ public class Cart {
     public void put(Product p){
         if(cart.containsKey(p.getId())){
             Product p1 = cart.get(p.getId());
-            p1.setCount(p1.getCount()+1);
+            p1.setQuantity(p1.getQuantity()+1);
             cart.put(p.getId(),p1);
         }else{
             cart.put(p.getId(), p);
@@ -31,8 +31,8 @@ public class Cart {
         total =0;
         quantity = 0;
         for(Product p : cart.values()){
-            total += p.getCount()* p.getPrice();
-            quantity += p.getCount();
+            total += p.getQuantity()* p.getPrice();
+            quantity += p.getQuantity();
         }
     }
     public Collection<Product> getListProduct() {
@@ -57,10 +57,10 @@ public class Cart {
     }
     public void minus(String id){
         Product p1 = this.cart.get(id);
-        if(p1.getCount()==1){
+        if(p1.getQuantity()==1){
             remove(id);
         }else {
-            p1.setCount(p1.getCount() - 1);
+            p1.setQuantity(p1.getQuantity() - 1);
             cart.put(id, p1);
         }
         updateTotalMoneyQuantity();

@@ -21,7 +21,7 @@ public class Plus extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        p.setCount(1);
+        p.setQuantity(1);
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         cart.put(p);
 //        request.getSession().setAttribute("cart",cart);
