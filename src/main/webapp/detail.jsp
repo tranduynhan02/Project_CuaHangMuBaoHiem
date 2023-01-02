@@ -1,4 +1,5 @@
-`````<%--
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %><%--
 Created by IntelliJ IDEA.
 User: ACER
 Date: 11/6/2022
@@ -31,6 +32,33 @@ To change this template use File | Settings | File Templates.
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
+
+    <style>
+
+        input.star { display: none; }
+
+        label.star {
+            float: right;
+            padding: 10px;
+            font-size: 20px;
+            color: #444;
+            transition: all .2s;
+        }
+
+        input.star:checked ~ label.star:before {
+            content: '\f005';
+            color: #FD4;
+            transition: all .25s;
+        }
+
+        label.star:hover { cursor: pointer }
+
+        label.star:before {
+            content: '\f006';
+            font-family: FontAwesome;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,16 +73,17 @@ To change this template use File | Settings | File Templates.
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Home</a>
-                <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                <span class="breadcrumb-item active">Shop Detail</span>
+                <a class="breadcrumb-item text-dark" href="#">Trang chủ</a>
+                <a class="breadcrumb-item text-dark" href="#">Sản phẩm</a>
+                <span class="breadcrumb-item active">Chi tiết sản phẩm</span>
             </nav>
         </div>
     </div>
 </div>
 <!-- Breadcrumb End -->
 
-
+<% NumberFormat nf = new NumberFormat();
+    Product p= (Product) request.getAttribute("product"); %>
 <!-- Shop Detail Start -->
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
@@ -62,17 +91,14 @@ To change this template use File | Settings | File Templates.
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="img/product1.png" alt="Image">
+                        <img class="w-100 h-100" src="<%= p.getImg().get(0)%>" alt="Image">
                     </div>
+                    <% for(int i = 1;i<p.getImg().size();i++){%>
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product2.jpg" alt="Image">
+                        <img class="w-100 h-100" src="<%=p.getImg().get(i)%>" alt="Image">
                     </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product3.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="img/product4.png" alt="Image">
-                    </div>
+
+                    <%}%>
                 </div>
                 <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                     <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -85,7 +111,7 @@ To change this template use File | Settings | File Templates.
 
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
-                <h3>Tên sản phẩm</h3>
+                <h3><%=p.getName()%></h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -94,12 +120,12 @@ To change this template use File | Settings | File Templates.
                         <small class="fas fa-star-half-alt"></small>
                         <small class="far fa-star"></small>
                     </div>
-                    <small class="pt-1">(99 Reviews)</small>
+                    <small class="pt-1">(<%= p.getAmount() %> Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat(p.getPrice()) %>đ</h3>
                 <p class="mb-4">Mô tả sản phẩm</p>
                 <div class="d-flex mb-3">
-                    <strong class="text-dark mr-3">Sizes:</strong>
+                    <strong class="text-dark mr-3">Kích thước:</strong>
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="size-2" name="size">
@@ -120,7 +146,7 @@ To change this template use File | Settings | File Templates.
                     </form>
                 </div>
                 <div class="d-flex mb-4">
-                    <strong class="text-dark mr-3">Colors:</strong>
+                    <strong class="text-dark mr-3">Màu sắc:</strong>
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="color-1" name="color">
@@ -147,29 +173,35 @@ To change this template use File | Settings | File Templates.
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary border-0 text-center" style="height: 30px" value="1">
+
+                        <input type="text" class="form-control bg-secondary border-0 text-center" name="quantity" style="height: 30px" value="1">
+
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</button>
+
+
+                    <a href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" + p.getId()%>"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
+                        giỏ hàng</button></a>
+
+
                 </div>
                 <div class="d-flex pt-2">
-                    <strong class="text-dark mr-2">Share on:</strong>
+                    <strong class="text-dark mr-2">Chia sẻ:</strong>
                     <div class="d-inline-flex">
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://facebook.com" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://twitter.com" target="_blank">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://linkedin.com" target="_blank">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="text-dark px-2" href="http://pinterest.com" target="_blank">
                             <i class="fab fa-pinterest"></i>
                         </a>
                     </div>
@@ -187,8 +219,7 @@ To change this template use File | Settings | File Templates.
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
-                        <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                        <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                        <p><%=p.getDecrispe()%></p>
                     </div>
 
                     <div class="tab-pane fade" id="tab-pane-3">
@@ -211,33 +242,36 @@ To change this template use File | Settings | File Templates.
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h4 class="mb-4">Leave a review</h4>
-                                <small>Your email address will not be published. Required fields are marked *</small>
+                                <form action="/Project_CuaHangMuaBaoHiem_war/getComment" method="post">
+                                <h4 class="mb-4">Viết đánh giá</h4>
                                 <div class="d-flex my-3">
-                                    <p class="mb-0 mr-2">Your Rating * :</p>
+                                    <p class="mb-0 mr-2">Đánh giá * :</p>
                                     <div class="text-primary">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        <input class="star star-5" id="star-5" value="5" type="radio" name="star"/>
+                                        <label class="star star-5" for="star-5"></label>
+                                        <input class="star star-4" id="star-4" value="4" type="radio" name="star"/>
+                                        <label class="star star-4" for="star-4"></label>
+                                        <input class="star star-3" id="star-3" value="3" type="radio" name="star"/>
+                                        <label class="star star-3" for="star-3"></label>
+                                        <input class="star star-2" id="star-2" value="2" type="radio" name="star"/>
+                                        <label class="star star-2" for="star-2"></label>
+                                        <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star"/>
+                                        <label class="star star-1" for="star-1"></label>
                                     </div>
                                 </div>
-                                <form>
                                     <div class="form-group">
-                                        <label for="message">Your Review *</label>
-                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                        <label for="message">Bình luận *</label>
+                                        <textarea id="message" name="mess" cols="30" rows="5" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Your Name *</label>
-                                        <input type="text" class="form-control" id="name">
+                                        <input type="hidden" name="id_Cus" value="2" class="form-control" id="name">
+<%--                                        value = idCus --%>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Your Email *</label>
-                                        <input type="email" class="form-control" id="email">
+                                        <input type="hidden" name="id_Pro" value="p.getId" class="form-control" id="email">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                        <input type="submit" value="Gửi" class="btn btn-primary px-3">
                                     </div>
                                 </form>
                             </div>

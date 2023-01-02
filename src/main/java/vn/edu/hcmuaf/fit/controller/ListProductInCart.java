@@ -1,21 +1,19 @@
 package vn.edu.hcmuaf.fit.controller;
 
-import vn.edu.hcmuaf.fit.model.Product;
-import vn.edu.hcmuaf.fit.service.ProductService;
+import vn.edu.hcmuaf.fit.model.Cart;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
-@WebServlet(name = "getData", value = "/list-product")
-public class GetData extends HttpServlet {
+@WebServlet(name = "ListProductInCart", value = "/ListProductInCart")
+public class ListProductInCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> list = ProductService.getData();
-        request.setAttribute("list",list);
-        request.getRequestDispatcher("shop.jsp").forward(request,response);
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        request.getRequestDispatcher("cart.jsp").forward(request,response );
     }
 
     @Override
