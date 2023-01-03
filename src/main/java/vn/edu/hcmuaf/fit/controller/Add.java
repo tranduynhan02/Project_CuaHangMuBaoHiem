@@ -24,7 +24,7 @@ public class Add extends HttpServlet {
         p.setQuantity(1);
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         cart.put(p);
-//        request.getSession().setAttribute("cart",cart);
+        request.getSession().setAttribute("cart",cart);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/list-product");
 
     }

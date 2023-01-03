@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FilterProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String filter = request.getParameter("id");
+
         String[] price = request.getParameterValues("price");
         String[] star = request.getParameterValues("star");
         request.setAttribute("list",ProductService.filterProduct(price,star));

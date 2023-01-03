@@ -41,6 +41,7 @@ public class Product{
 
     public String getId() {
         return this.id;
+
     }
 
     public void setId(String id) {
@@ -176,4 +177,5 @@ public class Product{
         }
         return sum;
     }
+
 }
