@@ -255,7 +255,7 @@ public class ProductService {
         PreparedStatement prs = dbConnect.getConnection().prepareStatement("select link_image from image where id_product=?");
         prs.setString(1,id);
         ResultSet rs = prs.executeQuery();
-        if(rs.next()){
+        while(rs.next()){
             img.add(rs.getString("link_image"));
         }
         return img;
@@ -351,8 +351,48 @@ public class ProductService {
         }
         return null;
     }
+    public static void addComment(String id_Cus, String id_Pro, String mess, int star) {
+        DBConnect dbConnect = DBConnect.getInstance();
+        try {
+            PreparedStatement prs = dbConnect.getConnection().prepareStatement("insert into comment values (?,?,?)");
+            prs.setString(1,id_Cus);
+            prs.setString(2,id_Pro);
+            prs.setString(3,mess);
+            prs.executeUpdate();
+            Product p = getProduct(id_Pro);
+            int newAmount = p.getAmount()+1;
+            double newStar = (p.getStar()*p.getAmount()+star)/newAmount;
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("update star_vote set amount =?, star =?  where id_product=?");
+            ps.setString(3,id_Pro);
+            ps.setInt(1,newAmount);
+            ps.setDouble(2,newStar);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
+    public static List<Product> sort(String s){
+        List<Product> result = new ArrayList<Product>();
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            switch (s){
+                case "new":{
+                    ResultSet rs = dbConnect.get().executeQuery("select id_product from product order by release desc ");
+                    while (rs.next()){
+                        result.add(getProduct(rs.getString("id_product")));
+                    }
+                }
+                case "popular":{
+                    ResultSet rs = dbConnect.get().executeQuery("(select dp.id_product, count())b1");
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
     public static void main(String[] args) throws SQLException {
-        System.out.println(getProduct("ac"));
+        addComment("1","ac","expensive",2);
     }
 }

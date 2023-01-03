@@ -242,37 +242,33 @@ To change this template use File | Settings | File Templates.
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <form action="/Project_CuaHangMuaBaoHiem_war/getComment" method="post">
                                 <h4 class="mb-4">Viết đánh giá</h4>
-                                <div class="d-flex my-3">
-                                    <p class="mb-0 mr-2">Đánh giá * :</p>
-                                    <div class="text-primary">
-                                        <input class="star star-5" id="star-5" value="5" type="radio" name="star"/>
-                                        <label class="star star-5" for="star-5"></label>
-                                        <input class="star star-4" id="star-4" value="4" type="radio" name="star"/>
-                                        <label class="star star-4" for="star-4"></label>
-                                        <input class="star star-3" id="star-3" value="3" type="radio" name="star"/>
-                                        <label class="star star-3" for="star-3"></label>
-                                        <input class="star star-2" id="star-2" value="2" type="radio" name="star"/>
-                                        <label class="star star-2" for="star-2"></label>
-                                        <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star"/>
-                                        <label class="star star-1" for="star-1"></label>
-                                    </div>
-                                </div>
-                                    <div class="form-group">
-                                        <label for="message">Bình luận *</label>
-                                        <textarea id="message" name="mess" cols="30" rows="5" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" name="id_Cus" value="2" class="form-control" id="name">
-<%--                                        value = idCus --%>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" name="id_Pro" value="p.getId" class="form-control" id="email">
-                                    </div>
-                                    <div class="form-group mb-0">
-                                        <input type="submit" value="Gửi" class="btn btn-primary px-3">
-                                    </div>
+                                <form action="/Project_CuaHangMuBaoHiem_war/get-comment" method="get">
+                                        <div class="d-flex my-3">
+                                            <p class="mb-0 mr-2">Đánh giá * :</p>
+                                            <div class="text-primary">
+                                                <input class="star star-5" id="star-5" value="5" type="radio" name="star"/>
+                                                <label class="star star-5" for="star-5"></label>
+                                                <input class="star star-4" id="star-4" value="4" type="radio" name="star"/>
+                                                <label class="star star-4" for="star-4"></label>
+                                                <input class="star star-3" id="star-3" value="3" type="radio" name="star"/>
+                                                <label class="star star-3" for="star-3"></label>
+                                                <input class="star star-2" id="star-2" value="2" type="radio" name="star"/>
+                                                <label class="star star-2" for="star-2"></label>
+                                                <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star"/>
+                                                <label class="star star-1" for="star-1"></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message">Bình luận *</label>
+                                            <textarea id="message" name="mess" cols="30" rows="5" class="form-control"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="id_Pro" value="<%=p.getId()%>" class="form-control" id="email">
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <input type="submit" value="Gửi" class="btn btn-primary px-3">
+                                        </div>
                                 </form>
                             </div>
                         </div>

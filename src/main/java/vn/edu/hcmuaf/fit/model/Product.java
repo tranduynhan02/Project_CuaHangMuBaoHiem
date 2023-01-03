@@ -40,7 +40,7 @@ public class Product{
     }
 
     public String getId() {
-        return detail.get(0).getId();
+        return id;
     }
 
     public void setId(String id) {
