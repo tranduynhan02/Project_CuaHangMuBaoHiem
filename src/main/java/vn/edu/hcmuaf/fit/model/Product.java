@@ -1,50 +1,49 @@
 package vn.edu.hcmuaf.fit.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Product {
-    private int id;
+public class Product{
+    private String id;
     private String name;
     private String brand;
     private long price;
-    private int size;
-    private String color;
+
     private String type;
     private double discount;
     private List<String> img;
     private double star;
     private int amount;
-    private List<Comment> comment;
+    private Map<String, List<String>> comment;
 
     private String decrispe;
-
+    private Date release;
+    private List<DetailProduct> detail;
     private int quantity;
 
     public Product() {
     }
 
-    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, double star, int amount, String decrispe) {
+    public Product(String id, String name, long price, String brand, String type, double discount, double star, int amount, String decrispe, Date release) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.brand = brand;
-        this.size = size;
-        this.color = color;
         this.type = type;
         this.discount = discount;
         this.img = new ArrayList<String>();
         this.star = star;
         this.amount = amount;
-        this.comment = new ArrayList<Comment>();
-        this.decrispe = decrispe;
+        this.comment = new HashMap<String, List<String>>();
+        this.decrispe =decrispe;
+        this.release = release;
+        this.detail = new ArrayList<DetailProduct>();
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -70,22 +69,6 @@ public class Product {
 
     public void setPrice(long price) {
         this.price = price;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getType() {
@@ -128,11 +111,11 @@ public class Product {
         this.amount = amount;
     }
 
-    public List<Comment> getComment() {
+    public Map<String, List<String>> getComment() {
         return comment;
     }
 
-    public void setComment(List<Comment> comment) {
+    public void setComment(Map<String,List<String>> comment) {
         this.comment = comment;
     }
 
@@ -144,23 +127,54 @@ public class Product {
         this.decrispe = decrispe;
     }
 
-    public void addImg(String img) {
-        this.img.add(img);
+    public Date getRelease() {
+        return release;
     }
 
-    public String toString() {
-        return id + " " + name;
+    public void setRelease(Date release) {
+        this.release = release;
     }
 
-    public String getKey() {
-        return Integer.toString(this.id);
+    public List<DetailProduct> getDetail() {
+        return detail;
+    }
+
+    public void setDetail(List<DetailProduct> detail) {
+        this.detail = detail;
     }
 
     public int getQuantity() {
-        return this.quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", price=" + price +
+                ", type='" + type + '\'' +
+                ", discount=" + discount +
+                ", img=" + img +
+                ", star=" + star +
+                ", amount=" + amount +
+                ", comment=" + comment +
+                ", decrispe='" + decrispe + '\'' +
+                ", release=" + release +
+                ", detail=" + detail +
+                '}';
+    }
+
+    public int sumQuantity() {
+        int sum = 0;
+        for(DetailProduct dp : detail){
+            sum+= dp.getQuantity();
+        }
+        return sum;
     }
 }

@@ -32,6 +32,33 @@ To change this template use File | Settings | File Templates.
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
+
+    <style>
+
+        input.star { display: none; }
+
+        label.star {
+            float: right;
+            padding: 10px;
+            font-size: 20px;
+            color: #444;
+            transition: all .2s;
+        }
+
+        input.star:checked ~ label.star:before {
+            content: '\f005';
+            color: #FD4;
+            transition: all .25s;
+        }
+
+        label.star:hover { cursor: pointer }
+
+        label.star:before {
+            content: '\f006';
+            font-family: FontAwesome;
+        }
+    </style>
 </head>
 
 <body>
@@ -157,8 +184,8 @@ To change this template use File | Settings | File Templates.
                     </div>
 
 
-                   <a href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" + p.getId()%>"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
-                       giỏ hàng</button></a>
+                    <a href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" + p.getId()%>"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
+                        giỏ hàng</button></a>
 
 
                 </div>
@@ -215,33 +242,36 @@ To change this template use File | Settings | File Templates.
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <h4 class="mb-4">Leave a review</h4>
-                                <small>Your email address will not be published. Required fields are marked *</small>
+                                <form action="/Project_CuaHangMuaBaoHiem_war/getComment" method="post">
+                                <h4 class="mb-4">Viết đánh giá</h4>
                                 <div class="d-flex my-3">
-                                    <p class="mb-0 mr-2">Your Rating * :</p>
+                                    <p class="mb-0 mr-2">Đánh giá * :</p>
                                     <div class="text-primary">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
+                                        <input class="star star-5" id="star-5" value="5" type="radio" name="star"/>
+                                        <label class="star star-5" for="star-5"></label>
+                                        <input class="star star-4" id="star-4" value="4" type="radio" name="star"/>
+                                        <label class="star star-4" for="star-4"></label>
+                                        <input class="star star-3" id="star-3" value="3" type="radio" name="star"/>
+                                        <label class="star star-3" for="star-3"></label>
+                                        <input class="star star-2" id="star-2" value="2" type="radio" name="star"/>
+                                        <label class="star star-2" for="star-2"></label>
+                                        <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star"/>
+                                        <label class="star star-1" for="star-1"></label>
                                     </div>
                                 </div>
-                                <form>
                                     <div class="form-group">
-                                        <label for="message">Your Review *</label>
-                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                        <label for="message">Bình luận *</label>
+                                        <textarea id="message" name="mess" cols="30" rows="5" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Your Name *</label>
-                                        <input type="text" class="form-control" id="name">
+                                        <input type="hidden" name="id_Cus" value="2" class="form-control" id="name">
+<%--                                        value = idCus --%>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Your Email *</label>
-                                        <input type="email" class="form-control" id="email">
+                                        <input type="hidden" name="id_Pro" value="p.getId" class="form-control" id="email">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                        <input type="submit" value="Gửi" class="btn btn-primary px-3">
                                     </div>
                                 </form>
                             </div>

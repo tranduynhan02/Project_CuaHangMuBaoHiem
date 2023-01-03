@@ -42,4 +42,8 @@ public class DBConnect {
         }
         return null;
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
 }

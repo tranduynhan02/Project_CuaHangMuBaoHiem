@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "ProductDetail", value = "/detail")
 public class ProductDetail extends HttpServlet {
@@ -14,7 +15,12 @@ public class ProductDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         if(id != null) {
-            Product product = ProductService.getProductById(id);
+            Product product = null;
+            try {
+                product = ProductService.getProduct(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             request.setAttribute("product",product);
             request.getRequestDispatcher("detail.jsp").forward(request,response);
         }else

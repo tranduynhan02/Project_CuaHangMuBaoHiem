@@ -1,65 +1,358 @@
 package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.Database.DBConnect;
-import vn.edu.hcmuaf.fit.controller.ListProduct;
+import vn.edu.hcmuaf.fit.model.DetailProduct;
 import vn.edu.hcmuaf.fit.model.Product;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class ProductService {
     public static List<Product> getData() {
-        List<Product> list = new LinkedList<Product>();
+        List<Product> list = new ArrayList<Product>();
         DBConnect dbConnect = DBConnect.getInstance();
         Statement statement = dbConnect.get();
-        Product p = new Product();
         try {
-            ResultSet rs = statement.executeQuery("select * from products");
-            while (rs.next()) {
-              p = new Product(rs.getInt(1), rs.getString(2), rs.getLong(3),
-                        rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                        rs.getLong(8), rs.getInt(9), rs.getInt(10), rs.getString(11));
-              p.addImg(rs.getString(12));
-                list.add(p);
-
+            ResultSet rs = statement.executeQuery("select id_product from product");
+            while (rs.next()){
+                list.add(getProduct(rs.getString("id_product")));
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+    public static List<Product> findProduct(String para) {
+        List<Product> list = new ArrayList<Product>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        Statement statement = dbConnect.get();
+        try {
+            ResultSet rs = statement.executeQuery("select id_product from product where name like '%"+para+"%'");
+            while (rs.next()) {
+                list.add(getProduct(rs.getString("id_product")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return list;
     }
 
-    public static Product getProductById(String idp) {
-        Product p = new Product();
+    public static List<Product> filterProduct(String[] price, String[] star) {
+        List<Product> result = new ArrayList<Product>();
+        List<String> priceProduct = new ArrayList<String>();
+        List<String> starProduct = new ArrayList<String>();
         DBConnect dbConnect = DBConnect.getInstance();
         Statement statement = dbConnect.get();
-        String res = "select * from products where id =" + idp;
-        try {
-            ResultSet rs = statement.executeQuery(res);
-            if (rs.next()) {
-                p = new Product(rs.getInt(1), rs.getString(2), rs.getLong(3),
-                        rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7),
-                        rs.getLong(8), rs.getInt(9), rs.getInt(10), rs.getString(11));
-
-                p.addImg(rs.getString(12));
+        if(price == null){
+            try {
+                ResultSet rs = statement.executeQuery("select id_product from product");
+                while (rs.next()) {
+                    priceProduct.add(rs.getString("id_product"));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-            res = "select * from image where id =" + idp;
-            rs = statement.executeQuery(res);
-            while(rs.next()){
-            p.addImg(rs.getString(2));
+        }else{
+            for(String key:price){
+                switch (key){
+                    case "price-1":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from product where price>=0 and price<=100000");
+                            while (rs.next()) {
+                                priceProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "price-2":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from product where price>=100000 and price<=200000");
+                            while (rs.next()) {
+                                priceProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "price-3":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from product where price>=200000 and price<=300000");
+                            while (rs.next()) {
+                                priceProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "price-4":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from product where price>=300000 and price<=400000");
+                            while (rs.next()) {
+                                priceProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "price-5":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from product where price>=400000 and price<=500000");
+                            while (rs.next()) {
+                                priceProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    default:
+                }
             }
-        } catch (SQLException e) {
         }
+        if(star == null){
+            try {
+                ResultSet rs = statement.executeQuery("select id_product from product");
+                while (rs.next()) {
+                    starProduct.add(rs.getString("id_product"));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }else{
+            for(String key:star){
+                switch (key){
+                    case "star-1":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=0 and star<=100000");
+                            while (rs.next()) {
+                                starProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "star-2":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=1 and star<=2");
+                            while (rs.next()) {
+                                starProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "star-3":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=2 and star<=3");
+                            while (rs.next()) {
+                                starProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "star-4":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=3 and star<=4");
+                            while (rs.next()) {
+                                starProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    case "star-5":{
+                        try {
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=4 and star<=5");
+                            while (rs.next()) {
+                                starProduct.add(rs.getString("id_product"));
+                            }
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
+                    }
+                    default:
+                }
+            }
+        }
+        for(String st:priceProduct){
+            if (starProduct.contains(st)){
+                try {
+                    result.add(getProduct(st));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return result;
+    }
+
+    public static Product getProduct(String idp) throws SQLException {
+        Product p = new Product();
+        p.setId(idp);
+        p.setName(getname(idp));
+        p.setPrice(getprice(idp));
+        p.setBrand(getbrand(idp));
+        p.setType(gettype(idp));
+        p.setDiscount(getdiscount(idp));
+        p.setImg(getimg(idp));
+        p.setStar(getstar(idp));
+        p.setAmount(getamount(idp));
+        p.setComment(getcomment(idp));
+        p.setRelease(getrelease(idp));
+        p.setDecrispe(getdecrispe(idp));
+        p.setDetail(getdetail(idp));
         return p;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getProductById("2").getImg().get(0));
-        System.out.println(getProductById("2").getImg().get(1));
-        System.out.println(getProductById("2").getImg().get(2));
-        System.out.println(getProductById("2").getImg().get(3));
+    public static Map<String, List<String>> getcomment(String id) throws SQLException {
+        Map<String,List<String>> comment = new HashMap<String,List<String>>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select id_customer, comment from comment where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        while (rs.next()){
+            String id_cus = rs.getString("id_customer");
+            String com = rs.getString("comment");
+            if(comment.containsKey(id_cus)){
+                comment.get(id_cus).add(com);
+                comment.put(id_cus,comment.get(id_cus));
+            }else{
+                List<String> comm = new ArrayList<String>();
+                comm.add(com);
+                comment.put(id_cus,comm);
+            }
+        }
+        return comment;
+    }
+    public static List<DetailProduct> getdetail (String id) throws SQLException {
+        List<DetailProduct> detail = new ArrayList<DetailProduct>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select id_dp, size, color, quantity from detail_product where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        while(rs.next()){
+            detail.add(new DetailProduct(rs.getString("id_dp"),rs.getString("size"),rs.getString("color"), rs.getInt("quantity")));
+        }
+        return detail;
+    }
+    public static List<String> getimg (String id) throws SQLException {
+        List<String> img = new ArrayList<String>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select link_image from image where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        while (rs.next()){
+            img.add(rs.getString("link_image"));
+        }
+        return img;
+    }
 
+    public static String getname (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select name from product where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getString("name");
+        }
+        return null;
+    }
+    public static long getprice (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select price from product where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getLong("price");
+        }
+        return 0;
+    }
+    public static String getbrand (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select brand from product where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getString("brand");
+        }
+        return null;
+    }
+    public static String gettype (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select type from product where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getString("type");
+        }
+        return null;
+    }
+    public static double getdiscount (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select discount from product where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getDouble("discount");
+        }
+        return 0;
+    }
+    public static Double getstar (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select star from star_vote where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+             return rs.getDouble("star");
+        }
+        return 0.0;
+    }
+    public static int getamount (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select amount from star_vote where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getInt("amount");
+        }
+        return 0;
+    }
+    public static String getdecrispe (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select decrispe from product where id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getString("decrispe");
+        }
+        return null;
+    }
+    public static Date getrelease (String id) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select p.release from product p where p.id_product=?");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        if(rs.next()){
+            return rs.getDate("release");
+        }
+        return null;
+    }
+
+    public static void main(String[] args) throws SQLException {
+        System.out.println(getProduct("ac"));
     }
 }
