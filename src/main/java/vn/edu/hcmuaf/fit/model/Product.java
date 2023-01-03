@@ -40,7 +40,8 @@ public class Product{
     }
 
     public String getId() {
-        return id;
+        return this.id;
+
     }
 
     public void setId(String id) {
@@ -169,4 +170,12 @@ public class Product{
                 ", detail=" + detail +
                 '}';
     }
+    public int sumQuantity() {
+        int sum = 0;
+        for(DetailProduct dp : detail){
+            sum+= dp.getQuantity();
+        }
+        return sum;
+    }
+
 }

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="cart" class="vn.edu.hcmuaf.fit.model.Cart" scope="session"/>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -100,12 +101,7 @@
                         </a>
                         <a href="/Project_CuaHangMuBaoHiem_war/ListProductInCart" class="btn px-0 ml-3">
                             <i class="fas fa-shopping-cart text-primary"></i>
-                            <% Cart cart = (Cart) request.getSession().getAttribute("cart");
-                            if(cart== null){
-                                cart = new Cart();
-                            }
-                                request.getSession().setAttribute("cart",cart);
-                            %>
+
                             <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><%=cart.getQuanlity()%></span>
                         </a>
                     </div>

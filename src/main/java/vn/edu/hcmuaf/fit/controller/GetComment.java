@@ -2,10 +2,12 @@ package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.service.ProductService;
 
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+
 
 @WebServlet(name = "getComment", value = "/get-comment")
 public class GetComment extends HttpServlet {
@@ -16,6 +18,7 @@ public class GetComment extends HttpServlet {
         int star = Integer.parseInt(request.getParameter("star"));
         ProductService.addComment("4","ac",mess,star);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/detail?id="+idPro);
+
     }
 
     @Override

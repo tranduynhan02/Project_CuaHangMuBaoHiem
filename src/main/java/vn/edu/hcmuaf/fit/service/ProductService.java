@@ -244,7 +244,8 @@ public class ProductService {
         PreparedStatement prs = dbConnect.getConnection().prepareStatement("select id_dp, size, color, quantity from detail_product where id_product=?");
         prs.setString(1,id);
         ResultSet rs = prs.executeQuery();
-        if(rs.next()){
+        while(rs.next()){
+
             detail.add(new DetailProduct(rs.getString("id_dp"),rs.getString("size"),rs.getString("color"), rs.getInt("quantity")));
         }
         return detail;
@@ -351,6 +352,7 @@ public class ProductService {
         }
         return null;
     }
+
     public static void addComment(String id_Cus, String id_Pro, String mess, int star) {
         DBConnect dbConnect = DBConnect.getInstance();
         try {
