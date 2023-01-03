@@ -255,7 +255,7 @@ public class ProductService {
         PreparedStatement prs = dbConnect.getConnection().prepareStatement("select link_image from image where id_product=?");
         prs.setString(1,id);
         ResultSet rs = prs.executeQuery();
-        while (rs.next()){
+        while(rs.next()){
             img.add(rs.getString("link_image"));
         }
         return img;

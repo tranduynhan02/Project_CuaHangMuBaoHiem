@@ -169,7 +169,6 @@ public class Product{
                 ", detail=" + detail +
                 '}';
     }
-
     public int sumQuantity() {
         int sum = 0;
         for(DetailProduct dp : detail){
