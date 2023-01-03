@@ -1,7 +1,5 @@
 package vn.edu.hcmuaf.fit.Database;
 
-import vn.edu.hcmuaf.fit.Model.Product;
-
 import java.sql.*;
 
 public class DBConnect {

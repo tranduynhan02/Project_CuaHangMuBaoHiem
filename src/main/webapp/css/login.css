@@ -3,7 +3,7 @@
     margin: auto;
     font-size: 14px;
     justify-content: center;
-    padding: 60px;
+    padding: 40px;
     border-radius: 5px;
     background-image: url("http://localhost:8080/WebProject_war/img/login/nendangnhap.png");
     /*opacity: 0.5;*/
@@ -24,7 +24,6 @@
     padding: 30px;
 }
 .form-group{
-    padding-bottom: 10px;
     border-radius: 5px;
     position: relative;
     margin: auto;

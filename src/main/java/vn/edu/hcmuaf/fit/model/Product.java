@@ -1,8 +1,10 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Product{
+public class Product implements Serializable {
     private int id;
     private String name;
     private String brand;
@@ -14,14 +16,14 @@ public class Product{
     private List<String> img;
     private double star;
     private int amount;
-    private List<String> comment;
+    private List<Comment> comment;
 
     private String decrispe;
 
     public Product() {
     }
 
-    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, List<String> img, double star, int amount, List<String> comment, String decrispe) {
+    public Product(int id, String name, long price, String brand, int size, String color, String type, double discount, List<String> img, double star, int amount, String decrispe) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -33,7 +35,7 @@ public class Product{
         this.img = img;
         this.star = star;
         this.amount = amount;
-        this.comment = comment;
+        this.comment = new ArrayList<Comment>();
         this.decrispe =decrispe;
     }
 
@@ -125,11 +127,11 @@ public class Product{
         this.amount = amount;
     }
 
-    public List<String> getComment() {
+    public List<Comment> getComment() {
         return comment;
     }
 
-    public void setComment(List<String> comment) {
+    public void setComment(List<Comment> comment) {
         this.comment = comment;
     }
 

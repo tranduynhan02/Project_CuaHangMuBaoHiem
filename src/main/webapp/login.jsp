@@ -44,7 +44,7 @@ To change this template use File | Settings | File Templates.
 <section>
     <div class="form-container">
         <div class="form-login">
-            <form action="">
+            <form action="/WebProject_war/doLogin" method="post">
                 <div class="title">Đăng nhập</div>
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
