@@ -9,12 +9,12 @@ import java.util.List;
 public class Customer {
     private String id;
     private String name;
-    private int phone;
+    private String phone;
     private String address;
     private String userName;
     private String password;
     private boolean isLogin;
-    private int permission;
+    private String permission;
     private Cart cart;
     private List<Bill> listBill;
 
@@ -23,7 +23,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String id, String name, int phone, String address, String userName, String password, int permission, String email) {
+    public Customer(String id, String name, String phone, String address, String userName, String password, String permission, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -52,11 +52,11 @@ public class Customer {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -92,11 +92,11 @@ public class Customer {
         isLogin = login;
     }
 
-    public int getPermission() {
+    public String getPermission() {
         return permission;
     }
 
-    public void setPermission(int permission) {
+    public void setPermission(String permission) {
         this.permission = permission;
     }
 
@@ -122,5 +122,22 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", isLogin=" + isLogin +
+                ", permission='" + permission + '\'' +
+                ", cart=" + cart +
+                ", listBill=" + listBill +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
