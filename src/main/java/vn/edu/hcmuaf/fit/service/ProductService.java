@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.service;
 
 import vn.edu.hcmuaf.fit.Database.DBConnect;
+import vn.edu.hcmuaf.fit.model.Bill;
+import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.DetailProduct;
 import vn.edu.hcmuaf.fit.model.Product;
 
@@ -380,21 +382,154 @@ public class ProductService {
             DBConnect dbConnect = DBConnect.getInstance();
             switch (s){
                 case "new":{
-                    ResultSet rs = dbConnect.get().executeQuery("select id_product from product order by release desc ");
+                    ResultSet rs = dbConnect.get().executeQuery("select p.id_product from product p order by p.release desc ");
                     while (rs.next()){
                         result.add(getProduct(rs.getString("id_product")));
                     }
+                    break;
                 }
                 case "popular":{
-                    ResultSet rs = dbConnect.get().executeQuery("(select dp.id_product, count())b1");
+                    ResultSet rs = dbConnect.get().executeQuery("select dp.id_product, count(dp.id_product) from bill b join detail_bill db on b.id = db.id_bill join detail_product dp on db.id_dp = dp.id_dp group by dp.id_product order by count(dp.id_product) desc");
+                    while (rs.next()){
+                        result.add(getProduct(rs.getString("id_product")));
+                    }
+                    break;
                 }
+                case "rating":{
+                    ResultSet rs = dbConnect.get().executeQuery("select p.id_product from product p join star_vote s on p.id_product = s.id_product order by s.star desc");
+                    while (rs.next()){
+                        result.add(getProduct(rs.getString("id_product")));
+                    }
+                    break;
+                }
+                default:
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
         return result;
     }
+    public static List<Bill> sales(int month, int year){
+        List<Bill> result = new ArrayList<Bill>();
+        try{
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement prs = dbConnect.getConnection().prepareStatement("select b.id from bill b where month(b.date)=? and year(b.date)=?");
+            prs.setInt(1,month);
+            prs.setInt(2,year);
+            ResultSet rs = prs.executeQuery();
+            while(rs.next()){
+                result.add(getBill(rs.getString("id")));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static Bill getBill(String id) throws SQLException {
+        PreparedStatement prs = DBConnect.getInstance().getConnection().prepareStatement("select id_dp from detail_bill where id_bill=?");
+        prs.setString(1,id);
+        List<String> list_product = new ArrayList<String>();
+        ResultSet rs = prs.executeQuery();
+        while(rs.next()){
+            list_product.add(rs.getString("id_dp"));
+        }
+        PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id_customer, date, status from bill where id=?");
+        ps.setString(1,id);
+        ResultSet resultSet = ps.executeQuery();
+        if(resultSet.next()){
+            return new Bill(id,resultSet.getDate("date"),list_product, resultSet.getString("status"),resultSet.getString("id_customer"));
+        }
+        return null;
+    }
+    public static List<Customer> findCustomer(String para) {
+        List<Customer> list = new ArrayList<Customer>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        Statement statement = dbConnect.get();
+        try {
+            ResultSet rs = statement.executeQuery("select id_customer from customer where name like '%"+para+"%'");
+            while (rs.next()) {
+                list.add(getCustomer(rs.getString("id_customer")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+    public static Customer getCustomer(String idc) throws SQLException {
+        Customer c = new Customer();
+        PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select name,email,phone,address,username,password,permission from customer where id_customer=?");
+        ps.setString(1,idc);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            c.setId(idc);
+            c.setName(rs.getString("name"));
+            c.setEmail(rs.getString("email"));
+            c.setPhone(rs.getString("phone"));
+            c.setAddress(rs.getString("address"));
+            c.setUserName(rs.getString("username"));
+            c.setPassword(rs.getString("password"));
+            c.setPermission(rs.getString("permission"));
+        }
+        return c;
+    }
+    public static void addBill(String id,String id_Customer,String status, List<String> id_dp){
+        try {
+
+            Date date = new Date();
+            ResultSet resultSet = DBConnect.getInstance().get().executeQuery("select curdate()");
+            if(resultSet.next()){
+                date = resultSet.getDate(1);
+            }
+//            if(!checkbill(id_Customer,status,date,id_dp))return;
+            PreparedStatement prs = DBConnect.getInstance().getConnection().prepareStatement("INSERT into bill values(?,?,?,?)");
+            prs.setString(1, id);
+            prs.setString(2,id_Customer);
+            prs.setDate(3, (java.sql.Date) date);
+            prs.setString(4,status);
+            prs.executeUpdate();
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("INSERT into detail_bill values(?,?)");
+            for (String i:id_dp){
+                ps.setString(1,id);
+                ps.setString(2,i);
+                ps.executeUpdate();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public static boolean checkbill(String id_Customer,String status,Date date,List<String> id_dp) throws SQLException {
+        String id = "";
+        PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id from bill where id_customer=? and status=? and date=? ");
+        ps.setString(1,id_Customer);
+        ps.setString(2,status);
+        ps.setDate(3, (java.sql.Date) date);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            id += rs.getString("id");
+        }else {
+            return false;
+        }
+        PreparedStatement preparedStatement = DBConnect.getInstance().getConnection().prepareStatement("select id_dp from detail_bill where id_bill=?");
+        List<String> list = new ArrayList<String>();
+        preparedStatement.setString(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            if(!id_dp.contains(resultSet.getString("id_dp")))return false;
+        }
+        return true;
+    }
+    public static void cancel_bill(String id_bill){
+        try{
+            String status = "Đã hủy";
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("UPDATE bill set status = ? where id =?");
+            ps.setString(1,status);
+            ps.setString(2,id_bill);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws SQLException {
-        addComment("1","ac","expensive",2);
+
     }
 }

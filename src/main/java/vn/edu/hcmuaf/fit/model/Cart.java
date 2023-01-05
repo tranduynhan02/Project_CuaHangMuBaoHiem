@@ -73,4 +73,16 @@ public class Cart {
     public void setCart(Map<String, Product> cart) {
         this.cart = cart;
     }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

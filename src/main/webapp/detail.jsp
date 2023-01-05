@@ -270,7 +270,6 @@ To change this template use File | Settings | File Templates.
                                         <div class="form-group mb-0">
                                             <input type="submit" value="Gửi" class="btn btn-primary px-3">
                                         </div>
->>>>>>> origin
                                 </form>
                             </div>
                         </div>
