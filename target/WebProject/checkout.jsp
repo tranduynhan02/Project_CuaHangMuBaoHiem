@@ -1,3 +1,5 @@
+<%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 
@@ -24,6 +26,12 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        .error{
+            color: red;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,49 +62,44 @@
             <div class="col-lg-8">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">ĐỊA CHỈ THANH TOÁN</span></h5>
                 <div class="bg-light p-30 mb-5">
+                    <%String error = (String)request.getAttribute("error");
+                    if(error == "error") error = "* Vui lòng nhập đầy đủ thông tin";
+                    if(error == null) error ="";
+                        String name = request.getParameter("name");
+                        String email = request.getParameter("email");
+                        String phone = request.getParameter("phone");
+                        String address = request.getParameter("address");
+                        name = name==null?"":name;
+                        email=email==null?"":email;
+                        phone=phone==null?"":phone;
+                        address = address== null?"":address;
+                    %>
+                    <form action="/Project_CuaHangMuBaoHiem_war/add_bill" method="get">
                     <div class="row">
                         <div class="col-md-6 form-group">
-                            <label>Họ</label>
-                            <input class="form-control" type="text" placeholder="">
-                        </div>
-                        <div class="col-md-6 form-group">
                             <label>Tên</label>
-                            <input class="form-control" type="text" placeholder="">
+                            <input name="name" class="form-control" value="<%=name%>" type="text" placeholder="">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="">
+                            <input name="email" class="form-control" value="<%=email%>" type="text" placeholder="">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Số điện thoại</label>
-                            <input class="form-control" type="text" placeholder="">
+                            <input name="phone" class="form-control" value="<%=phone%>" type="text" placeholder="">
                         </div>
                         <div class="col-md-6 form-group">
-                            <label>Địa chỉ 1</label>
-                            <input class="form-control" type="text" placeholder="">
+                            <label>Địa chỉ</label>
+                            <input name="address" class="form-control" value="<%=address%>" type="text" placeholder="">
                         </div>
-                        <div class="col-md-6 form-group">
-                            <label>Địa chỉ 2</label>
-                            <input class="form-control" type="text" placeholder="">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Tỉnh/Thành Phố</label>
-                            <input class="form-control" type="text" placeholder="">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Quận/Huyện</label>
-                            <input class="form-control" type="text" placeholder="">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Xã/Phường</label>
-                            <input class="form-control" type="text" placeholder="">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mã bưu chính</label>
-                            <input class="form-control" type="text" placeholder="">
-                        </div>
-                      
+
                     </div>
+                    <div><span id="error" class="error"><%=error%></span></div>
+                    <div><small style="color: red;">* Thanh toán khi nhận hàng</small></div>
+                    <div class="bg-light p-30">
+                        <input type="submit" class="btn btn-block btn-primary font-weight-bold py-3" value="Đặt hàng" style="margin-left: 360px;width: 186px">
+                    </div>
+                    </form>
                 </div>
                 
             </div>
@@ -105,23 +108,23 @@
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom">
                         <h6 class="mb-3">Các sản phẩm</h6>
+                        <%NumberFormat nf = new NumberFormat();%>
+                        <%for(Product p: cart.getListProduct()){%>
                         <div class="d-flex justify-content-between">
-                            <p>KYT Venom Thitipong 2016</p>
-                            <p>1.990.000đ</p>
+                            <p><%=p.getName()%></p>
+                            <p><%=nf.numberFormat(p.getPrice()*(1-(long)p.getDiscount()))%></p>
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <p>LS2 Storm Nepa</p>
-                            <p>2.900.000đ</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>LS2 Storm Sprinter</p>
-                            <p>2.900.000đ</p>
-                        </div>
+                        <%}%>
                     </div>
                     <div class="border-bottom pt-3 pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Tổng tiền hàng</h6>
-                            <h6>7.790.000đ</h6>
+                            <%
+                                long price = 0;
+                                for(Product p:cart.getListProduct()){
+                                    price += p.getPrice()*(1-(long)p.getDiscount());
+                                }%>
+                            <h6><%=nf.numberFormat(price)%></h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Phí vận chuyển</h6>
@@ -131,32 +134,8 @@
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Tổng thanh toán</h5>
-                            <h5>7.840.000đ</h5>
+                            <h5><%=nf.numberFormat(price+50000)%></h5>
                         </div>
-                    </div>
-                </div>
-                <div class="mb-5">
-                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Hình thức thanh toán</span></h5>
-                    <div class="bg-light p-30">
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Thẻ tín dụng/Ghi nợ</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                <label class="custom-control-label" for="directcheck">Thanh toán khi nhận hàng</label>
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Thẻ ATM nội địa (Internet Banking)</label>
-                            </div>
-                        </div>
-                        <button class="btn btn-block btn-primary font-weight-bold py-3">Đặt hàng</button>
                     </div>
                 </div>
             </div>

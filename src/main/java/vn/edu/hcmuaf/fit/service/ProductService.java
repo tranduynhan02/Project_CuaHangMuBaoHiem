@@ -472,7 +472,64 @@ public class ProductService {
         }
         return c;
     }
+    public static void addBill(String id,String id_Customer,String status, List<String> id_dp){
+        try {
+
+            Date date = new Date();
+            ResultSet resultSet = DBConnect.getInstance().get().executeQuery("select curdate()");
+            if(resultSet.next()){
+                date = resultSet.getDate(1);
+            }
+//            if(!checkbill(id_Customer,status,date,id_dp))return;
+            PreparedStatement prs = DBConnect.getInstance().getConnection().prepareStatement("INSERT into bill values(?,?,?,?)");
+            prs.setString(1, id);
+            prs.setString(2,id_Customer);
+            prs.setDate(3, (java.sql.Date) date);
+            prs.setString(4,status);
+            prs.executeUpdate();
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("INSERT into detail_bill values(?,?)");
+            for (String i:id_dp){
+                ps.setString(1,id);
+                ps.setString(2,i);
+                ps.executeUpdate();
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public static boolean checkbill(String id_Customer,String status,Date date,List<String> id_dp) throws SQLException {
+        String id = "";
+        PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id from bill where id_customer=? and status=? and date=? ");
+        ps.setString(1,id_Customer);
+        ps.setString(2,status);
+        ps.setDate(3, (java.sql.Date) date);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()){
+            id += rs.getString("id");
+        }else {
+            return false;
+        }
+        PreparedStatement preparedStatement = DBConnect.getInstance().getConnection().prepareStatement("select id_dp from detail_bill where id_bill=?");
+        List<String> list = new ArrayList<String>();
+        preparedStatement.setString(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            if(!id_dp.contains(resultSet.getString("id_dp")))return false;
+        }
+        return true;
+    }
+    public static void cancel_bill(String id_bill){
+        try{
+            String status = "Đã hủy";
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("UPDATE bill set status = ? where id =?");
+            ps.setString(1,status);
+            ps.setString(2,id_bill);
+            ps.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws SQLException {
-       System.out.println(findCustomer("U"));
+
     }
 }
