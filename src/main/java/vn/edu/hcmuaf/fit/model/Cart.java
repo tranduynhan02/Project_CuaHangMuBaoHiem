@@ -95,15 +95,16 @@ public void put(Product p){
                 '}';
     }
 
-    public static void main(String[] args) throws SQLException {
 
-        Cart cart = new Cart();
+    public void setTotal(long total) {
+        this.total = total;
+    }
 
+    public int getQuantity() {
+        return quantity;
+    }
 
-        Product p2 =  ProductService.getDetailProduct("1","40","đỏ");
-        p2.getDetail().get(0).setQuantity(1);
-        cart.put(p2);
-        System.out.println(cart);
-
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

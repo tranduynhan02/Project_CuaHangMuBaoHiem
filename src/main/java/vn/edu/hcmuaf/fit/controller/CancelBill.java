@@ -1,24 +1,22 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.Database.DBConnect;
 import vn.edu.hcmuaf.fit.service.ProductService;
-
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-
-@WebServlet(name = "getComment", value = "/get-comment")
-public class GetComment extends HttpServlet {
+@WebServlet(name = "cancel_bill", value = "/cancel_bill")
+public class CancelBill extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idPro = request.getParameter("id_Pro");
-        String mess = request.getParameter("mess");
-        int star = Integer.parseInt(request.getParameter("star"));
-        ProductService.addComment("4",idPro,mess,star);
-        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/detail?id="+idPro);
-
+        String id_bill = request.getParameter("id");
+        ProductService.cancel_bill(id_bill);
+        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/");
     }
 
     @Override

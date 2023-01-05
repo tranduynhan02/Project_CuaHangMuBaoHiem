@@ -7,12 +7,19 @@ import java.util.List;
 public class Bill {
     private String id;
     private Date date;
-    private List<Product> productList;
+    private List<String> productList;
+    private String status;
+    private String id_cus;
 
-    public Bill(String id, Date date) {
+    public Bill(String id, Date date, List<String> list, String status, String id_cus) {
         this.id = id;
         this.date = date;
-        this.productList = new ArrayList<Product>();
+        this.productList = list;
+        this.status = status;
+        this.id_cus = id_cus;
+    }
+    public Bill(){
+
     }
 
     public String getId() {
@@ -31,11 +38,38 @@ public class Bill {
         this.date = date;
     }
 
-    public List<Product> getProductList() {
+    public List<String> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<Product> productList) {
+    public void setProductList(List<String> productList) {
         this.productList = productList;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getId_cus() {
+        return id_cus;
+    }
+
+    public void setId_cus(String id_cus) {
+        this.id_cus = id_cus;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "id='" + id + '\'' +
+                ", date=" + date +
+                ", productList=" + productList +
+                ", status='" + status + '\'' +
+                ", id_cus='" + id_cus + '\'' +
+                '}';
     }
 }

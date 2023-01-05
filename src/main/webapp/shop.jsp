@@ -148,9 +148,10 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Mới nhất</a>
-                                    <a class="dropdown-item" href="#">Phổ biến</a>
-                                    <a class="dropdown-item" href="#">Đánh giá cao</a>
+
+                                    <a class="dropdown-item" href="/Project_CuaHangMuBaoHiem_war/sort?text=new">Mới nhất</a>
+                                    <a class="dropdown-item" href="/Project_CuaHangMuBaoHiem_war/sort?text=popular">Phổ biến</a>
+                                    <a class="dropdown-item" href="/Project_CuaHangMuBaoHiem_war/sort?text=rating">Đánh giá cao</a>
                                 </div>
                             </div>
                         </div>
