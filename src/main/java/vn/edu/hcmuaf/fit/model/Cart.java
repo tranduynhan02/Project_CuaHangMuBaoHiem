@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.model;
 
+import vn.edu.hcmuaf.fit.service.ProductService;
+
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,16 +19,27 @@ public class Cart {
         this.total = 0;
         this.quantity = 0;
     }
-    public void put(Product p){
-        if(cart.containsKey(p.getId())){
-            Product p1 = cart.get(p.getId());
-            p1.setQuantity(p1.getQuantity()+1);
-            cart.put(p.getId(),p1);
+public void put(Product p){
+    if(cart.containsKey(p.getKey())){
+        Product p1 = cart.get(p.getKey());
+        p1.setQuantity(p1.getQuantity()+1);
+        cart.put(p.getKey(),p1);
+    }else{
+        cart.put(p.getKey(), p);
+    }
+    total+=p.getPrice();
+    quantity++;
+}
+    public void putQuantity(Product p){
+        if(cart.containsKey(p.getKey())){
+            Product p1 = cart.get(p.getKey());
+            p1.setQuantity(p1.getQuantity()+p.getQuantity());
+            cart.put(p.getKey(),p1);
         }else{
-            cart.put(p.getId(), p);
+            cart.put(p.getKey(), p);
         }
-        total+=p.getPrice();
-        quantity++;
+        total+=p.getPrice()*p.getQuantity();
+        quantity+=p.getQuantity();
     }
     public void updateTotalMoneyQuantity(){
         total =0;
@@ -50,8 +64,8 @@ public class Cart {
         updateTotalMoneyQuantity();
     }
     public void update(Product p){
-        if(cart.containsKey(p.getId())){
-            cart.put(p.getId(), p);
+        if(cart.containsKey(p.getKey())){
+            cart.put(p.getKey(), p);
         }
         updateTotalMoneyQuantity();
     }
@@ -72,5 +86,24 @@ public class Cart {
 
     public void setCart(Map<String, Product> cart) {
         this.cart = cart;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cart=" + cart +
+                '}';
+    }
+
+    public static void main(String[] args) throws SQLException {
+
+        Cart cart = new Cart();
+
+
+        Product p2 =  ProductService.getDetailProduct("1","40","đỏ");
+        p2.getDetail().get(0).setQuantity(1);
+        cart.put(p2);
+        System.out.println(cart);
+
     }
 }

@@ -366,9 +366,7 @@
     </header>
     <main class="h-full pb-16 overflow-y-auto">
       <div class="container grid px-6 mx-auto">
-        <h2
-                class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-        >
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
           Danh sách sản phẩm
         </h2>
         <!-- Filter-->
@@ -409,9 +407,8 @@
                 <th class="px-4 py-3">Chỉnh sửa</th>
               </tr>
               </thead>
-              <tbody
-                      class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-              >
+              <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+
               <% NumberFormat nf = new NumberFormat();
               List<Product> list = (List<Product>) request.getAttribute("list");
                 for(Product p : list){
