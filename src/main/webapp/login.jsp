@@ -49,15 +49,15 @@ To change this template use File | Settings | File Templates.
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
                         <span class="fa-solid fa-user"></span></div>
-                    <input type="text" class="form-control" placeholder="Tên đăng nhập" name="user">
+                    <input type="text" class="form-control" placeholder="Tên đăng nhập" name="username">
                 </div>
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
                         <span class="fa-solid fa-lock"></span></div>
-                    <input type="password" class="form-control" placeholder="Mật khẩu" name="pass">
+                    <input type="password" class="form-control" placeholder="Mật khẩu" name="password">
                 </div>
                 <div class="form-group text-md-right">
-                    <a href="forgot-password.jsp">Quên mật khẩu?</a>
+                    <a href="forgot-password.jsp" style="text-decoration: none">Quên mật khẩu?</a>
                 </div>
                 <div class="form-group">
                     <button type="submit"> Đăng nhập</button>
@@ -65,7 +65,7 @@ To change this template use File | Settings | File Templates.
             </form>
             <div class="form-footer">
                 <p>Bạn chưa có tài khoản?</p>
-                <a href="register.jsp">Đăng ký</a>
+                <a href="register.jsp" style="text-decoration: none">Đăng ký</a>
             </div>
         </div>
     </div>

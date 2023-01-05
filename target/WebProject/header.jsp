@@ -66,11 +66,13 @@
 <div class="container-fluid bg-dark mb-30">
     <div class="row px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
+               href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
                 <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Danh mục sản phẩm</h6>
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
-            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+                 id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">
                     <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm fullface</a>
                     <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm 3/4</a>
@@ -95,14 +97,26 @@
                         <a href="publicshop.jsp" class="nav-item nav-link">Thương hiệu</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
-                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <a href="login.jsp" class="btn px-0">
-                            <i class="fas fa-user text-primary"></i>
-                        </a>
-                        <a href="cart.jsp" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                        </a>
+                    <div class="navbar-nav ml-auto py-0">
+                        <div class="navbar-nav ml-auto py-0">
+                            <a href="login.jsp" class="nav-item nav-link">
+                                <i class="fas fa-user text-primary" style="padding-top: 4px"></i>
+                            </a>
+                        </div>
+                        <%--                            <div class="nav-item dropdown">--%>
+                        <%--                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user text-primary" style="padding-top: 4px"></i></a>--%>
+                        <%--                                <div class="dropdown-menu bg-dark border-bt-primary m-0">--%>
+                        <%--                                    <a href="#" class="dropdown-item text-primary">Thông tin</a>--%>
+                        <%--                                    <a href="#" class="dropdown-item text-primary">Đăng xuất</a>--%>
+                        <%--                                </div>--%>
+                        <%--                            </div>--%>
+                        <div class="navbar-nav ml-auto py-0">
+                            <a href="cart.jsp" class="nav-item nav-link">
+                                <i class="fas fa-shopping-cart text-primary"></i>
+                                <span class="badge text-secondary border border-secondary rounded-circle"
+                                      style="padding-bottom: 2px;">0</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </nav>

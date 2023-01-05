@@ -82,3 +82,27 @@
     color: #FFD333;
     border: 1px solid #FFD333;
 }
+.container-fluid .row .col-lg-9 .collapse .navbar-nav ul{
+    display: none;
+    position: absolute;
+    padding: 0px;
+    margin-top: 8px;
+    margin-left: -130px;
+}
+.container-fluid .row .col-lg-9 .collapse .navbar-nav ul li{
+    list-style-type: none;
+    width: 160px;
+    height: 40px;
+    text-align: left;
+    padding-top: 8px;
+    padding-left: 10px;
+    background-color: #3D464D;
+    border-top: 1px solid #FFD333;
+}
+.container-fluid .row .col-lg-9 .collapse .navbar-nav ul li a{
+    margin-top: 10px;
+    text-decoration: none;
+}
+.container-fluid .row .col-lg-9 .collapse .navbar-nav.ml-auto div:hover ul{
+    display: block;
+}
