@@ -148,6 +148,7 @@
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                 <div class="dropdown-menu dropdown-menu-right">
+
                                     <a class="dropdown-item" href="/Project_CuaHangMuBaoHiem_war/sort?text=new">Mới nhất</a>
                                     <a class="dropdown-item" href="/Project_CuaHangMuBaoHiem_war/sort?text=popular">Phổ biến</a>
                                     <a class="dropdown-item" href="/Project_CuaHangMuBaoHiem_war/sort?text=rating">Đánh giá cao</a>
@@ -165,7 +166,7 @@
                         <div class="product-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="<%=p.getImg().get(0)%>" alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" +p.getId()%>"><i class="fa fa-shopping-cart"></i></a>
+                                <a class="btn btn-outline-dark btn-square" <% if (p.sumQuantity()<=0){%><%}else{%> href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" +p.getId()%>"<%}%>><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><i class="fa fa-search"></i></a>
@@ -175,7 +176,9 @@
                             <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><%=p.getName()%></a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5><%=nf.numberFormat(p.getPrice())%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p.getPrice())%>đ</del></h6>
+
                             </div>
+                            <% if(p.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p.sumQuantity()%><%}%>
                             <div class="d-flex align-items-center justify-content-center mb-1">
                                 <%for (int j=1;j<=p.getStar();j++){%>
                                 <small class="fa fa-star text-primary mr-1"></small>

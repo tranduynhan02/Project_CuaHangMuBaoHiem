@@ -124,52 +124,46 @@ To change this template use File | Settings | File Templates.
                 </div>
                 <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat(p.getPrice()) %>đ</h3>
                 <p class="mb-4">Mô tả sản phẩm</p>
+
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Kích thước:</strong>
-                    <form>
+                    <form id="size" action="/Project_CuaHangMuBaoHiem_war/AddDetail">
+                        <input type="hidden" name="id" value="<%= p.getId() %>">
+                        <% int i=1; for(String size : p.getListSize()){ i++;%>
+
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-2" name="size">
-                            <label class="custom-control-label" for="size-2">S</label>
+                            <input type="radio" required="required" class="custom-control-input" id="size-<%=i%>" name="size"  value="<%= size %>">
+                            <label class="custom-control-label" for="size-<%=i%>"><%= size %></label>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-3" name="size">
-                            <label class="custom-control-label" for="size-3">M</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-4" name="size">
-                            <label class="custom-control-label" for="size-4">L</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-5" name="size">
-                            <label class="custom-control-label" for="size-5">XL</label>
-                        </div>
-                    </form>
+
+                        <%}%>
+<%--                    </form>--%>
                 </div>
+
                 <div class="d-flex mb-4">
                     <strong class="text-dark mr-3">Màu sắc:</strong>
-                    <form>
+                    <%  String s = request.getParameter("size");
+                        String c = request.getParameter("color");
+                        int quantity = p.getQuantitySizeColor(s,c);
+                    %>
+
+<%--                    <form id="color">--%>
+                        <% int j=0; for(String color : p.getListColor()){ j++;%>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-1" name="color">
-                            <label class="custom-control-label" for="color-1">Black</label>
+                            <input type="radio"  required="required" class="custom-control-input" id="color-<%=j%>" name="color" onclick="addDetail(<%= quantity %>)" value="<%= color%>">
+                            <label class="custom-control-label" for="color-<%=j%>"><%= color %></label>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-2" name="color">
-                            <label class="custom-control-label" for="color-2">White</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-3" name="color">
-                            <label class="custom-control-label" for="color-3">Red</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-4" name="color">
-                            <label class="custom-control-label" for="color-4">Blue</label>
-                        </div>
-                    </form>
+                        <%}%>
+
                 </div>
+                <div>
+
+                </div>
+                <p id="color1234" class="help-block text-danger"><%= p.sumQuantity() %> sản phẩm có sẵn</p>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus">
+                            <button class="btn btn-primary btn-minus" type="button">
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
@@ -177,18 +171,15 @@ To change this template use File | Settings | File Templates.
                         <input type="text" class="form-control bg-secondary border-0 text-center" name="quantity" style="height: 30px" value="1">
 
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
+                            <button class="btn btn-primary btn-plus" type="button">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-
-
-                    <a href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" + p.getId()%>"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
-                        giỏ hàng</button></a>
-
-
+                    <button type="submit" class="btn btn-primary px-3" onclick="check()"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
+                        giỏ hàng</button>
                 </div>
+                </form>
                 <div class="d-flex pt-2">
                     <strong class="text-dark mr-2">Chia sẻ:</strong>
                     <div class="d-inline-flex">
@@ -441,6 +432,7 @@ To change this template use File | Settings | File Templates.
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
+<script src="js/addDetail.js"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ public class Add extends HttpServlet {
         String id = request.getParameter("id");
         Product p = null;
         try {
-            p = ProductService.getProduct(id);
+            p = ProductService.getDetailProduct(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -26,7 +26,6 @@ public class Add extends HttpServlet {
         cart.put(p);
         request.getSession().setAttribute("cart",cart);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/list-product");
-
     }
 
     @Override

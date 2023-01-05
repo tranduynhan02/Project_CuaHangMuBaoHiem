@@ -61,8 +61,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Sản phẩm</th>
-                         </th>   <th>Giá tiền</th>
-                            <th>Số lượng
+                            <th>Kích thước</th>
+                            <th>Màu sắc</th>
+                         <th>Giá tiền</th>
+                            <th>Số lượng</th>
                             <th>Tổng tiền</th>
                             <th>Xóa</th>
                         </tr>
@@ -73,6 +75,8 @@
                         %>
                         <tr>
                             <td class="align-middle"><div style="float: left"><img src="<%= p.getImg().get(0) %>" alt="" style="width: 50px;"> <%= p.getName() %></div></td>
+                            <td class="align-middle"><%=p.getDetail().get(0).getSize()%></td>
+                            <td class="align-middle"><%=p.getDetail().get(0).getColor()%></td>
                             <td class="align-middle"><%=nf.numberFormat(p.getPrice())%>đ</td>
                             <td class="align-middle">
 
@@ -80,7 +84,7 @@
                                 <div class="input-group mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <form action="/Project_CuaHangMuBaoHiem_war/Minus" method="get">
-                                            <input type="hidden" name="minus" value="<%= p.getId() %>">
+                                            <input type="hidden" name="minus" value="<%= p.getKey() %>">
                                             <button type="submit" class="btn btn-sm btn-primary btn"> <i class="fa fa-minus"></i></button>
                                         </form>
                                     </div>
@@ -88,9 +92,17 @@
                                     <div class="input-group-btn">
                                         <form method="get" action="/Project_CuaHangMuBaoHiem_war/Plus">
                                             <input type="hidden" name="plus" value="<%= p.getId() %>">
-                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <input type="hidden" name="size" value="<%= p.getDetail().get(0).getSize() %>">
+                                            <input type="hidden" name="color" value="<%= p.getDetail().get(0).getColor() %>">
+                                            <%if(p.getQuantity() >= p.getDetail().get(0).getQuantity()){%>
+                                        <button class="btn btn-sm btn-primary btn-plus" disabled>
                                             <i class="fa fa-plus"></i>
                                         </button>
+                                            <%}else{%>
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <%}%>
                                         </form>
                                     </div>
                                 </div>
@@ -99,7 +111,7 @@
                             <td class="align-middle"><%= nf.numberFormat(p.getPrice()*p.getQuantity()) %>đ</td>
                             <td class="align-middle">
                                 <form method="get" action="/Project_CuaHangMuBaoHiem_war/Delete">
-                                <input type="hidden" name="delete" value="<%= p.getId() %>">
+                                <input type="hidden" name="delete" value="<%= p.getKey() %>">
                                 <button class="btn btn-sm btn-danger" ><i class="fa fa-times"></i></button>
                             </form></td>
                         </tr>

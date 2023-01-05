@@ -31,6 +31,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="fontawesome-free-6.2.1/css/all.css" rel="stylesheet">
 </head>
 <body>
 <!-- Topbar Start -->

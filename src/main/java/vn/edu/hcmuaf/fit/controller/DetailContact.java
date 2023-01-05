@@ -15,9 +15,11 @@ public class DetailContact extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+        String pages= request.getParameter("pages");
         if(id != null) {
             Contact contact = ContactService.getInstance().getContact(id);
             request.setAttribute("contact",contact);
+            request.setAttribute("pages",pages);
             request.getRequestDispatcher("DetailContact.jsp").forward(request,response);
         }else
             response.sendError(404,"Product not found");

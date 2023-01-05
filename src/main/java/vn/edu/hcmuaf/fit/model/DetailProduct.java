@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class DetailProduct {
@@ -57,4 +58,5 @@ public class DetailProduct {
                 ", quantity=" + quantity +
                 '}';
     }
+
 }

@@ -409,6 +409,66 @@ public class ProductService {
         }
         return result;
     }
+    public static Product getDetailProduct(String idp) throws SQLException {
+        Product p = new Product();
+        p.setId(idp);
+        p.setName(getname(idp));
+        p.setPrice(getprice(idp));
+        p.setBrand(getbrand(idp));
+        p.setType(gettype(idp));
+        p.setDiscount(getdiscount(idp));
+        p.setImg(getimg(idp));
+        p.setStar(getstar(idp));
+        p.setAmount(getamount(idp));
+        p.setComment(getcomment(idp));
+        p.setRelease(getrelease(idp));
+        p.setDecrispe(getdecrispe(idp));
+        p.setDetail(getfirst(idp));
+        return p;
+    }
+    public static List<DetailProduct> getfirst(String id) throws SQLException {
+        List<DetailProduct> detail = new ArrayList<DetailProduct>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select id_dp, size, color, quantity from detail_product where id_product=? and quantity>0");
+        prs.setString(1,id);
+        ResultSet rs = prs.executeQuery();
+        while(rs.next()){
+
+            detail.add(new DetailProduct(rs.getString("id_dp"),rs.getString("size"),rs.getString("color"), rs.getInt("quantity")));
+        break;
+        }
+        return detail;
+    }
+    public static Product getDetailProduct(String idp,String size,String color) throws SQLException {
+        Product p = new Product();
+        p.setId(idp);
+        p.setName(getname(idp));
+        p.setPrice(getprice(idp));
+        p.setBrand(getbrand(idp));
+        p.setType(gettype(idp));
+        p.setDiscount(getdiscount(idp));
+        p.setImg(getimg(idp));
+        p.setStar(getstar(idp));
+        p.setAmount(getamount(idp));
+        p.setComment(getcomment(idp));
+        p.setRelease(getrelease(idp));
+        p.setDecrispe(getdecrispe(idp));
+        p.setDetail(getDetail(idp, size, color));
+        return p;
+    }
+    public static List<DetailProduct> getDetail(String id,String size,String color) throws SQLException {
+        List<DetailProduct> detail = new ArrayList<DetailProduct>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        PreparedStatement prs = dbConnect.getConnection().prepareStatement("select id_dp, size, color, quantity from detail_product where id_product=? and size =? and color = ?");
+        prs.setString(1, id);
+        prs.setString(2, size);
+        prs.setString(3, color);
+        ResultSet rs = prs.executeQuery();
+        while (rs.next()) {
+            detail.add(new DetailProduct(rs.getString("id_dp"), rs.getString("size"), rs.getString("color"), rs.getInt("quantity")));
+        }
+        return detail;
+    }
     public static List<Bill> sales(int month, int year){
         List<Bill> result = new ArrayList<Bill>();
         try{
@@ -528,8 +588,5 @@ public class ProductService {
         }catch (SQLException e){
             e.printStackTrace();
         }
-    }
-    public static void main(String[] args) throws SQLException {
-
     }
 }

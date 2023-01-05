@@ -1,5 +1,8 @@
 package vn.edu.hcmuaf.fit.model;
 
+import vn.edu.hcmuaf.fit.service.ProductService;
+
+import java.sql.SQLException;
 import java.util.*;
 
 public class Product{
@@ -177,5 +180,48 @@ public class Product{
         }
         return sum;
     }
+    public String getKey(){
+        return this.id+""+this.getDetail().get(0).getId();
+    }
+    public List<String> getListSize(){
+        List<String> list = new LinkedList<String>();
+        for(DetailProduct size : getDetail()){
+            if(!list.contains(size.getSize())){
+                list.add(size.getSize());
+            }
+        }
+        return list;
+    }
+    public List<String> getListColor(){
+        List<String> list = new LinkedList<String>();
+        for(DetailProduct size : getDetail()){
+            if(!list.contains(size.getColor())){
+                list.add(size.getColor());
+            }
+        }
+        return list;
+    }
+    public int getQuantitySizeColor(String size,String color){
+        int sum = 0;
+        for(DetailProduct dp : getDetail()){
+            if(dp.getSize().equalsIgnoreCase(size) && dp.getColor().equalsIgnoreCase(color)){
+                sum = dp.getQuantity();
+            }
+        }
+        return sum;
+    }
+    public int getQuantitySize(String size){
+        int sum = 0;
+        for(DetailProduct dp : getDetail()){
+            if(dp.getSize().equalsIgnoreCase(size)){
+                sum += dp.getQuantity();
+            }
+        }
+        return sum;
+    }
 
+    public static void main(String[] args) throws SQLException {
+        Product p = ProductService.getProduct("1");
+        System.out.println(p.getQuantitySize(""));
+    }
 }
