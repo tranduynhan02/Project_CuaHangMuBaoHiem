@@ -480,7 +480,6 @@ public class ProductService {
             if(resultSet.next()){
                 date = resultSet.getDate(1);
             }
-//            if(!checkbill(id_Customer,status,date,id_dp))return;
             PreparedStatement prs = DBConnect.getInstance().getConnection().prepareStatement("INSERT into bill values(?,?,?,?)");
             prs.setString(1, id);
             prs.setString(2,id_Customer);
@@ -497,27 +496,6 @@ public class ProductService {
             e.printStackTrace();
         }
     }
-    public static boolean checkbill(String id_Customer,String status,Date date,List<String> id_dp) throws SQLException {
-        String id = "";
-        PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id from bill where id_customer=? and status=? and date=? ");
-        ps.setString(1,id_Customer);
-        ps.setString(2,status);
-        ps.setDate(3, (java.sql.Date) date);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()){
-            id += rs.getString("id");
-        }else {
-            return false;
-        }
-        PreparedStatement preparedStatement = DBConnect.getInstance().getConnection().prepareStatement("select id_dp from detail_bill where id_bill=?");
-        List<String> list = new ArrayList<String>();
-        preparedStatement.setString(1,id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()){
-            if(!id_dp.contains(resultSet.getString("id_dp")))return false;
-        }
-        return true;
-    }
     public static void cancel_bill(String id_bill){
         try{
             String status = "Đã hủy";
@@ -528,6 +506,42 @@ public class ProductService {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    public static List<Customer> getData_Customer() {
+        List<Customer> list = new ArrayList<Customer>();
+        DBConnect dbConnect = DBConnect.getInstance();
+        Statement statement = dbConnect.get();
+        try {
+            ResultSet rs = statement.executeQuery("select id_customer from customer");
+            while (rs.next()){
+                list.add(getCustomer(rs.getString("id_customer")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+    public static void delete_customer(String id){
+        try {
+            PreparedStatement preparedStatement = DBConnect.getInstance().getConnection().prepareStatement("delete from customer where id_customer=?");
+            preparedStatement.setString(1,id);
+            preparedStatement.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    public static void fix_customer(String id, String name, String phone, String email,String address){
+       try {
+           PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("update customer set name=?,phone=?,email=?,address=? where id_customer=?");
+           ps.setString(1,name);
+           ps.setString(2,phone);
+           ps.setString(3,email);
+           ps.setString(4,address);
+           ps.setString(5,id);
+           ps.executeUpdate();
+       }catch(SQLException e){
+           e.printStackTrace();
+       }
     }
     public static void main(String[] args) throws SQLException {
 
