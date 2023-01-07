@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.controller;
 
 import vn.edu.hcmuaf.fit.model.Cart;
+import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.Product;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
@@ -34,7 +35,9 @@ public class Add_Bill extends HttpServlet {
         }else{
             LocalDateTime date = LocalDateTime.now();
             String id_bill = date.getSecond()+"-"+date.getMinute()+"-"+date.getHour()+"-"+date.getDayOfMonth()+"-"+date.getMonth()+"-"+date.getYear();
-            ProductService.addBill(id_bill,"id_Customer","Đang gửi",id_dp,address,phone);
+            Customer customer = (Customer) request.getSession().getAttribute("tendangnhap");
+            String id_cus = customer.getId();
+            ProductService.addBill(id_bill,id_cus,"Đang gửi",id_dp,address,phone);
             cart.getCart().clear();
             cart.setTotal(0);
             cart.setQuantity(0);
