@@ -3,45 +3,46 @@ package vn.edu.hcmuaf.fit.model;
 import vn.edu.hcmuaf.fit.model.Bill;
 import vn.edu.hcmuaf.fit.model.Cart;
 
+import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer {
-    private String id;
+public class Customer implements Serializable {
+    private String id_customer;
     private String name;
-    private int phone;
-    private String address;
-    private String userName;
-    private String password;
-    private boolean isLogin;
-    private int permission;
-    private Cart cart;
-    private List<Bill> listBill;
-
     private String email;
+    private String phone;
+    private String address;
+    private String username;
+    private String password;
+    private int permission;
+    private boolean active;
+    private Date create_date;
 
     public Customer() {
     }
 
-    public Customer(String id, String name, int phone, String address, String userName, String password, int permission, String email) {
-        this.id = id;
+    public Customer(String id_customer, String name, String email, String phone, String address, String username, String password, int permission, boolean active, Date create_date) {
+        this.id_customer = id_customer;
         this.name = name;
+        this.email = email;
         this.phone = phone;
         this.address = address;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.permission = permission;
-        this.cart = new Cart();
-        this.listBill = new ArrayList<Bill>();
-        this.email = email;
+        this.active = active;
+        this.create_date = create_date;
+
     }
 
-    public String getId() {
-        return id;
+    public String getId_customer() {
+        return id_customer;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId_customer(String id_customer) {
+        this.id_customer = id_customer;
     }
 
     public String getName() {
@@ -52,11 +53,19 @@ public class Customer {
         this.name = name;
     }
 
-    public int getPhone() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -68,12 +77,12 @@ public class Customer {
         this.address = address;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -84,14 +93,6 @@ public class Customer {
         this.password = password;
     }
 
-    public boolean isLogin() {
-        return isLogin;
-    }
-
-    public void setLogin(boolean login) {
-        isLogin = login;
-    }
-
     public int getPermission() {
         return permission;
     }
@@ -100,27 +101,35 @@ public class Customer {
         this.permission = permission;
     }
 
-    public Cart getCart() {
-        return cart;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    public List<Bill> getListBill() {
-        return listBill;
+    public Date getCreate_date() {
+        return create_date;
     }
 
-    public void setListBill(List<Bill> listBill) {
-        this.listBill = listBill;
+    public void setCreate_date(Date create_date) {
+        this.create_date = create_date;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id_customer='" + id_customer + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", permission=" + permission +
+                ", active=" + active +
+                ", create_date=" + create_date +
+                '}';
     }
 }

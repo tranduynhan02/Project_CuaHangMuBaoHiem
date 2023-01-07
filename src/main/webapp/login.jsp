@@ -1,4 +1,4 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.controller.DoRegister" %><%--
 Created by IntelliJ IDEA.
 User: ACER
 Date: 11/6/2022
@@ -37,19 +37,22 @@ To change this template use File | Settings | File Templates.
 
 <body>
 <!-- Header Start -->
-<%@include file="header.jsp"%>
+<%@include file="header.jsp" %>
 <!-- Header End -->
 
 <!-- Login Start -->
+<% String error = (String) request.getAttribute("error");%>
+<% String username = (String) request.getParameter("username");%>
 <section>
     <div class="form-container">
         <div class="form-login">
-            <form action="/WebProject_war/doLogin" method="post">
+            <form action="/Project_CuaHangMuBaoHiem_war/doLogin" method="post">
                 <div class="title">Đăng nhập</div>
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
                         <span class="fa-solid fa-user"></span></div>
-                    <input type="text" class="form-control" placeholder="Tên đăng nhập" name="username">
+                    <input type="text" value="<%=(username!=null && username!="")? username:""%>" class="form-control"
+                           placeholder="Tên đăng nhập" name="username">
                 </div>
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
@@ -62,6 +65,8 @@ To change this template use File | Settings | File Templates.
                 <div class="form-group">
                     <button type="submit"> Đăng nhập</button>
                 </div>
+                <p style="color: red"><%=(error != null && error != "") ? error : ""%>
+                </p>
             </form>
             <div class="form-footer">
                 <p>Bạn chưa có tài khoản?</p>
@@ -73,7 +78,7 @@ To change this template use File | Settings | File Templates.
 <!-- Login End-->
 
 <!-- Footer Start -->
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
 <!-- Footer End -->
 
 

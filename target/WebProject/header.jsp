@@ -1,4 +1,4 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.model.Cart" %><%--
   Created by IntelliJ IDEA.
   User: ACER
   Date: 11/6/2022
@@ -42,13 +42,12 @@
             </a>
         </div>
         <div class="col-lg-4 col-6 text-left pt-2" style="margin-top: 8px">
-            <form action="">
+            <form action="/Project_CuaHangMuBaoHiem_war/find-product" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm">
+                    <input type="text" name="text" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm">
                     <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+                        <input type="submit" value="Tìm kiếm" class="input-group-text bg-transparent text-primary">
+                        <%--                                <i class="fa fa-search"></i>--%>
                     </div>
                 </div>
             </form>
@@ -93,29 +92,43 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
-                        <a href="shop.jsp" class="nav-item nav-link">Sản phẩm</a>
+                        <a href="/Project_CuaHangMuBaoHiem_war/list-product" class="nav-item nav-link">Sản phẩm</a>
                         <a href="publicshop.jsp" class="nav-item nav-link">Thương hiệu</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="login.jsp" class="nav-item nav-link">
-                                <i class="fas fa-user text-primary" style="padding-top: 4px"></i>
-                            </a>
-                        </div>
-                        <%--                            <div class="nav-item dropdown">--%>
-                        <%--                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user text-primary" style="padding-top: 4px"></i></a>--%>
-                        <%--                                <div class="dropdown-menu bg-dark border-bt-primary m-0">--%>
-                        <%--                                    <a href="#" class="dropdown-item text-primary">Thông tin</a>--%>
-                        <%--                                    <a href="#" class="dropdown-item text-primary">Đăng xuất</a>--%>
-                        <%--                                </div>--%>
-                        <%--                            </div>--%>
-                        <div class="navbar-nav ml-auto py-0">
-                            <a href="cart.jsp" class="nav-item nav-link">
-                                <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle"
-                                      style="padding-bottom: 2px;">0</span>
-                            </a>
+                            <% String s = (String) request.getSession().getAttribute("tendangnhap");%>
+                            <% if (s == null) {%>
+                            <div class="navbar-nav ml-auto py-0">
+                                <a href="login.jsp" class="nav-item nav-link">
+                                    <i class="fas fa-user text-primary" style="padding-top: 4px"></i>
+                                </a>
+                            </div>
+                            <% } else { %>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i
+                                        class="fas fa-user text-primary" style="padding-top: 4px"></i></a>
+                                <div class="dropdown-menu bg-dark border-bt-primary m-0">
+                                    <a href="account.jsp" class="dropdown-item text-primary">Thông tin</a>
+                                    <a href="#" class="dropdown-item text-primary">Đăng xuất</a>
+                                </div>
+                            </div>
+                            <% }%>
+
+                            <div class="navbar-nav ml-auto py-0">
+                                <a href="/Project_CuaHangMuBaoHiem_war/ListProductInCart" class="nav-item nav-link">
+                                    <i class="fas fa-shopping-cart text-primary"></i>
+                                    <% Cart cart = (Cart) request.getSession().getAttribute("cart");
+                                        if (cart == null) {
+                                            cart = new Cart();
+                                        }
+                                        request.getSession().setAttribute("cart", cart);
+                                    %>
+                                    <span class="badge text-secondary border border-secondary rounded-circle"
+                                          style="padding-bottom: 2px;"><%=cart.getQuanlity()%></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
