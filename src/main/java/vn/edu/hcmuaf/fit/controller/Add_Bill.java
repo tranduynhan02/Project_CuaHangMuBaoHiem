@@ -9,8 +9,10 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "add_bill", value = "/add_bill")
@@ -30,8 +32,9 @@ public class Add_Bill extends HttpServlet {
             request.setAttribute("error","error");
             request.getRequestDispatcher("checkout.jsp").forward(request,response);
         }else{
-            String id_bill = java.time.LocalDateTime.now().toString();
-            ProductService.addBill(id_bill,"id_Customer","Đang gửi",id_dp);
+            LocalDateTime date = LocalDateTime.now();
+            String id_bill = date.getSecond()+"-"+date.getMinute()+"-"+date.getHour()+"-"+date.getDayOfMonth()+"-"+date.getMonth()+"-"+date.getYear();
+            ProductService.addBill(id_bill,"id_Customer","Đang gửi",id_dp,address,phone);
             cart.getCart().clear();
             cart.setTotal(0);
             cart.setQuantity(0);

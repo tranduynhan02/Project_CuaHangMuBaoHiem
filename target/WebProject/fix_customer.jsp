@@ -96,7 +96,7 @@
 
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                            href="bill.jsp"
+                            href="bill_manager.jsp"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -120,7 +120,7 @@
                 ></span>
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                            href="customer.jsp"
+                            href="customer_manager.jsp"
                     >
                         <svg
                                 class="w-5 h-5"
@@ -333,9 +333,7 @@
         </header>
         <main class="h-full pb-16 overflow-y-auto">
             <div class="container grid px-6 mx-auto">
-                <h2
-                        class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-                >
+                <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                     Chỉnh sửa thông tin khách hàng
                 </h2>
                 <%Customer c = (Customer) request.getAttribute("customer");%>

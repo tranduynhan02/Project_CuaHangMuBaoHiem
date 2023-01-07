@@ -13,7 +13,7 @@ public class FindCustomer extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String text = request.getParameter("text");
         request.setAttribute("list", ProductService.findCustomer(text));
-        request.getRequestDispatcher("customer.jsp").forward(request,response);
+        request.getRequestDispatcher("customer_manager.jsp").forward(request,response);
     }
 
     @Override
