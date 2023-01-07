@@ -15,16 +15,18 @@ public class Plus extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("plus");
+        String size = request.getParameter("size");
+        String color = request.getParameter("color");
         Product p = null;
         try {
-            p = ProductService.getProduct(id);
+            p = ProductService.getDetailProduct(id,size,color);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         p.setQuantity(1);
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         cart.put(p);
-//        request.getSession().setAttribute("cart",cart);
+        request.getSession().setAttribute("cart",cart);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/ListProductInCart");
     }
 

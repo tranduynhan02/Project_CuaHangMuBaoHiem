@@ -8,12 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ContactService {
     private static ContactService instance;
-    private ContactService() {
+    public ContactService() {
     }
     public static ContactService getInstance() {
         if (instance == null) {
@@ -23,7 +24,6 @@ public class ContactService {
     }
     public void remove(String id)  {
         DBConnect dbConnect = DBConnect.getInstance();
-        Statement statement = dbConnect.get();
         try {
             PreparedStatement ps = dbConnect.getConnection().prepareStatement("delete from contacts where id=?");
             ps.setString(1,id);
@@ -58,10 +58,11 @@ public class ContactService {
     public List<Contact> getAll(){
         List<Contact> list = new LinkedList<Contact>();
         DBConnect dbConnect = DBConnect.getInstance();
-        Statement statement = dbConnect.get();
+
        Contact contact = new Contact();
         try {
-            ResultSet rs = statement.executeQuery("select * from contacts order by date desc");
+            PreparedStatement ps =dbConnect.getConnection().prepareStatement("select * from contacts order by date desc");
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             contact = new Contact(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
 
@@ -101,7 +102,41 @@ public class ContactService {
 
         return contact;
     }
+    public List<Contact> getContact(int a, int b){
+        List<Contact> list = new LinkedList<Contact>();
+        DBConnect dbConnect = DBConnect.getInstance();
+
+        Contact contact = new Contact();
+        try {
+
+          PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from  contacts limit ?,?");
+          ps.setInt(1,a);
+            ps.setInt(2,b);
+          ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                contact = new Contact(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+
+                list.add(contact);
+            }
+
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public List<Contact> pagination(int a, int b){
+        List<Contact> list = getAll();
+        List<Contact> result = new ArrayList<Contact>();
+
+        for(int i = a; i<b+a;i++){
+            if(i<list.size()) {
+                result.add(list.get(i));
+            }
+        }
+
+        return result;
+    }
     public static void main(String[] args) throws SQLException {
-        System.out.println();
+
     }
 }

@@ -10,22 +10,26 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "Add", value = "/Add")
-public class Add extends HttpServlet {
+@WebServlet(name = "AddDetail", value = "/AddDetail")
+public class AddDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+        String size = request.getParameter("size");
+        String color = request.getParameter("color");
+        String quantity = request.getParameter("quantity");
         Product p = null;
         try {
-            p = ProductService.getDetailProduct(id);
+            p = ProductService.getDetailProduct(id,size,color);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        p.setQuantity(1);
+        p.setQuantity(Integer.parseInt(quantity));
         Cart cart = (Cart) request.getSession().getAttribute("cart");
-        cart.put(p);
+        cart.putQuantity(p);
         request.getSession().setAttribute("cart",cart);
-        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/list-product");
+        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/detail?id=" +id);
+//        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/ListProductInCart");
     }
 
     @Override
