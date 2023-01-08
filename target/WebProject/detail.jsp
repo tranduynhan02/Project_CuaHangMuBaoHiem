@@ -122,9 +122,7 @@ To change this template use File | Settings | File Templates.
                     </div>
                     <small class="pt-1">(<%= p.getAmount() %> Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat(p.getPrice()) %>đ</h3>
-                <p class="mb-4">Mô tả sản phẩm</p>
-
+                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat((long) (p.getPrice()-p.getPrice()*p.getDiscount())) %>đ</h3>
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Kích thước:</strong>
                     <form id="size" action="/Project_CuaHangMuBaoHiem_war/AddDetail">
