@@ -1,6 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %>
+<<<<<<< HEAD
+<%@ page import="java.util.Map" %>
+=======
 <%@ page import="java.util.List" %>
+>>>>>>> origin
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %><%--
 Created by IntelliJ IDEA.
 User: ACER
@@ -198,65 +202,68 @@ To change this template use File | Settings | File Templates.
             <div class="bg-light p-30">
                 <div class="nav nav-tabs mb-4">
                     <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Mô tả sản phẩm</a>
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Bình luận (0)</a>
+                    <%Map<String,String> listComment = ProductService.getListComment(p.getId());%>
+                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Bình luận (<%=listComment.size()%>)</a>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Product Description</h4>
+                        <h4 class="mb-3">Mô tả sản phẩm</h4>
                         <p><%=p.getDecrispe()%></p>
                     </div>
 
                     <div class="tab-pane fade" id="tab-pane-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Product Name"</h4>
-                                <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
+                        <div class="row" style="overflow: auto">
+                            <div style="float:left;width:680px; padding-right:0px;">
+                                <%for(String key:listComment.keySet()){%>
+                                <div class="col-md-6">
+                                    <div class="media mb-4" style="width: 600px;">
+                                        <div class="media-body" >
+                                            <h6><%=ProductService.getCustomer(key).getName()%><small> - <i><%=ProductService.getDateComment(key,p.getId(),listComment.get(key))%></i></small></h6>
+                                            <div class="text-primary mb-2">
+                                                <%int star = ProductService.getStarComment(key,p.getId(),listComment.get(key));
+                                                for(int a=0;a<star;a++){%>
+                                                <i class="fas fa-star"></i>
+                                                <%}%>
+                                            </div>
+                                            <p><%=listComment.get(key)%></p>
                                         </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
                                     </div>
                                 </div>
+                                <%}%>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="float: right; width: 500px;">
 
                                 <h4 class="mb-4">Viết đánh giá</h4>
                                 <form action="/Project_CuaHangMuBaoHiem_war/get-comment" method="get">
-                                        <div class="d-flex my-3">
-                                            <p class="mb-0 mr-2">Đánh giá * :</p>
-                                            <div class="text-primary">
-                                                <input class="star star-5" id="star-5" value="5" type="radio" name="star"/>
-                                                <label class="star star-5" for="star-5"></label>
-                                                <input class="star star-4" id="star-4" value="4" type="radio" name="star"/>
-                                                <label class="star star-4" for="star-4"></label>
-                                                <input class="star star-3" id="star-3" value="3" type="radio" name="star"/>
-                                                <label class="star star-3" for="star-3"></label>
-                                                <input class="star star-2" id="star-2" value="2" type="radio" name="star"/>
-                                                <label class="star star-2" for="star-2"></label>
-                                                <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star"/>
-                                                <label class="star star-1" for="star-1"></label>
-                                            </div>
+                                    <div class="d-flex my-3">
+                                        <p class="mb-0 mr-2">Đánh giá * :</p>
+                                        <div class="text-primary">
+                                            <input class="star star-5" id="star-5" value="5" type="radio" name="star">
+                                            <label class="star star-5" for="star-5"></label>
+                                            <input class="star star-4" id="star-4" value="4" type="radio" name="star">
+                                            <label class="star star-4" for="star-4"></label>
+                                            <input class="star star-3" id="star-3" value="3" type="radio" name="star">
+                                            <label class="star star-3" for="star-3"></label>
+                                            <input class="star star-2" id="star-2" value="2" type="radio" name="star">
+                                            <label class="star star-2" for="star-2"></label>
+                                            <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star">
+                                            <label class="star star-1" for="star-1"></label>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="message">Bình luận *</label>
-                                            <textarea id="message" name="mess" cols="30" rows="5" class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="hidden" name="id_Pro" value="<%=p.getId()%>" class="form-control" id="email">
-                                        </div>
-                                        <div class="form-group mb-0">
-                                            <input type="submit" value="Gửi" class="btn btn-primary px-3">
-                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">Bình luận *</label>
+                                        <textarea id="message" name="mess" cols="30" rows="5" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" name="id_Pro" value="1" class="form-control" id="email">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <input type="submit" value="Gửi" class="btn btn-primary px-3">
+                                    </div>
                                 </form>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 
@@ -16,7 +17,8 @@ public class GetComment extends HttpServlet {
         String idPro = request.getParameter("id_Pro");
         String mess = request.getParameter("mess");
         int star = Integer.parseInt(request.getParameter("star"));
-        ProductService.addComment("4",idPro,mess,star);
+        Customer customer = (Customer) request.getSession().getAttribute("tendangnhap");
+        ProductService.addComment(customer.getId(),idPro,mess,star);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/detail?id="+idPro);
 
     }
