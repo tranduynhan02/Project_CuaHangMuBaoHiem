@@ -1230,20 +1230,40 @@ public class ProductService {
             }
             return result;
         }
-    public static String getDateComment(String id_cus,String id_pro, String comment){
+    public static String getDateComment(String id_cus,String id_pro, String comment) {
         String result = "";
         try {
             PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select DAY(date),MONTH(date),YEAR(date) from comment where id_customer=? and id_product=? and comment=?");
-            ps.setString(1,id_cus);
-            ps.setString(2,id_pro);
-            ps.setString(3,comment);
+            ps.setString(1, id_cus);
+            ps.setString(2, id_pro);
+            ps.setString(3, comment);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                result += rs.getInt(1)+"/"+rs.getInt(2)+"/"+rs.getInt(3);
+            if (rs.next()) {
+                result += rs.getInt(1) + "/" + rs.getInt(2) + "/" + rs.getInt(3);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
     }
+    public static List<Product> listType(String type, String id) {
+        List<Product> list = new ArrayList<Product>();
+
+        DBConnect dbConnect = DBConnect.getInstance();
+
+        try {
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_product from product where type =? and id_product not in(?)");
+            ps.setString(1, type);
+            ps.setString(2, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                list.add(getProduct(rs.getString("id_product")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
+}

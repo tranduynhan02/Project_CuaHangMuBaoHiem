@@ -1,6 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %>
+<<<<<<< HEAD
 <%@ page import="java.util.Map" %>
+=======
+<%@ page import="java.util.List" %>
+>>>>>>> origin
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %><%--
 Created by IntelliJ IDEA.
 User: ACER
@@ -122,7 +126,7 @@ To change this template use File | Settings | File Templates.
                         <small class="fas fa-star-half-alt"></small>
                         <small class="far fa-star"></small>
                     </div>
-                    <small class="pt-1">(<%= p.getAmount() %> Reviews)</small>
+                    <small class="pt-1">(<%= p.getAmount() %> đánh giá)</small>
                 </div>
                 <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat((long) (p.getPrice()-p.getPrice()*p.getDiscount())) %>đ</h3>
                 <div class="d-flex mb-3">
@@ -130,14 +134,12 @@ To change this template use File | Settings | File Templates.
                     <form id="size" action="/Project_CuaHangMuBaoHiem_war/AddDetail">
                         <input type="hidden" name="id" value="<%= p.getId() %>">
                         <% int i=1; for(String size : p.getListSize()){ i++;%>
-
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" required="required" class="custom-control-input" id="size-<%=i%>" name="size"  value="<%= size %>">
                             <label class="custom-control-label" for="size-<%=i%>"><%= size %></label>
                         </div>
 
                         <%}%>
-<%--                    </form>--%>
                 </div>
 
                 <div class="d-flex mb-4">
@@ -273,135 +275,141 @@ To change this template use File | Settings | File Templates.
 
 <!-- Products Start -->
 <div class="container-fluid py-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May Also Like</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Có thể bạn cũng thích</span></h2>
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
+                <% List<Product> list = ProductService.listType(p.getType(),p.getId());
+                for(Product pd : list){
+                %>
+
                 <div class="product-item bg-light">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product5.jpg" alt="">
+                        <img class="img-fluid w-100" <%if(pd.getImg().size()<=0){%>src="img/noimage.jpg"<%}else{%> src="<%=pd.getImg().get(0).getImg()%>" <%}%> alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="<%= "/Project_CuaHangMuBaoHiem_war/detail?id="+pd.getId() %>"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">GRS A760k nửa đầu</a>
+                        <a class="h6 text-decoration-none text-truncate" href="<%= "/Project_CuaHangMuBaoHiem_war/detail?id="+pd.getId() %>"><%= pd.getName() %></a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h5><%=nf.numberFormat((long)(pd.getPrice()-pd.getPrice()*pd.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(pd.getPrice())%>đ</del></h6>
                         </div>
+                        <% if(p.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p.sumQuantity()%><%}%>
                         <div class="d-flex align-items-center justify-content-center mb-1">
+                            <%for (int x=1;x<=pd.getStar();x++){%>
                             <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <%}
+                                if ((pd.getStar()*10)%10!=0){
+                            %>
+                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                            <%}%>
+                            <small>(<%=pd.getAmount()%>)</small>
                         </div>
                     </div>
                 </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product6.png" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 922</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product7.png" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">GRS 760 kính to</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product8.png" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Zeus 613B nón 3/4</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product3.jpg" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 966-1</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
+<%--                <div class="product-item bg-light">--%>
+<%--                    <div class="product-img position-relative overflow-hidden">--%>
+<%--                        <img class="img-fluid w-100" src="img/product6.png" alt="">--%>
+<%--                        <div class="product-action">--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="text-center py-4">--%>
+<%--                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 922</a>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
+<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
+<%--                        </div>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small>(99)</small>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-item bg-light">--%>
+<%--                    <div class="product-img position-relative overflow-hidden">--%>
+<%--                        <img class="img-fluid w-100" src="img/product7.png" alt="">--%>
+<%--                        <div class="product-action">--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="text-center py-4">--%>
+<%--                        <a class="h6 text-decoration-none text-truncate" href="">GRS 760 kính to</a>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
+<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
+<%--                        </div>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small>(99)</small>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-item bg-light">--%>
+<%--                    <div class="product-img position-relative overflow-hidden">--%>
+<%--                        <img class="img-fluid w-100" src="img/product8.png" alt="">--%>
+<%--                        <div class="product-action">--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="text-center py-4">--%>
+<%--                        <a class="h6 text-decoration-none text-truncate" href="">Zeus 613B nón 3/4</a>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
+<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
+<%--                        </div>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small>(99)</small>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="product-item bg-light">--%>
+<%--                    <div class="product-img position-relative overflow-hidden">--%>
+<%--                        <img class="img-fluid w-100" src="img/product3.jpg" alt="">--%>
+<%--                        <div class="product-action">--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
+<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="text-center py-4">--%>
+<%--                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 966-1</a>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
+<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
+<%--                        </div>--%>
+<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
+<%--                            <small>(99)</small>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+
+                <%}%>
             </div>
         </div>
     </div>

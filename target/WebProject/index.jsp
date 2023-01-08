@@ -68,7 +68,11 @@
                 <% List<SlideShow> img1 = (List<SlideShow>) request.getAttribute("img1");%>
                 <div class="carousel-inner">
                     <div class="carousel-item position-relative active" style="height: 430px;">
+<<<<<<< HEAD
                         <img class="position-absolute w-100 h-100" <%if(img1.size()<=0){%>src="/img/noimage.jpg"<%}else{%>src="<%= img1.get(0).getImg()%>"<%}%> style="object-fit: cover;">
+=======
+                        <img class="position-absolute w-100 h-100" <%if(img1.size()<=0){%>src="img/noimage.jpg"<%}else{%>src="<%= img1.get(0).getImg()%>"<%}%> style="object-fit: cover;">
+>>>>>>> origin
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                             </div>
@@ -124,7 +128,7 @@
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p1.getId()%>"><%=p1.getName()%></a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%></h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%></del></h6>
+                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%>đ</del></h6>
                     </div>
                     <% if(p1.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p1.sumQuantity()%><%}%>
                     <div class="d-flex align-items-center justify-content-center mb-1">
@@ -194,7 +198,7 @@
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p1.getId()%>"><%=p1.getName()%></a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%></h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%></del></h6>
+                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%>đ</del></h6>
                     </div>
                     <% if(p1.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p1.sumQuantity()%><%}%>
                     <div class="d-flex align-items-center justify-content-center mb-1">
@@ -264,7 +268,7 @@
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p1.getId()%>"><%=p1.getName()%></a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%></h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%></del></h6>
+                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%>đ</del></h6>
                     </div>
                     <% if(p1.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p1.sumQuantity()%><%}%>
                     <div class="d-flex align-items-center justify-content-center mb-1">
@@ -334,7 +338,7 @@
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p1.getId()%>"><%=p1.getName()%></a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%></h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%></del></h6>
+                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%>đ</del></h6>
                     </div>
                     <% if(p1.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p1.sumQuantity()%><%}%>
                     <div class="d-flex align-items-center justify-content-center mb-1">
@@ -404,7 +408,7 @@
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p1.getId()%>"><%=p1.getName()%></a>
                     <div class="d-flex align-items-center justify-content-center mt-2">
-                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%></h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%></del></h6>
+                        <h5><%=nf.numberFormat((long)(p1.getPrice()-p1.getPrice()*p1.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p1.getPrice())%>đ</del></h6>
                     </div>
                     <% if(p1.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p1.sumQuantity()%><%}%>
                     <div class="d-flex align-items-center justify-content-center mb-1">
