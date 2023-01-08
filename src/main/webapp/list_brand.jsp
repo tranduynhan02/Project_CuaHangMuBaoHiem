@@ -14,7 +14,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>HelmetsShop</title>
+  <title>Thương hiệu</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="Free HTML Templates" name="keywords">
   <meta content="Free HTML Templates" name="description">
@@ -48,9 +48,8 @@
   <div class="row px-xl-5">
     <div class="col-12">
       <nav class="breadcrumb bg-light mb-30">
-        <a class="breadcrumb-item text-dark" href="#">Home</a>
-        <a class="breadcrumb-item text-dark" href="#">Shop</a>
-        <span class="breadcrumb-item active">Shop List</span>
+        <a class="breadcrumb-item text-dark" href="/Project_CuaHangMuBaoHiem_war/Home">Trang chủ</a>
+        <span class="breadcrumb-item active">Thương hiệu</span>
       </nav>
     </div>
   </div>

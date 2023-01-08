@@ -238,7 +238,7 @@ public class SlideShowService {
         int count =0;
         DBConnect dbConnect = DBConnect.getInstance();
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from slideshow");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_slideshow from slideshow");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 count++;
@@ -251,7 +251,7 @@ public class SlideShowService {
         int count =0;
         DBConnect dbConnect = DBConnect.getInstance();
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from logo");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_logo from logo");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 count++;
@@ -264,7 +264,7 @@ public class SlideShowService {
         int count =0;
         DBConnect dbConnect = DBConnect.getInstance();
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from banner");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_banner from banner");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 count++;

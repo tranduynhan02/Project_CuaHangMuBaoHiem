@@ -61,7 +61,7 @@ public class ContactService {
 
        Contact contact = new Contact();
         try {
-            PreparedStatement ps =dbConnect.getConnection().prepareStatement("select * from contacts order by date desc");
+            PreparedStatement ps =dbConnect.getConnection().prepareStatement("select id_contact, name, email,subject,content,date from contacts order by date desc");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             contact = new Contact(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
@@ -78,7 +78,7 @@ public class ContactService {
         DBConnect dbConnect = DBConnect.getInstance();
 
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from contacts");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_contact from contacts");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             count++;
@@ -91,7 +91,7 @@ public class ContactService {
         Contact contact = new Contact();
         DBConnect dbConnect = DBConnect.getInstance();
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from contacts where id_contact=?");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_contact, name, email,subject,content,date from contacts where id_contact=?");
             ps.setString(1,id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
@@ -110,7 +110,7 @@ public class ContactService {
         Contact contact = new Contact();
         try {
 
-          PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from  contacts limit ?,?");
+          PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_contact, name, email,subject,content,date from  contacts limit ?,?");
           ps.setInt(1,a);
             ps.setInt(2,b);
           ResultSet rs = ps.executeQuery();
@@ -138,6 +138,5 @@ public class ContactService {
         return result;
     }
     public static void main(String[] args) throws SQLException {
-
     }
 }

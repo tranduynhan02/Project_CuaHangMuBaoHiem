@@ -662,7 +662,7 @@ public class ProductService {
         int count =0;
         DBConnect dbConnect = DBConnect.getInstance();
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from product");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_product from product");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 count++;
@@ -676,7 +676,7 @@ public class ProductService {
         DBConnect dbConnect = DBConnect.getInstance();
 
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from detail_product");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_dp from detail_product");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 count++;
@@ -785,7 +785,7 @@ public class ProductService {
         DBConnect dbConnect = DBConnect.getInstance();
 
         try {
-            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from image");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_img from image");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 count++;

@@ -202,7 +202,7 @@ To change this template use File | Settings | File Templates.
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Product Description</h4>
+                        <h4 class="mb-3">Thông tin sản phẩm</h4>
                         <p><%=p.getDecrispe()%></p>
                     </div>
 
