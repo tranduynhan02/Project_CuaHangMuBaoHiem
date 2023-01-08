@@ -1120,6 +1120,30 @@ public class ProductService {
                 e.printStackTrace();
             }
         }
+    public static List<Product> listType(String type, String id) {
+        List<Product> list = new ArrayList<Product>();
 
+        DBConnect dbConnect = DBConnect.getInstance();
 
+        try {
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_product from product where type =? and id_product not in(?)");
+            ps.setString(1, type);
+            ps.setString(2, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                list.add(getProduct(rs.getString("id_product")));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        for(Product p : listType("FULLFACE", "1")){
+            System.out.println(p);
+        }
+    }
     }

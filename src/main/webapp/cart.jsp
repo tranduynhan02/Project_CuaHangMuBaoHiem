@@ -51,8 +51,6 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-
-
     <!-- Cart Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -79,8 +77,6 @@
                             <td class="align-middle"><%=p.getDetail().get(0).getColor()%></td>
                             <td class="align-middle"><%=nf.numberFormat((long) (p.getPrice()-p.getPrice()*p.getDiscount()))%>đ</td>
                             <td class="align-middle">
-
-
                                 <div class="input-group mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <form action="/Project_CuaHangMuBaoHiem_war/Minus" method="get">
@@ -120,14 +116,7 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-30" >
-                    <div class="input-group">
-                        <input type="text" class="form-control border-0 p-4" placeholder="Mã giảm giá">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Áp dụng phiếu giảm giá</button>
-                        </div>
-                    </div>
-                </form>
+
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Giỏ hàng</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom pb-2">
