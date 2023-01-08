@@ -84,7 +84,7 @@
           %>
           <div class="d-flex justify-content-between">
             <p><%=p.getName()%></p>
-            <p><%=nf.numberFormat(p.getPrice()*(1-(long)p.getDiscount()))%></p>
+            <p><%=nf.numberFormat(p.getPrice()*(1-(long)p.getDiscount()))%>đ</p>
           </div>
           <%}%>
 
@@ -98,7 +98,7 @@
                 Product p = ProductService.getProduct(s);
                 price += p.getPrice()*(1-(long)p.getDiscount());
               }%>
-            <h6><%=nf.numberFormat(price)%></h6>
+            <h6><%=nf.numberFormat(price)%>đ</h6>
           </div>
           <div class="d-flex justify-content-between">
             <h6 class="font-weight-medium">Phí vận chuyển</h6>
@@ -108,7 +108,7 @@
         <div class="pt-2">
           <div class="d-flex justify-content-between mt-2">
             <h5>Tổng thanh toán</h5>
-            <h5><%=nf.numberFormat(price+50000)%></h5>
+            <h5><%=nf.numberFormat(price+50000)%>đ</h5>
           </div>
         </div>
       </div>

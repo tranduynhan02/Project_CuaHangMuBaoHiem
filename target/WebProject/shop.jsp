@@ -69,28 +69,28 @@
 
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" name="price" class="custom-control-input" id="price-1" value="price-1">
-                        <label class="custom-control-label" for="price-1">0VND - 100.00VND</label>
-                        <span class="badge border font-weight-normal">150</span>
+                        <label class="custom-control-label" for="price-1">0đ - 500.000đ</label>
+                        <span class="badge border font-weight-normal"><%=ProductService.getQuantityProduct(0,500000)%></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" name="price" class="custom-control-input" id="price-2" value="price-2">
-                        <label class="custom-control-label" for="price-2">100.00VND - 200.00VND</label>
-                        <span class="badge border font-weight-normal">295</span>
+                        <label class="custom-control-label" for="price-2">500.000đ - 1.000.000đ</label>
+                        <span class="badge border font-weight-normal"><%=ProductService.getQuantityProduct(500000,1000000)%></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" name="price" class="custom-control-input" id="price-3" value="price-3">
-                        <label class="custom-control-label" for="price-3">200.000VND - 300.000VND</label>
-                        <span class="badge border font-weight-normal">246</span>
+                        <label class="custom-control-label" for="price-3">1.000.000đ - 2.000.000đ</label>
+                        <span class="badge border font-weight-normal"><%=ProductService.getQuantityProduct(1000000,2000000)%></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" name="price" class="custom-control-input" id="price-4" value="price-4">
-                        <label class="custom-control-label" for="price-4">300.000VND - 400.000VND</label>
-                        <span class="badge border font-weight-normal">145</span>
+                        <label class="custom-control-label" for="price-4">2.000.000đ - 5.000.000đ</label>
+                        <span class="badge border font-weight-normal"><%=ProductService.getQuantityProduct(2000000,5000000)%></span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" name="price" class="custom-control-input" id="price-5" value="price-5">
-                        <label class="custom-control-label" for="price-5">400.000VND - 500.000VND</label>
-                        <span class="badge border font-weight-normal">168</span>
+                        <label class="custom-control-label" for="price-5">Trên 5.000.000đ</label>
+                        <span class="badge border font-weight-normal"><%=ProductService.getQuantityProduct(5000000,0)%></span>
                     </div>
                     <%--                </form>--%>
             </div>
@@ -102,27 +102,27 @@
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input type="checkbox" name="star" class="custom-control-input" id="star-5" value="star-5">
                     <label class="custom-control-label" for="star-5">5 sao</label>
-                    <span class="badge border font-weight-normal">150</span>
+                    <span class="badge border font-weight-normal"><%=ProductService.getQuantityStarProduct(5)%></span>
                 </div>
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input type="checkbox" name="star" class="custom-control-input" id="star-4" value="star-4">
                     <label class="custom-control-label" for="star-4">4 sao</label>
-                    <span class="badge border font-weight-normal">295</span>
+                    <span class="badge border font-weight-normal"><%=ProductService.getQuantityStarProduct(4)%></span>
                 </div>
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input type="checkbox" name="star" class="custom-control-input" id="star-3" value="star-3">
                     <label class="custom-control-label" for="star-3">3 sao</label>
-                    <span class="badge border font-weight-normal">246</span>
+                    <span class="badge border font-weight-normal"><%=ProductService.getQuantityStarProduct(3)%></span>
                 </div>
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                     <input type="checkbox" name="star" class="custom-control-input" id="star-2" value="star-2">
                     <label class="custom-control-label" for="star-2">2 sao</label>
-                    <span class="badge border font-weight-normal">145</span>
+                    <span class="badge border font-weight-normal"><%=ProductService.getQuantityStarProduct(2)%></span>
                 </div>
                 <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                     <input type="checkbox" name="star" class="custom-control-input" id="star-1" value="star-1">
                     <label class="custom-control-label" for="star-1">1 sao</label>
-                    <span class="badge border font-weight-normal">168</span>
+                    <span class="badge border font-weight-normal"><%=ProductService.getQuantityStarProduct(1)%></span>
                 </div>
             </div>
             <!-- Star End -->

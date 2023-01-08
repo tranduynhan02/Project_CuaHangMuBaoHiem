@@ -93,7 +93,7 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
                         <a href="/Project_CuaHangMuBaoHiem_war/list-product" class="nav-item nav-link">Sản phẩm</a>
-                        <a href="publicshop.jsp" class="nav-item nav-link">Thương hiệu</a>
+                        <a href="list_brand.jsp" class="nav-item nav-link">Thương hiệu</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
