@@ -131,7 +131,7 @@ public class ProductService {
                 switch (key){
                     case "star-1":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=0 and star<=100000");
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=0 and star<=1");
                             while (rs.next()) {
                                 starProduct.add(rs.getString("id_product"));
                             }
@@ -142,7 +142,7 @@ public class ProductService {
                     }
                     case "star-2":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=1 and star<=2");
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>1 and star<=2");
                             while (rs.next()) {
                                 starProduct.add(rs.getString("id_product"));
                             }
@@ -153,7 +153,7 @@ public class ProductService {
                     }
                     case "star-3":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=2 and star<=3");
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>2 and star<=3");
                             while (rs.next()) {
                                 starProduct.add(rs.getString("id_product"));
                             }
@@ -164,7 +164,7 @@ public class ProductService {
                     }
                     case "star-4":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=3 and star<=4");
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>3 and star<=4");
                             while (rs.next()) {
                                 starProduct.add(rs.getString("id_product"));
                             }
@@ -175,7 +175,7 @@ public class ProductService {
                     }
                     case "star-5":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>=4 and star<=5");
+                            ResultSet rs = statement.executeQuery("select id_product from star_vote where star>4 and star<=5");
                             while (rs.next()) {
                                 starProduct.add(rs.getString("id_product"));
                             }

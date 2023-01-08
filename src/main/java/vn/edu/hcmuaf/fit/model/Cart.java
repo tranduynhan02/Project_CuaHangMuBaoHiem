@@ -125,8 +125,6 @@ public void put(Product p){
         c.put(p);
         c.put(p);
         System.out.println(c.getQuantityProduct("1dp"));
-
-
     }
 
 }
