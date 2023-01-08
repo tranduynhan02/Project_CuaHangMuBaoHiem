@@ -2,7 +2,8 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %>
-<%@ page import="java.util.Map" %><%--
+<%@ page import="java.util.Map" %>
+<%@ page import="vn.edu.hcmuaf.fit.service.SlideShowService" %><%--
   Created by IntelliJ IDEA.
   User: ACER
   Date: 11/6/2022
@@ -14,7 +15,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>HelmetsShop</title>
+  <title>Thương hiệu</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="Free HTML Templates" name="keywords">
   <meta content="Free HTML Templates" name="description">
@@ -48,9 +49,8 @@
   <div class="row px-xl-5">
     <div class="col-12">
       <nav class="breadcrumb bg-light mb-30">
-        <a class="breadcrumb-item text-dark" href="#">Home</a>
-        <a class="breadcrumb-item text-dark" href="#">Shop</a>
-        <span class="breadcrumb-item active">Shop List</span>
+        <a class="breadcrumb-item text-dark" href="/Project_CuaHangMuBaoHiem_war/Home">Trang chủ</a>
+        <span class="breadcrumb-item active">Thương hiệu sản phẩm</span>
       </nav>
     </div>
   </div>
@@ -60,29 +60,28 @@
 <!-- Categories Start -->
 <div class="container-fluid pt-5">
   <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Thể loại</span></h2>
-    <div class="row px-xl-5 pb-3">
-      <%
-        Map<String,Integer> list_brand = ProductService.getListBrand();
-        for(String key: list_brand.keySet()){
-      %>
-      <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-        <a class="text-decoration-none" href="/Project_CuaHangMuBaoHiem_war/product-by-brand?brand=<%=key%>">
-          <div class="cat-item d-flex align-items-center mb-4">
-            <div class="overflow-hidden" style="width: 100px; height: 100px;">
-              <img class="img-fluid" src="img/cat-1.jpg" alt="">
-            </div>
-            <div class="flex-fill pl-3">
-              <h6><%=key%></h6>
-              <small class="text-body"><%=list_brand.get(key)%> Sản phẩm</small>
-            </div>
+  <div class="row px-xl-5 pb-3">
+    <%
+      Map<String,Integer> list_brand = ProductService.getListBrand();
+      for(String key: list_brand.keySet()){
+    %>
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+      <a class="text-decoration-none" href="/Project_CuaHangMuBaoHiem_war/product-by-brand?brand=<%=key%>">
+        <div class="cat-item d-flex align-items-center mb-4">
+          <div class="overflow-hidden" style="width: 100px; height: 100px;">
+            <img class="img-fluid" src="<%=SlideShowService.getInstance().getImgBrand(key)%>" alt="">
           </div>
-        </a>
-      </div>
-      <%}%>
+          <div class="flex-fill pl-3">
+            <h6><%=key%></h6>
+            <small class="text-body"><%=list_brand.get(key)%> Sản phẩm</small>
+          </div>
+        </div>
+      </a>
     </div>
+    <%}%>
+  </div>
 </div>
 <!-- Categories End -->
-
 
 
 <!-- Shop Start -->
@@ -91,7 +90,7 @@
     <!-- Shop Sidebar Start -->
     <div class="col-lg-3 col-md-4">
       <!-- Price Start -->
-      <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+      <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo giá</span></h5>
       <div class="bg-light p-4 mb-30">
         <form action="/Project_CuaHangMuBaoHiem_war/filter-product" method="get">
 
@@ -192,19 +191,15 @@
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
           <div class="product-item bg-light mb-4">
             <div class="product-img position-relative overflow-hidden">
-              <img class="img-fluid w-100" src="<%=p.getImg().get(0)%>" alt="">
+              <img class="img-fluid w-100" <%if(p.getImg().size()<=0){%>src="img/noimage.jpg"<%}else{%> src="<%=p.getImg().get(0).getImg()%>" <%}%> alt="">
               <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" <% if (p.sumQuantity()<=0){%><%}else{%> href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" +p.getId()%>"<%}%>><i class="fa fa-shopping-cart"></i></a>
-                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                 <a class="btn btn-outline-dark btn-square" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><i class="fa fa-search"></i></a>
               </div>
             </div>
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><%=p.getName()%></a>
               <div class="d-flex align-items-center justify-content-center mt-2">
-                <h5><%=nf.numberFormat(p.getPrice())%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p.getPrice())%>đ</del></h6>
-
+                <h5><%=nf.numberFormat((long)(p.getPrice()-p.getPrice()*p.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p.getPrice())%>đ</del></h6>
               </div>
               <% if(p.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p.sumQuantity()%><%}%>
               <div class="d-flex align-items-center justify-content-center mb-1">

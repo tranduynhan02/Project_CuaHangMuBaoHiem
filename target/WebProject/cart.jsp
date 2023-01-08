@@ -116,7 +116,7 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                
+
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Giỏ hàng</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom pb-2">

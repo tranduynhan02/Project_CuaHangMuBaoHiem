@@ -90,7 +90,7 @@
 
           <a
                   class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                  href="bill_manager.jsp"
+                  href="/Project_CuaHangMuBaoHiem_war/list-bill"
           >
             <svg
                     class="w-5 h-5"
@@ -108,10 +108,8 @@
           </a>
         </li>
         <li class="relative px-6 py-3">
-          <a
-                  class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                  href="customer_manager.jsp"
-          >
+          <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                  href="/Project_CuaHangMuBaoHiem_war/list-customer">
             <svg
                     class="w-5 h-5"
                     aria-hidden="true"
