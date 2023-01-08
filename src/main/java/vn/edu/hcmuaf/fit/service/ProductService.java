@@ -359,10 +359,17 @@ public class ProductService {
     public static void addComment(String id_Cus, String id_Pro, String mess, int star) {
         DBConnect dbConnect = DBConnect.getInstance();
         try {
-            PreparedStatement prs = dbConnect.getConnection().prepareStatement("insert into comment values (?,?,?)");
+            Date date = new Date();
+            ResultSet resultSet = DBConnect.getInstance().get().executeQuery("select curdate()");
+            if(resultSet.next()){
+                date = resultSet.getDate(1);
+            }
+            PreparedStatement prs = dbConnect.getConnection().prepareStatement("insert into comment values (?,?,?,?,?)");
             prs.setString(1,id_Cus);
             prs.setString(2,id_Pro);
             prs.setString(3,mess);
+            prs.setInt(4,star);
+            prs.setDate(5, (java.sql.Date) date);
             prs.executeUpdate();
             Product p = getProduct(id_Pro);
             int newAmount = p.getAmount()+1;
@@ -1193,6 +1200,52 @@ public class ProductService {
                 e.printStackTrace();
             }
         }
+        public static Map<String,String> getListComment(String id_pro){
+            Map<String,String> result = new HashMap<String,String>();
+            try {
+                PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select  id_customer,comment from comment where id_product=?");
+                ps.setString(1,id_pro);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()){
+                    result.put(rs.getString(1),rs.getString(2));
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+            return result;
+        }
+        public static int getStarComment(String id_cus,String id_pro, String comment){
+            int result = 0;
+            try {
+                PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select star from comment where id_customer=? and id_product=? and comment=?");
+                ps.setString(1,id_cus);
+                ps.setString(2,id_pro);
+                ps.setString(3,comment);
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()){
+                    result+= rs.getInt(1);
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+            return result;
+        }
+    public static String getDateComment(String id_cus,String id_pro, String comment) {
+        String result = "";
+        try {
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select DAY(date),MONTH(date),YEAR(date) from comment where id_customer=? and id_product=? and comment=?");
+            ps.setString(1, id_cus);
+            ps.setString(2, id_pro);
+            ps.setString(3, comment);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result += rs.getInt(1) + "/" + rs.getInt(2) + "/" + rs.getInt(3);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     public static List<Product> listType(String type, String id) {
         List<Product> list = new ArrayList<Product>();
 
@@ -1213,4 +1266,4 @@ public class ProductService {
         }
         return list;
     }
-    }
+}
