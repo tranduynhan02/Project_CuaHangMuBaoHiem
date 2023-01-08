@@ -13,27 +13,50 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.regex.Pattern;
 
 public class CustomerService {
     public static List<Customer> getData() throws SQLException {
         List<Customer> list = new ArrayList<>();
-        String sql = "select * from customer where username = ?";
-        DBConnect dbConnect = DBConnect.getInstance();
-        ResultSet rs = dbConnect.get().executeQuery(sql);
-        while (rs.next()){
-            list.add(new Customer());
-        }
+
         return list;
     }
+
     public static String toMD5(String password) {
         return DigestUtils.md5Hex(password).toLowerCase();
     }
+
     public static String GetKey() {
         StringBuilder sb = new StringBuilder("ct_");
         sb.append(LocalDateTime.now());
         return sb.toString();
+    }
+
+    public static String GetRandom() {
+        StringBuilder sb = new StringBuilder();
+        Random rd = new Random();
+        sb.append(rd.nextLong(100000, 999999));
+        return sb.toString();
+    }
+
+    public static void changePassword(String username, String pass_old, String pass_new) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        String sql = "select * from customer where username = ? and password = ?";
+        PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
+        pre.setString(1, username);
+        pre.setString(2, pass_old);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+            StringBuilder sb = new StringBuilder("Xin chào " + rs.getString("username") + ", \n");
+            sb.append("Mật khẩu của bạn đã được thay đổi thành công vào " + LocalDate.now() + " lúc " + LocalTime.now() +". \n\n\n");
+            sb.append("Trân trọng cảm ơn! \n");
+            sb.append("Đội ngũ bảo mật HelmetShop.");
+            MailService.sendMail(rs.getString("email"), "Thay đổi mật khẩu - HelmetShop", sb.toString());
+            String change = "update customer set password = '" + pass_new + "' where username = '" + username + "';";
+            pre.executeUpdate(change);
+        }
     }
 
     public static void addCustomer(String username, String password, String name, String email) throws SQLException {
@@ -41,6 +64,27 @@ public class CustomerService {
 //        String sql = "insert into customer values ('" + GetKey() + "'," + "'" + name + "'," + "'" + email + "', null," + "null,'" + username + "'," + "'" + password + "',0,1," + "'" + LocalDateTime.now() + "')";
         String sql = "insert into customer values ('" + GetKey() + "','" + name + "','" + email + "', null,null,'" + username + "','" + password + "',0,1,'" + LocalDateTime.now() + "')";
         dbConnect.get().executeUpdate(sql);
+    }
+
+    public static void resetPassword(String email) throws SQLException {
+        DBConnect dbConnect = DBConnect.getInstance();
+        String password = GetRandom();
+        String sql = "select * from customer where email = ?";
+        PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
+        pre.setString(1, email);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+//            String content = "Xin chào " + rs.getString("username") + ", \n" + "Chúng tôi đã nhận được thông báo cấp lại mật khẩu từ bạn. " + password + " là mật khẩu đặt lại HelmetShop của bạn.";
+//            sb.append("Mật khẩu của bạn đã được thay đổi vào " + LocalDate.now() + " lúc " + LocalTime.now() +". \n");
+            StringBuilder sb = new StringBuilder("Xin chào " + rs.getString("username") + ", \n");
+            sb.append("Chúng tôi đã nhận được thông báo cấp lại mật khẩu từ bạn. ");
+            sb.append(password + " là mật khẩu đặt lại HelmetShop của bạn. \n\n\n");
+            sb.append("Trân trọng cảm ơn! \n");
+            sb.append("Đội ngũ bảo mật HelmetShop.");
+            MailService.sendMail(email, "Đặt lại mật khẩu - HelmetShop", sb.toString());
+            String reset = "update customer set password = '" + toMD5(password) + "' where email = '" + email + "';";
+            pre.executeUpdate(reset);
+        }
     }
 
     public static boolean checkLogin(String username, String password) throws SQLException {
@@ -99,7 +143,10 @@ public class CustomerService {
     public static void main(String[] args) throws SQLException, NoSuchAlgorithmException {
 //        System.out.println(emailValidate("@tran.duyn.han@gm.ail.com"));
 //        System.out.println(pwValidate("nhandz", "nhandz"));
+//        System.out.println(checkEmail("20130346@st.hcmuaf.edu.vn"));
 //        addCustomer("nhandz", "123123", "iam", "123@gmail.com");
-//        System.out.println(toMD5("1"));
+//        System.out.println(toMD5("123456"));
+//        changePassword("tdn", "c4ca4238a0b923820dcc509a6f75849b", toMD5("nhandz"));
+//        resetPassword("20130346@st.hcmuaf.edu.vn");
     }
 }

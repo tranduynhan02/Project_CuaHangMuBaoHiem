@@ -25,7 +25,7 @@ public class DoRegister extends HttpServlet {
         String confirm_pw = request.getParameter("confirm_pw");
         try {
             if (name == null || name == "" || email == null || email == "" || username == null || username == "" || password == null || password == "" || confirm_pw == null || confirm_pw == "") {
-                request.setAttribute("error", "Nguười dùng phải nhập đầy đủ thông tin đăng ký.");
+                request.setAttribute("error", "Nguời dùng phải nhập đầy đủ thông tin đăng ký.");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
             } else if (CustomerService.emailValidate(email) == false) {
                 request.setAttribute("error", "Người dùng nhập email không hợp lệ!");
