@@ -210,11 +210,7 @@ To change this template use File | Settings | File Templates.
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-<<<<<<< HEAD
-                        <h4 class="mb-3">Thông tin sản phẩm</h4>
-=======
                         <h4 class="mb-3">Mô tả sản phẩm</h4>
->>>>>>> origin
                         <p><%=p.getDecrispe()%></p>
                     </div>
 
@@ -228,7 +224,7 @@ To change this template use File | Settings | File Templates.
                                             <h6><%=ProductService.getCustomer(key).getName()%><small> - <i><%=ProductService.getDateComment(key,p.getId(),listComment.get(key))%></i></small></h6>
                                             <div class="text-primary mb-2">
                                                 <%int star = ProductService.getStarComment(key,p.getId(),listComment.get(key));
-                                                for(int a=0;a<star;a++){%>
+                                                    for(int a=0;a<star;a++){%>
                                                 <i class="fas fa-star"></i>
                                                 <%}%>
                                             </div>
@@ -315,106 +311,6 @@ To change this template use File | Settings | File Templates.
                         </div>
                     </div>
                 </div>
-<%--                <div class="product-item bg-light">--%>
-<%--                    <div class="product-img position-relative overflow-hidden">--%>
-<%--                        <img class="img-fluid w-100" src="img/product6.png" alt="">--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="text-center py-4">--%>
-<%--                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 922</a>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
-<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
-<%--                        </div>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small>(99)</small>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-item bg-light">--%>
-<%--                    <div class="product-img position-relative overflow-hidden">--%>
-<%--                        <img class="img-fluid w-100" src="img/product7.png" alt="">--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="text-center py-4">--%>
-<%--                        <a class="h6 text-decoration-none text-truncate" href="">GRS 760 kính to</a>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
-<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
-<%--                        </div>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small>(99)</small>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-item bg-light">--%>
-<%--                    <div class="product-img position-relative overflow-hidden">--%>
-<%--                        <img class="img-fluid w-100" src="img/product8.png" alt="">--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="text-center py-4">--%>
-<%--                        <a class="h6 text-decoration-none text-truncate" href="">Zeus 613B nón 3/4</a>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
-<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
-<%--                        </div>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small>(99)</small>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--                <div class="product-item bg-light">--%>
-<%--                    <div class="product-img position-relative overflow-hidden">--%>
-<%--                        <img class="img-fluid w-100" src="img/product3.jpg" alt="">--%>
-<%--                        <div class="product-action">--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>--%>
-<%--                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="text-center py-4">--%>
-<%--                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 966-1</a>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mt-2">--%>
-<%--                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>--%>
-<%--                        </div>--%>
-<%--                        <div class="d-flex align-items-center justify-content-center mb-1">--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small class="fa fa-star text-primary mr-1"></small>--%>
-<%--                            <small>(99)</small>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
 
                 <%}%>
             </div>
