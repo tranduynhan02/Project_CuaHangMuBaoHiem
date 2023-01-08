@@ -445,10 +445,10 @@
                   <% long price = 0;
                     for(String id_dp:b.getProductList()){
                       Product p = ProductService.getProduct(ProductService.getIdProduct(id_dp));
-                      price += p.getPrice()*(1-(long)p.getDiscount());
+                      price += p.getPrice()-p.getPrice()*p.getDiscount();
                     }
                     NumberFormat nf = new NumberFormat();%>
-                  <%=nf.numberFormat(price)%>
+                  <%=nf.numberFormat(price)%>đ
                   </a>
                 </td>
                 <td class="px-4 py-3 text-sm">

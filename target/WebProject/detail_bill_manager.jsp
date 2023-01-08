@@ -363,6 +363,7 @@
                       class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                     >
                     <%
+                      NumberFormat nf = new NumberFormat();
                       for(String s: bill.getProductList()){
                         Product p = ProductService.getProduct(ProductService.getIdProduct(s));
                     %>
@@ -371,7 +372,7 @@
                           <%=p.getName()%>
                         </td>
                         <td class="px-4 py-3 text-sm">
-                          <%=p.getPrice()*(1-(long)p.getDiscount())%>
+                          <%=nf.numberFormat((long)(p.getPrice()-p.getPrice()*p.getDiscount()))%>đ
                          </td>
                         <td class="px-4 py-3 text-sm">
                           <%=ProductService.getSize(s)%>
@@ -397,10 +398,10 @@
                   <% long price = 0;
                     for(String id_dp:bill.getProductList()){
                       Product p = ProductService.getProduct(ProductService.getIdProduct(id_dp));
-                      price += p.getPrice()*(1-(long)p.getDiscount());
+                      price += p.getPrice()-p.getPrice()*p.getDiscount();
                     }
-                    NumberFormat nf = new NumberFormat();%>
-                  Tồng tiền: <%=nf.numberFormat(price)%>
+                    %>
+                  Tồng tiền: <%=nf.numberFormat(price)%>đ
                 </span>
                 <span class="col-span-2"></span>
                 <!-- Pagination -->
