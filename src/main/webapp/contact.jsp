@@ -74,7 +74,7 @@
                         <p id="alertemail" class="help-block text-danger"></p>
                     </div>
                     <div class="control-group">
-                        <input type="text" class="form-control" name="subject" id="subject" placeholder="tiêu đề"
+                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Tiêu đề"
                                required="required" data-validation-required-message="Please enter a subject" />
                         <p id="alertsubject" class="help-block text-danger"></p>
                     </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thêm sản phẩm</title>
+    <title>Thêm kích thước, màu sắc, số lượng sản phẩm</title>
     <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
@@ -341,13 +341,13 @@
                 <h2
                         class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
                 >
-                    Thêm kích thước, Màu sắc và số lượng
+                    Bước 2
                 </h2>
                 <!-- CTA -->
                     <%String id =request.getAttribute("id").toString();%>
                 <!-- General elements -->
                 <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-                    Bước 2
+                    Thêm kích thước, Màu sắc và số lượng
                 </h4>
                 <div
                         class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
