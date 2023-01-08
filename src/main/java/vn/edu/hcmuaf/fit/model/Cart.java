@@ -27,7 +27,7 @@ public void put(Product p){
     }else{
         cart.put(p.getKey(), p);
     }
-    total+=p.getPrice();
+    total+= (long) (p.getPrice()-p.getPrice()*p.getDiscount());
     quantity++;
 }
     public void putQuantity(Product p){
@@ -38,14 +38,14 @@ public void put(Product p){
         }else{
             cart.put(p.getKey(), p);
         }
-        total+=p.getPrice()*p.getQuantity();
+        total+=(long) ((p.getPrice()-p.getPrice()*p.getDiscount())*p.getQuantity());
         quantity+=p.getQuantity();
     }
     public void updateTotalMoneyQuantity(){
         total =0;
         quantity = 0;
         for(Product p : cart.values()){
-            total += p.getQuantity()* p.getPrice();
+            total += p.getQuantity()*((long)(p.getPrice()-p.getPrice()*p.getDiscount()));
             quantity += p.getQuantity();
         }
     }
