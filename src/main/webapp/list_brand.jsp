@@ -15,7 +15,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>HelmetsShop</title>
+  <title>Thương hiệu</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="Free HTML Templates" name="keywords">
   <meta content="Free HTML Templates" name="description">
@@ -50,7 +50,11 @@
     <div class="col-12">
       <nav class="breadcrumb bg-light mb-30">
         <a class="breadcrumb-item text-dark" href="/Project_CuaHangMuBaoHiem_war/Home">Trang chủ</a>
+<<<<<<< HEAD
+        <span class="breadcrumb-item active">Thương hiệu</span>
+=======
         <span class="breadcrumb-item active">Thương hiệu sản phẩm</span>
+>>>>>>> origin
       </nav>
     </div>
   </div>

@@ -575,7 +575,7 @@
                               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                       >
                         <img
-                                class="object-cover w-full h-full rounded-full"
+
                                 src="<%= i.getImg()%>"
                                 alt=""
                                 loading="lazy"
