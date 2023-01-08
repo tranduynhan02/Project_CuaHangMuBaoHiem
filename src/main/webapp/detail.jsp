@@ -91,11 +91,11 @@ To change this template use File | Settings | File Templates.
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="<%= p.getImg().get(0)%>" alt="Image">
+                        <img class="w-100 h-100" <%if(p.getImg().size()<=0){%>src="img/noimage.jpg"<%}else{%>src="<%= p.getImg().get(0).getImg()%>"<%}%> alt="Image">
                     </div>
                     <% for(int i = 1;i<p.getImg().size();i++){%>
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="<%=p.getImg().get(i)%>" alt="Image">
+                        <img class="w-100 h-100" src="<%=p.getImg().get(i).getImg()%>" alt="Image">
                     </div>
 
                     <%}%>
@@ -122,9 +122,7 @@ To change this template use File | Settings | File Templates.
                     </div>
                     <small class="pt-1">(<%= p.getAmount() %> Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat(p.getPrice()) %>đ</h3>
-                <p class="mb-4">Mô tả sản phẩm</p>
-
+                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat((long) (p.getPrice()-p.getPrice()*p.getDiscount())) %>đ</h3>
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Kích thước:</strong>
                     <form id="size" action="/Project_CuaHangMuBaoHiem_war/AddDetail">
@@ -142,15 +140,9 @@ To change this template use File | Settings | File Templates.
 
                 <div class="d-flex mb-4">
                     <strong class="text-dark mr-3">Màu sắc:</strong>
-                    <%  String s = request.getParameter("size");
-                        String c = request.getParameter("color");
-                        int quantity = p.getQuantitySizeColor(s,c);
-                    %>
-
-<%--                    <form id="color">--%>
                         <% int j=0; for(String color : p.getListColor()){ j++;%>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio"  required="required" class="custom-control-input" id="color-<%=j%>" name="color" onclick="addDetail(<%= quantity %>)" value="<%= color%>">
+                            <input type="radio"  required="required" class="custom-control-input" id="color-<%=j%>" name="color" value="<%= color%>">
                             <label class="custom-control-label" for="color-<%=j%>"><%= color %></label>
                         </div>
                         <%}%>
@@ -159,7 +151,8 @@ To change this template use File | Settings | File Templates.
                 <div>
 
                 </div>
-                <p id="color1234" class="help-block text-danger"><%= p.sumQuantity() %> sản phẩm có sẵn</p>
+                <p id="color1234" class="help-block text-danger"></p>
+
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">

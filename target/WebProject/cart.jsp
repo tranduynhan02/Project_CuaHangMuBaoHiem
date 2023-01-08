@@ -74,10 +74,10 @@
                             for(Product p: cart.getListProduct()){
                         %>
                         <tr>
-                            <td class="align-middle"><div style="float: left"><img src="<%= p.getImg().get(0) %>" alt="" style="width: 50px;"> <%= p.getName() %></div></td>
+                            <td class="align-middle"><div style="float: left"><img <%if(p.getImg().size()<=0){%>src="img/noimage.jpg" <%}else{%>src="<%= p.getImg().get(0).getImg() %>"<%}%> alt="" style="width: 50px;"> <%= p.getName() %></div></td>
                             <td class="align-middle"><%=p.getDetail().get(0).getSize()%></td>
                             <td class="align-middle"><%=p.getDetail().get(0).getColor()%></td>
-                            <td class="align-middle"><%=nf.numberFormat(p.getPrice())%>đ</td>
+                            <td class="align-middle"><%=nf.numberFormat((long) (p.getPrice()-p.getPrice()*p.getDiscount()))%>đ</td>
                             <td class="align-middle">
 
 
@@ -108,7 +108,7 @@
                                 </div>
 
                             </td>
-                            <td class="align-middle"><%= nf.numberFormat(p.getPrice()*p.getQuantity()) %>đ</td>
+                            <td class="align-middle"><%= nf.numberFormat((long) ((p.getPrice()-p.getPrice()*p.getDiscount())*p.getQuantity())) %>đ</td>
                             <td class="align-middle">
                                 <form method="get" action="/Project_CuaHangMuBaoHiem_war/Delete">
                                 <input type="hidden" name="delete" value="<%= p.getKey() %>">

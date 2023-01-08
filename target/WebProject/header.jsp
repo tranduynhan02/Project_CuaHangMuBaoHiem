@@ -38,7 +38,7 @@
 <div class="container-fluid">
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
-            <a href="index.jsp" class="text-decoration-none">
+            <a href="/Project_CuaHangMuBaoHiem_war/Home" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary bg-dark px-2">Helmets</span>
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
             </a>
@@ -73,10 +73,10 @@
             </a>
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">
-                    <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm fullface</a>
-                    <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm 3/4</a>
-                    <a href="shop.jsp" class="nav-item nav-link">Nón nửa đầu</a>
-                    <a href="shop.jsp" class="nav-item nav-link">Nón trẻ em</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/ListFullface" class="nav-item nav-link">Nón bảo hiểm fullface</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/List3_4" class="nav-item nav-link">Nón bảo hiểm 3/4</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/ListNuaDau" class="nav-item nav-link">Nón nửa đầu</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/ListChildren" class="nav-item nav-link">Nón trẻ em</a>
                 </div>
             </nav>
         </div>
@@ -91,7 +91,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
+                        <a href="/Project_CuaHangMuBaoHiem_war/Home" class="nav-item nav-link">Trang chủ</a>
                         <a href="/Project_CuaHangMuBaoHiem_war/list-product" class="nav-item nav-link">Sản phẩm</a>
                         <a href="list_brand.jsp" class="nav-item nav-link">Thương hiệu</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>

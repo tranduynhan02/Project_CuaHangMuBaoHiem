@@ -47,9 +47,8 @@
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Home</a>
-                <a class="breadcrumb-item text-dark" href="#">Shop</a>
-                <span class="breadcrumb-item active">Shop List</span>
+                <a class="breadcrumb-item text-dark" href="/Project_CuaHangMuBaoHiem_war/Home">Trang chủ</a>
+                <span class="breadcrumb-item active">Danh sách sản phẩm</span>
             </nav>
         </div>
     </div>
@@ -63,7 +62,7 @@
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <!-- Price Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Lọc theo giá</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form action="/Project_CuaHangMuBaoHiem_war/filter-product" method="get">
 
@@ -164,19 +163,15 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                     <div class="product-item bg-light mb-4">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="<%=p.getImg().get(0)%>" alt="">
+                            <img class="img-fluid w-100" <%if(p.getImg().size()<=0){%>src="img/noimage.jpg"<%}else{%> src="<%=p.getImg().get(0).getImg()%>" <%}%> alt="">
                             <div class="product-action">
-                                <a class="btn btn-outline-dark btn-square" <% if (p.sumQuantity()<=0){%><%}else{%> href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" +p.getId()%>"<%}%>><i class="fa fa-shopping-cart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><i class="fa fa-search"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate" href="<%="/Project_CuaHangMuBaoHiem_war/detail?id=" +p.getId()%>"><%=p.getName()%></a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5><%=nf.numberFormat(p.getPrice())%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p.getPrice())%>đ</del></h6>
-
+                                <h5><%=nf.numberFormat((long)(p.getPrice()-p.getPrice()*p.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(p.getPrice())%>đ</del></h6>
                             </div>
                             <% if(p.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p.sumQuantity()%><%}%>
                             <div class="d-flex align-items-center justify-content-center mb-1">
