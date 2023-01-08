@@ -29,7 +29,7 @@ border-radius: 5px;
 }
 
 .dropdown {
-  position: absolute;
+  position: inherit;
   display: inline-block;
   margin-left: 900px;
 }

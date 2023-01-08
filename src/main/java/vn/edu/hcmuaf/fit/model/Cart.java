@@ -79,7 +79,15 @@ public void put(Product p){
         }
         updateTotalMoneyQuantity();
     }
-
+    public int getQuantityProduct(String id){
+        int quantity = 0;
+        try{
+            quantity =  cart.get(id).getQuantity();
+        }catch (Exception e){
+            quantity = 0;
+        }
+        return quantity;
+    }
     public Map<String, Product> getCart() {
         return cart;
     }
@@ -107,4 +115,18 @@ public void put(Product p){
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public static void main(String[] args) throws SQLException {
+        Product p = ProductService.getDetailProduct("1","M","đỏ");
+        Cart c = new Cart();
+        p.setQuantity(1);
+        c.put(p);
+        p.setQuantity(2);
+        c.put(p);
+        c.put(p);
+        System.out.println(c.getQuantityProduct("1dp"));
+
+
+    }
+
 }
