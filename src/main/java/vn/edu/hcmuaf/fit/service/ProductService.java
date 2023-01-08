@@ -60,7 +60,7 @@ public class ProductService {
                 switch (key){
                     case "price-1":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from product where price>=0 and price<=100000");
+                            ResultSet rs = statement.executeQuery("select id_product from product where (price-price*discount)>=0 and (price-price*discount)<=500000");
                             while (rs.next()) {
                                 priceProduct.add(rs.getString("id_product"));
                             }
@@ -71,7 +71,7 @@ public class ProductService {
                     }
                     case "price-2":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from product where price>=100000 and price<=200000");
+                            ResultSet rs = statement.executeQuery("select id_product from product where (price-price*discount)>=500000 and (price-price*discount)<=1000000");
                             while (rs.next()) {
                                 priceProduct.add(rs.getString("id_product"));
                             }
@@ -82,7 +82,7 @@ public class ProductService {
                     }
                     case "price-3":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from product where price>=200000 and price<=300000");
+                            ResultSet rs = statement.executeQuery("select id_product from product where (price-price*discount)>=1000000 and (price-price*discount)<=2000000");
                             while (rs.next()) {
                                 priceProduct.add(rs.getString("id_product"));
                             }
@@ -93,7 +93,7 @@ public class ProductService {
                     }
                     case "price-4":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from product where price>=300000 and price<=400000");
+                            ResultSet rs = statement.executeQuery("select id_product from product where (price-price*discount)>=2000000 and (price-price*discount)<=5000000");
                             while (rs.next()) {
                                 priceProduct.add(rs.getString("id_product"));
                             }
@@ -104,7 +104,7 @@ public class ProductService {
                     }
                     case "price-5":{
                         try {
-                            ResultSet rs = statement.executeQuery("select id_product from product where price>=400000 and price<=500000");
+                            ResultSet rs = statement.executeQuery("select id_product from product where (price-price*discount)>=5000000");
                             while (rs.next()) {
                                 priceProduct.add(rs.getString("id_product"));
                             }
@@ -865,6 +865,79 @@ public class ProductService {
         } catch (SQLException e) {
         }
     }
+    public static Map<String,Integer> getListBrand(){
+        Map<String,Integer> result = new HashMap<String,Integer>();
+        try {
+            ResultSet rs = DBConnect.getInstance().get().executeQuery("select brand,count(id_product)as SL from product group by brand");
+            while(rs.next()){
+                result.put(rs.getString(1),Integer.parseInt(rs.getString(2)));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static List<Product> getProductByBrand(String brand){
+        List<Product> result = new ArrayList<Product>();
+        try {
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id_product from product where brand =?");
+            ps.setString(1,brand);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                result.add(getProduct(rs.getString("id_product")));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static int getQuantityProduct(long starPrice, long endPrice){
+        int result = 0;
+        try {
+            if(endPrice==0){
+                PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select count(price) from product where (price-price*discount)>=?");
+                ps.setLong(1,starPrice);
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()){
+                    result+=rs.getInt(1);
+                }
+            }else{
+                PreparedStatement prs = DBConnect.getInstance().getConnection().prepareStatement("select count(price) from product where (price-price*discount)>=? and (price-price*discount)<=?");
+                prs.setLong(1,starPrice);
+                prs.setLong(2,endPrice);
+                ResultSet resultSet = prs.executeQuery();
+                if(resultSet.next()){
+                    result+=resultSet.getInt(1);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static int getQuantityStarProduct(int star){
+        int result = 0;
+        try {
+            if(star==1){
+                PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select count(star) from star_vote where star>=0 and star<=1");
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()){
+                    result+=rs.getInt(1);
+                }
+            }else{
+                PreparedStatement prs = DBConnect.getInstance().getConnection().prepareStatement("select count(star) from star_vote where star>?-1 and star<=?");
+                prs.setInt(1,star);
+                prs.setInt(2,star);
+                ResultSet resultSet = prs.executeQuery();
+                if(resultSet.next()){
+                    result+=resultSet.getInt(1);
+                }
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public static Product getProductFullImage(String idp) throws SQLException {
         Product p = new Product();
@@ -1120,6 +1193,4 @@ public class ProductService {
                 e.printStackTrace();
             }
         }
-
-
     }

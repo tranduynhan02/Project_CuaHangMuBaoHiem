@@ -27,7 +27,7 @@ public class Add_Bill extends HttpServlet {
         Cart cart = (Cart) request.getSession().getAttribute("cart");
         List<String> id_dp = new ArrayList<String>();
         for(Product p: cart.getListProduct()){
-            id_dp.add(p.getId());
+            id_dp.add(p.getDetail().get(0).getId());
         }
         if(name==""||email==""||phone==""||address==""){
             request.setAttribute("error","error");
