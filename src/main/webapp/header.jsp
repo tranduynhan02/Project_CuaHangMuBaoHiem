@@ -111,7 +111,7 @@
                                         class="fas fa-user text-primary" style="padding-top: 4px"></i></a>
                                 <div class="dropdown-menu bg-dark border-bt-primary m-0">
                                     <a href="account.jsp" class="dropdown-item text-primary">Thông tin</a>
-                                    <a href="#" class="dropdown-item text-primary">Đăng xuất</a>
+                                    <a href="DoLogout" class="dropdown-item text-primary">Đăng xuất</a>
                                 </div>
                             </div>
                             <% }%>
