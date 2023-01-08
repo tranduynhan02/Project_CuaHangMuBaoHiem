@@ -10,13 +10,17 @@ public class Bill {
     private List<String> productList;
     private String status;
     private String id_cus;
+    private String address;
+    private String phone;
 
-    public Bill(String id, Date date, List<String> list, String status, String id_cus) {
+    public Bill(String id, Date date, List<String> list, String status, String id_cus, String address, String phone) {
         this.id = id;
         this.date = date;
         this.productList = list;
         this.status = status;
         this.id_cus = id_cus;
+        this.address = address;
+        this.phone = phone;
     }
     public Bill(){
 
@@ -62,6 +66,22 @@ public class Bill {
         this.id_cus = id_cus;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "Bill{" +
@@ -70,6 +90,8 @@ public class Bill {
                 ", productList=" + productList +
                 ", status='" + status + '\'' +
                 ", id_cus='" + id_cus + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }
