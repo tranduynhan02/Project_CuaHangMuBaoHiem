@@ -20,7 +20,7 @@
     font-size: 18px;
     font-weight: bold;
 }
-.form-group input {
+.form-group input, .form-group .no_text {
     width: 80%;
     margin-bottom: 10px;
     padding-left: 30px;

@@ -108,7 +108,9 @@
                             <% } else { %>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i
-                                        class="fas fa-user text-primary" style="padding-top: 4px"></i></a>
+                                        class="fas fa-user text-primary"
+                                        style="padding-top: 4px; padding-right: 4px; "></i><%=s%>
+                                </a>
                                 <div class="dropdown-menu bg-dark border-bt-primary m-0">
                                     <a href="account.jsp" class="dropdown-item text-primary">Thông tin</a>
                                     <a href="DoLogout" class="dropdown-item text-primary">Đăng xuất</a>

@@ -8,6 +8,9 @@ To change this template use File | Settings | File Templates.
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>HelmetsShop</title>
@@ -30,9 +33,8 @@ To change this template use File | Settings | File Templates.
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/account.css">
+    <link href="css/account.css" rel="stylesheet">
 </head>
 
 <body>
@@ -68,11 +70,9 @@ To change this template use File | Settings | File Templates.
                                                value="">
                                     </div>
                                     <div class="col-6">
-                                        <label for="inputEmail" class="form-label">Email *</label>
-                                        <input
-                                                type="email" class="form-control" id="inputEmail"
-                                                placeholder=" Nhập email"
-                                                value="">
+                                        <label class="form-label">Email *</label>
+                                        <div class="form-control no_text">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">

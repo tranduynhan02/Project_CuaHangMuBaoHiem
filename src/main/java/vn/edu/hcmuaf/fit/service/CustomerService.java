@@ -17,9 +17,14 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class CustomerService {
-    public static List<Customer> getData() {
-        List<Customer> list = new LinkedList<>();
-
+    public static List<Customer> getData() throws SQLException {
+        List<Customer> list = new ArrayList<>();
+        String sql = "select * from customer where username = ?";
+        DBConnect dbConnect = DBConnect.getInstance();
+        ResultSet rs = dbConnect.get().executeQuery(sql);
+        while (rs.next()){
+            list.add(new Customer());
+        }
         return list;
     }
     public static String toMD5(String password) {

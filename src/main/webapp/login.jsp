@@ -58,6 +58,7 @@ To change this template use File | Settings | File Templates.
                     <div class="icon d-flex align-items-center justify-content-center">
                         <span class="fa-solid fa-lock"></span></div>
                     <input type="password" class="form-control" placeholder="Mật khẩu" name="password">
+
                 </div>
                 <div class="form-group text-md-right">
                     <a href="forgot-password.jsp" style="text-decoration: none">Quên mật khẩu?</a>
