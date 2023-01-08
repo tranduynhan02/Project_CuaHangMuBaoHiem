@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.model;
 
 import vn.edu.hcmuaf.fit.service.ProductService;
 
+import java.security.Key;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -13,7 +14,7 @@ public class Product{
 
     private String type;
     private double discount;
-    private List<String> img;
+    private List<ImageProduct> img;
     private double star;
     private int amount;
     private Map<String, List<String>> comment;
@@ -33,7 +34,7 @@ public class Product{
         this.brand = brand;
         this.type = type;
         this.discount = discount;
-        this.img = new ArrayList<String>();
+        this.img = new ArrayList<ImageProduct>();
         this.star = star;
         this.amount = amount;
         this.comment = new HashMap<String, List<String>>();
@@ -91,11 +92,11 @@ public class Product{
         this.discount = discount;
     }
 
-    public List<String> getImg() {
+    public List<ImageProduct> getImg() {
         return img;
     }
 
-    public void setImg(List<String> img) {
+    public void setImg(List<ImageProduct> img) {
         this.img = img;
     }
 
@@ -218,10 +219,5 @@ public class Product{
             }
         }
         return sum;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        Product p = ProductService.getProduct("1");
-        System.out.println(p.getQuantitySize(""));
     }
 }

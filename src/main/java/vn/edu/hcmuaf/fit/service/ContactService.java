@@ -76,9 +76,10 @@ public class ContactService {
     public int quantity(){
         int count =0;
         DBConnect dbConnect = DBConnect.getInstance();
-        Statement statement = dbConnect.get();
+
         try {
-            ResultSet rs = statement.executeQuery("select * from contacts");
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select * from contacts");
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
             count++;
             }
@@ -124,8 +125,8 @@ public class ContactService {
         return list;
     }
 
-    public List<Contact> pagination(int a, int b){
-        List<Contact> list = getAll();
+    public List<Contact> pagination(int a, int b,List<Contact> list){
+//        List<Contact> list = getAll();
         List<Contact> result = new ArrayList<Contact>();
 
         for(int i = a; i<b+a;i++){

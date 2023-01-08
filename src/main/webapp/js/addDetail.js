@@ -6,8 +6,6 @@ function addDetail(quantity) {
 }
 function addDetail(quantity) {
 
-
-
 }
 function check() {
     var check1 = size.size.value;
