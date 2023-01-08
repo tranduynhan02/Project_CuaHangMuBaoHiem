@@ -159,7 +159,7 @@
                     </div>
                     <% if(list1.get(i).sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=list1.get(i).sumQuantity()%><%}%>
                     <div class="d-flex align-items-center justify-content-center mb-1">
-                        <%for (int j=1;j<=list1.get(0).getStar();j++){%>
+                        <%for (int j=1;j<=list1.get(i).getStar();j++){%>
                         <small class="fa fa-star text-primary mr-1"></small>
                         <%}
                             if ((list1.get(i).getStar()*10)%10!=0){
