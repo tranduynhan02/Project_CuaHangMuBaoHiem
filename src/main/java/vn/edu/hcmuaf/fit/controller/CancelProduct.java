@@ -14,12 +14,16 @@ public class CancelProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id_bill = request.getParameter("id_bill");
         try {
-            if(ProductService.getBill(id_bill).getStatus().equals("Đã Nhận")) response.sendRedirect("notification2.html");
-            ProductService.updateStatus(id_bill,"Đã hủy");
+            request.setAttribute("id_bill",id_bill);
+            if(ProductService.getBill(id_bill).getStatus().equals("Đã Nhận")){
+                request.getRequestDispatcher("notification2.jsp").forward(request,response);
+            }else{
+                ProductService.updateStatus(id_bill,"Đã hủy");
+                request.getRequestDispatcher("notification1.jsp").forward(request,response);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        response.sendRedirect("notification1.html");
     }
 
     @Override

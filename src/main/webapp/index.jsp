@@ -69,7 +69,9 @@
                 <div class="carousel-inner">
                     <div class="carousel-item position-relative active" style="height: 430px;">
 
+
                         <img class="position-absolute w-100 h-100" <%if(img1.size()<=0){%>src="img/noimage.jpg"<%}else{%>src="<%=img1.get(0).getImg()%>"<%}%> style="object-fit: cover;">
+
 
 
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
