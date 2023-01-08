@@ -139,6 +139,20 @@ public class CustomerService {
         }
         return isPassword;
     }
+    public static int checkActive(String username) throws SQLException {
+        int isActive = 0;
+        DBConnect dbConnect = DBConnect.getInstance();
+        String sql = "select * from customer where username = ?";
+        PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
+        pre.setString(1, username);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+            if (rs.getString("active").equals(1)){
+                isActive = 1;
+            }
+        }
+        return isActive;
+    }
 
     public static void main(String[] args) throws SQLException, NoSuchAlgorithmException {
 //        System.out.println(emailValidate("@tran.duyn.han@gm.ail.com"));

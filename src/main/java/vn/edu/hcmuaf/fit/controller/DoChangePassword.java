@@ -19,9 +19,9 @@ public class DoChangePassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("tendangnhap");
-        String pass_old = request.getParameter("pass_old");
-        String password = request.getParameter("password");
-        String confirm_pw = request.getParameter("confirm_pw");
+        String pass_old = request.getParameter("pass_old").trim();
+        String password = request.getParameter("password").trim();
+        String confirm_pw = request.getParameter("confirm_pw").trim();
 
         if (username == null || username == "") {
             request.setAttribute("error ", "Vui lòng đăng nhập để sử dụng chức năng này!");

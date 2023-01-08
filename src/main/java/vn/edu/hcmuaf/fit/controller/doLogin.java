@@ -17,14 +17,17 @@ public class DoLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username").toLowerCase();
-        String password = request.getParameter("password");
+        String username = request.getParameter("username").toLowerCase().trim();
+        String password = request.getParameter("password").trim();
         HttpSession session = request.getSession();
         try {
             if (username == null || username == "" || password == null || password == "") {
                 request.setAttribute("error", "Người dùng không được để trống Tên đăng nhập hoặc Mật khẩu.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
-            } else if (CustomerService.checkLogin(username, CustomerService.toMD5(password))) {
+            } else if(CustomerService.checkActive(username) == 0) {
+                request.setAttribute("error", "Tài khoản đã bị khóa.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else if (CustomerService.checkLogin(username, CustomerService.toMD5(password)) == true) {
                 session.setAttribute("tendangnhap", username);
                 response.sendRedirect("index.jsp");
             } else {

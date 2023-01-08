@@ -53,7 +53,7 @@ To change this template use File | Settings | File Templates.
             <%--                   aria-controls="#v-pills-reset_pw" aria-selected="false">Đổi mật khẩu</a>--%>
             <%--            </div>--%>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-home-tab"href="account.jsp" role="tab"
+                <a class="nav-link active" id="v-pills-home-tab" href="account.jsp" role="tab"
                    aria-controls="v-pills-info" aria-selected="true">Thông tin cá nhân</a>
                 <a class="nav-link" id="v-pills-profile-tab" href="change-password.jsp" role="tab"
                    aria-controls="#v-pills-reset_pw" aria-selected="false">Đổi mật khẩu</a>
@@ -64,7 +64,7 @@ To change this template use File | Settings | File Templates.
                 <div class="tab-pane fade show active" id="v-pills-info" role="tabpanel"
                      aria-labelledby="v-pills-info-tab">
                     <div class="form-account">
-                        <form action="">
+                        <form action="/Project_CuaHangMuBaoHiem_war/DoProfile">
                             <div class="title">Thông tin cá nhân</div>
                             <div class="form-group">
                                 <div class="row">
@@ -116,7 +116,8 @@ To change this template use File | Settings | File Templates.
                         <form action="/Project_CuaHangMuBaoHiem_war/doChangePassword" method="post">
                             <div class="title">Đổi mật khẩu</div>
                             <div class="form-group-rp">
-                                <input type="password" class="form-control" placeholder="Mật khẩu hiện tại" name="pass_old">
+                                <input type="password" class="form-control" placeholder="Mật khẩu hiện tại"
+                                       name="pass_old">
                                 <input type="password" class="form-control" placeholder="Mật khẩu mới" name="pass_new">
                                 <input type="password" class="form-control" placeholder="Nhập lại mật khẩu"
                                        name="confirm_pwn">

@@ -18,11 +18,11 @@ public class DoRegister extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String username = request.getParameter("username").toLowerCase();
-        String password = request.getParameter("password");
-        String confirm_pw = request.getParameter("confirm_pw");
+        String name = request.getParameter("name").trim();
+        String email = request.getParameter("email").trim();
+        String username = request.getParameter("username").toLowerCase().trim();
+        String password = request.getParameter("password").trim();
+        String confirm_pw = request.getParameter("confirm_pw").trim();
         try {
             if (name == null || name == "" || email == null || email == "" || username == null || username == "" || password == null || password == "" || confirm_pw == null || confirm_pw == "") {
                 request.setAttribute("error", "Nguời dùng phải nhập đầy đủ thông tin đăng ký.");

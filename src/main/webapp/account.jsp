@@ -64,7 +64,7 @@ To change this template use File | Settings | File Templates.
                 <div class="tab-pane fade show active" id="v-pills-info" role="tabpanel"
                      aria-labelledby="v-pills-info-tab">
                     <div class="form-account">
-                        <form action="">
+                        <form action="/Project_CuaHangMuBaoHiem_war/DoProfile">
                             <div class="title">Thông tin cá nhân</div>
                             <div class="form-group">
                                 <div class="row">

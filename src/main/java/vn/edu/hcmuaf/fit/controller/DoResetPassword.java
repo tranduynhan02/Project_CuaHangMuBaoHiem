@@ -18,7 +18,7 @@ public class DoResetPassword extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
+        String email = request.getParameter("email").trim();
         try {
             if (CustomerService.checkEmail(email)==false){
                 request.setAttribute("error", "Email chưa được sử dụng để đăng ký tài khoản.");
