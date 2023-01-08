@@ -1,10 +1,10 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
 <%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %>
-<<<<<<< HEAD
+
 <%@ page import="java.util.Map" %>
-=======
+
 <%@ page import="java.util.List" %>
->>>>>>> origin
+
 <%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %><%--
 Created by IntelliJ IDEA.
 User: ACER
@@ -91,6 +91,7 @@ To change this template use File | Settings | File Templates.
 <% NumberFormat nf = new NumberFormat();
     Product p= (Product) request.getAttribute("product"); %>
 <!-- Shop Detail Start -->
+<%Map<String,String> listComment = ProductService.getListComment(p.getId());%>
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
         <div class="col-lg-5 mb-30">
@@ -120,11 +121,13 @@ To change this template use File | Settings | File Templates.
                 <h3><%=p.getName()%></h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                        <%for (int j=1;j<=p.getStar();j++){%>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <%}
+                            if ((p.getStar()*10)%10!=0){
+                        %>
+                        <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                        <%}%>
                     </div>
                     <small class="pt-1">(<%= p.getAmount() %> đánh giá)</small>
                 </div>
@@ -202,7 +205,7 @@ To change this template use File | Settings | File Templates.
             <div class="bg-light p-30">
                 <div class="nav nav-tabs mb-4">
                     <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Mô tả sản phẩm</a>
-                    <%Map<String,String> listComment = ProductService.getListComment(p.getId());%>
+
                     <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Bình luận (<%=listComment.size()%>)</a>
                 </div>
                 <div class="tab-content">
