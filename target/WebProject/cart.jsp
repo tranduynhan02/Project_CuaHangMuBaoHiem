@@ -139,10 +139,10 @@
                             <%if(cart.getQuanlity()==0){%>
                             <h5><%= nf.numberFormat(cart.getTotal()) %>đ</h5>
                             <%}else{%>
-                            <h5><%= nf.numberFormat(cart.getTotal() + 50000) %>đ</h5>
+                            <h5><%= nf.numberFormat(cart.getTotal() + 50000) %>đ</h5>s
                             <%}%>
                         </div>
-                        <a href="checkout.jsp" style="text-decoration: none"><button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiến hành thanh toán</button></a>
+                        <a href="/Project_CuaHangMuBaoHiem_war/CheckCart" style="text-decoration: none"><button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Tiến hành thanh toán</button></a>
                     </div>
                 </div>
             </div>

@@ -54,6 +54,8 @@
                    aria-controls="v-pills-info" aria-selected="false">Thông tin cá nhân</a>
                 <a class="nav-link active" id="v-pills-profile-tab" href=change-password.jsp role="tab"
                    aria-controls="#v-pills-reset_pw" aria-selected="true">Đổi mật khẩu</a>
+                <a class="nav-link " id="v-pills-bill-tab" href="bill_customer.jsp" role="tab"
+                   aria-controls="v-pills-bill" aria-selected="false">Lịch sử mua hàng</a>
             </div>
         </div>
         <div class="col-9">
@@ -120,9 +122,11 @@
                             <div class="form-group-rp">
                                 <input type="password" class="form-control" placeholder="Mật khẩu hiện tại"
                                        name="pass_old">
-                                <input type="password" id="password" class="form-control" placeholder="Mật khẩu mới" name="password">
+                                <input type="password" id="password" class="form-control" placeholder="Mật khẩu mới"
+                                       name="password">
                                 <p style="color: red">Mật khẩu phải chứa tối thiểu 6 ký tự.</p>
-                                <input type="password" id="confirm_pw" class="form-control" placeholder="Nhập lại mật khẩu"
+                                <input type="password" id="confirm_pw" class="form-control"
+                                       placeholder="Nhập lại mật khẩu"
                                        name="confirm_pw">
                                 <p style="color: red">Mật khẩu xác nhận phải trùng với mật khẩu mới.</p>
                             </div>

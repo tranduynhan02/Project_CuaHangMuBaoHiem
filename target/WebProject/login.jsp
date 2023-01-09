@@ -44,7 +44,7 @@ To change this template use File | Settings | File Templates.
 <% String error = (String) request.getAttribute("error");%>
 <% String username = (String) request.getParameter("username");%>
 <section>
-    <div class="form-container">
+    <div class="form-container" style="background: url('//localhost:8080/Project_CuaHangMuBaoHiem_war/img/login/nendangnhap.png')">
         <div class="form-login">
             <form action="/Project_CuaHangMuBaoHiem_war/doLogin" method="post">
                 <div class="title">Đăng nhập</div>
