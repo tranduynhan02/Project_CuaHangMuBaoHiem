@@ -49,7 +49,7 @@ public class CustomerService {
         ResultSet rs = pre.executeQuery();
         if (rs.next()) {
             StringBuilder sb = new StringBuilder("Xin chào " + rs.getString("username") + ", \n");
-            sb.append("Mật khẩu của bạn đã được thay đổi thành công vào " + LocalDate.now() + " lúc " + LocalTime.now() +". \n\n\n");
+            sb.append("Mật khẩu của bạn đã được thay đổi thành công vào " + LocalDate.now() + " lúc " + LocalTime.now() + ". \n\n\n");
             sb.append("Trân trọng cảm ơn! \n");
             sb.append("Đội ngũ bảo mật HelmetShop.");
             MailService.sendMail(rs.getString("email"), "Thay đổi mật khẩu - HelmetShop", sb.toString());
@@ -84,6 +84,19 @@ public class CustomerService {
             String reset = "update customer set password = '" + toMD5(password) + "' where email = '" + email + "';";
             pre.executeUpdate(reset);
         }
+    }
+
+    public static Customer customer(String username) throws SQLException {
+        Customer customer = null;
+        DBConnect dbConnect = DBConnect.getInstance();
+        String sql = "select * from customer where username = ?";
+        PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
+        pre.setString(1, username);
+        ResultSet rs = pre.executeQuery();
+        if (rs.next()) {
+            customer = new Customer(Integer.parseInt(rs.getString("permission")));
+        }
+        return customer;
     }
 
     public static boolean checkLogin(String username, String password) throws SQLException {
@@ -138,6 +151,7 @@ public class CustomerService {
         }
         return isPassword;
     }
+
     public static int checkActive(String username) throws SQLException {
         int isActive = 0;
         DBConnect dbConnect = DBConnect.getInstance();
@@ -146,7 +160,7 @@ public class CustomerService {
         pre.setString(1, username);
         ResultSet rs = pre.executeQuery();
         if (rs.next()) {
-            if (rs.getString("active").equals(1)){
+            if (Integer.parseInt(rs.getString("active")) == 1) {
                 isActive = 1;
             }
         }
@@ -161,5 +175,6 @@ public class CustomerService {
 //        System.out.println(toMD5("123456"));
 //        changePassword("tdn", "c4ca4238a0b923820dcc509a6f75849b", toMD5("nhandz"));
 //        resetPassword("20130346@st.hcmuaf.edu.vn");
+        System.out.println(checkActive("tdn"));
     }
 }

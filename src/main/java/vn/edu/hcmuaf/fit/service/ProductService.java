@@ -529,14 +529,14 @@ public class ProductService {
         ps.setString(1,idc);
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
-            c.setId(idc);
+            c.setId_customer(idc);
             c.setName(rs.getString("name"));
             c.setEmail(rs.getString("email"));
             c.setPhone(rs.getString("phone"));
             c.setAddress(rs.getString("address"));
-            c.setUserName(rs.getString("username"));
+            c.setUsername(rs.getString("username"));
             c.setPassword(rs.getString("password"));
-            c.setPermission(rs.getString("permission"));
+            c.setPermission(Integer.valueOf(rs.getString("permission")));
         }
         return c;
     }
