@@ -48,7 +48,5 @@ public class DoLogin extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
