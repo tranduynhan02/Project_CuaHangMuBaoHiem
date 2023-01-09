@@ -51,3 +51,7 @@
     margin-bottom: 10px;
     border-bottom: 1px solid #FFD333;
 }
+.text-gray-700 a {
+    color: black;
+    text-decoration: none;
+}
