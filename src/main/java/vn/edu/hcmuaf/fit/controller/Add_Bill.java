@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.controller;
 import vn.edu.hcmuaf.fit.model.Cart;
 import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.model.Product;
+import vn.edu.hcmuaf.fit.service.MailService;
 import vn.edu.hcmuaf.fit.service.ProductService;
 
 import javax.servlet.*;
@@ -35,8 +36,13 @@ public class Add_Bill extends HttpServlet {
         }else{
             LocalDateTime date = LocalDateTime.now();
             String id_bill = date.getSecond()+"-"+date.getMinute()+"-"+date.getHour()+"-"+date.getDayOfMonth()+"-"+date.getMonth()+"-"+date.getYear();
-            Customer customer = (Customer) request.getSession().getAttribute("tendangnhap");
-            String id_cus = customer.getId_customer();
+            String username = (String) request.getSession().getAttribute("tendangnhap");
+            String id_cus = "";
+            try {
+                id_cus += ProductService.getCustomer(ProductService.getIdCusByUserName(username)).getId_customer();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             ProductService.addBill(id_bill,id_cus,"Đang gửi",id_dp,address,phone);
             cart.getCart().clear();
             cart.setTotal(0);
@@ -47,6 +53,13 @@ public class Add_Bill extends HttpServlet {
             request.setAttribute("address",address);
             request.setAttribute("id_bill",id_bill);
             request.setAttribute("list",id_dp);
+            String conttent_recive = "";
+            conttent_recive+=id_bill+"\n"+name+"\n"+email+"\n"+phone+"\n"+address+"\n"+"Tuy cập vào đây nếu giao hàng thành công"+"\n"+"http://localhost:8080/Project_CuaHangMuBaoHiem_war/ReciveProduct?id_bill="+id_bill;
+            MailService.sendMail("20130233@st.hcmuaf.edu.vn","Giao hàng",conttent_recive);
+            String conttent_cancel = "";
+            conttent_cancel+=id_bill+"\n"+name+"\n"+email+"\n"+phone+"\n"+address+"\n"+"Tuy cập vào đây nếu muốn hủy hàng"+"\n"+"http://localhost:8080/Project_CuaHangMuBaoHiem_war/CancelProduct?id_bill="+id_bill;
+            MailService.sendMail(email,"Helmetsshop",conttent_cancel);
+            MailService.sendMail("20130233@st.hcmuaf.edu.vn","Giao hàng",conttent_recive);
             request.getRequestDispatcher("detail_bill.jsp").forward(request,response);
         }
 
