@@ -363,7 +363,7 @@
                               name="address"     value="<%=c.getAddress()%>"     />
                         </label>
                     </div>
-                    <input type="hidden" name="id_Cus" value="<%=c.getId()%>">
+                    <input type="hidden" name="id_Cus" value="<%=c.getId_customer()%>">
                     <input type="submit" value="Lưu" class="button" style="background: #007bff; margin-right: 20px">
                     <a href="http://localhost:8080/Project_CuaHangMuBaoHiem_war/list-customer"><button type="button" class="button cancel" style="background: red">Hủy</button></a>
                 </form>

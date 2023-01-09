@@ -452,7 +452,7 @@
                   <a href="/Project_CuaHangMuBaoHiem_war/detail-bill?id=<%=b.getId()%>">
                   <p class="font-semibold"><%=ProductService.getCustomer(b.getId_cus()).getName()%></p>
                   <p class="text-xs text-gray-600 dark:text-gray-400">
-                    <%=ProductService.getCustomer(b.getId_cus()).getId()%>
+                    <%=ProductService.getCustomer(b.getId_cus()).getId_customer()%>
                   </p>
                   </a>
                 </td>

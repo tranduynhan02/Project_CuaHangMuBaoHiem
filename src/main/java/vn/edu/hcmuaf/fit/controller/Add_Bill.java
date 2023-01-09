@@ -36,7 +36,7 @@ public class Add_Bill extends HttpServlet {
             LocalDateTime date = LocalDateTime.now();
             String id_bill = date.getSecond()+"-"+date.getMinute()+"-"+date.getHour()+"-"+date.getDayOfMonth()+"-"+date.getMonth()+"-"+date.getYear();
             Customer customer = (Customer) request.getSession().getAttribute("tendangnhap");
-            String id_cus = customer.getId();
+            String id_cus = customer.getId_customer();
             ProductService.addBill(id_bill,id_cus,"Đang gửi",id_dp,address,phone);
             cart.getCart().clear();
             cart.setTotal(0);
