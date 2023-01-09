@@ -89,15 +89,16 @@ public class CustomerService {
     public static Customer customer(String username) throws SQLException {
         Customer customer = null;
         DBConnect dbConnect = DBConnect.getInstance();
-        String sql = "select username, permission from customer where username = ?";
+        String sql = "select * from customer where username = ?";
         PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
         pre.setString(1, username);
         ResultSet rs = pre.executeQuery();
         if (rs.next()) {
-            customer = new Customer(Integer.parseInt(rs.getString("permission")));
+            customer = new Customer(rs.getString("name"), rs.getString("email"), rs.getString("phone"), rs.getString("address"), Integer.parseInt(rs.getString("permission")));
         }
         return customer;
     }
+
 
     public static boolean checkLogin(String username, String password) throws SQLException {
         boolean isLogin = false;
