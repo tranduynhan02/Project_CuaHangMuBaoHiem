@@ -6224,6 +6224,10 @@ button.bg-dark:focus {
 .border-primary {
   border-color: #FFD333 !important;
 }
+.border-bt-primary{
+  border-top: 1px solid #FFD333;
+  border-bottom: 1px solid #FFD333;
+}
 
 .border-secondary {
   border-color: #F5F5F5 !important;

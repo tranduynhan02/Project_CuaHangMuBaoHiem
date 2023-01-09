@@ -37,34 +37,38 @@ To change this template use File | Settings | File Templates.
 
 <body>
 <!-- Header Start -->
-<%@include file="header.jsp"%>
+<%@include file="header.jsp" %>
 <!-- Header End -->
 
 <!-- Login Start -->
-<section>
-    <div class="form-container bg-dangnhap">
-        <div class="form-login">
-            <form action="">
-                <div class="title">Đặt lại mật khẩu</div>
-                <div class="form-group">
-                    <div class="icon d-flex align-items-center justify-content-center">
-                        <span class="fa-solid fa-envelope"></span></div>
-                    <input type="text" class="form-control" placeholder="Email" name="email">
-                </div>
+<% String error = (String) request.getAttribute("error");%>
+<% String success = (String) request.getAttribute("success");%>
+<div class="form-container bg-dangnhap">
+    <div class="form-login">
+        <form action="/Project_CuaHangMuBaoHiem_war/DoResetPassword">
+            <div class="title">Đặt lại mật khẩu</div>
+            <span style="color: green; font-size: 18px;"><%=(success != null && success != "") ? success : ""%>
+                </span>
+            <div class="form-group">
+                <div class="icon d-flex align-items-center justify-content-center">
+                    <span class="fa-solid fa-envelope"></span></div>
+                <input type="email" class="form-control" placeholder="Email" name="email">
+            </div>
+            <span style="color: red; font-size: 18px;"><%=(error != null && error != "") ? error : ""%>
                 <div class="form-group">
                     <button type="submit">Gửi</button>
                 </div>
-            </form>
-            <div class="form-footer">
-                <a href="login.jsp">Đăng nhập</a>
-            </div>
+        </form>
+        <div class="form-footer">
+            <a href="login.jsp">Đăng nhập</a>
         </div>
     </div>
+</div>
 </section>
 <!-- Login End-->
 
 <!-- Footer Start -->
-<%@include file="footer.jsp"%>
+<%@include file="footer.jsp" %>
 <!-- Footer End -->
 
 
