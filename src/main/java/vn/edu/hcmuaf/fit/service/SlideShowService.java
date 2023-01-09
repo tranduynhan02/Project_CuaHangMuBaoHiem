@@ -200,6 +200,15 @@ public class SlideShowService {
     public void insertSlideShow(String image){
         DBConnect dbConnect = DBConnect.getInstance();
         String id = "ssimg"+(quantitySlideShow()+1);
+        int count = quantitySlideShow();
+        while(true){
+            count +=1;
+            id="ssimg"+(count);
+            if(!idSlideShow(id)){
+                break;
+            }
+        }
+
         try {
             PreparedStatement ps = dbConnect.getConnection().prepareStatement("insert into slideshow values (?,?,?)");
             ps.setString(1,id);
@@ -212,6 +221,14 @@ public class SlideShowService {
     public void insertBanner(String image){
         DBConnect dbConnect = DBConnect.getInstance();
         String id = "bnimg"+(quantityBanner()+1);
+        int count = quantityBanner();
+        while(true){
+            count +=1;
+            id="bnimg"+(count);
+            if(!idBanner(id)){
+                break;
+            }
+        }
         try {
             PreparedStatement ps = dbConnect.getConnection().prepareStatement("insert into banner(id_banner,img,allow) values (?,?,?)");
             ps.setString(1,id);
@@ -224,6 +241,14 @@ public class SlideShowService {
     public void insertLogo(String image){
         DBConnect dbConnect = DBConnect.getInstance();
         String id = "logo"+(quantityLogo()+1);
+        int count = quantityLogo();
+        while(true){
+            count +=1;
+            id="logo"+(count);
+            if(!idLogo(id)){
+                break;
+            }
+        }
         try {
             PreparedStatement ps = dbConnect.getConnection().prepareStatement("insert into logo values (?,?,?,?)");
             ps.setString(1,id);
@@ -288,8 +313,53 @@ public class SlideShowService {
         }
         return result;
     }
+    public boolean idSlideShow(String id){
+        boolean result=false;
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_slideshow from slideshow where id_slideshow=?");
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                result=true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public boolean idBanner(String id){
+        boolean result=false;
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_banner from banner where id_banner=?");
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                result=true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public boolean idLogo(String id){
+        boolean result=false;
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_logo from logo where id_logo=?");
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                result=true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
     public static void main(String[] args) {
         SlideShowService s = new SlideShowService();
-        System.out.println(getInstance().getImgBrand("KYT"));
+        getInstance().insertSlideShow("ajjasja");
     }
 }

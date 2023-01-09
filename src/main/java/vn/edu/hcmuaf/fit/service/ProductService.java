@@ -701,6 +701,14 @@ public class ProductService {
         double discounta = Double.parseDouble(discount);
         double discountDB = discounta/100;
         String id = "pdhm"+(countProduct()+1);
+        int count = countProduct();
+        while(true){
+            count +=1;
+            id="pdhm"+(count);
+            if(!idProduct(id)){
+                break;
+            }
+        }
         LocalDate localDate = LocalDate.now();
         int year = localDate.getYear();
         int mont = localDate.getMonthValue();
@@ -728,6 +736,14 @@ public class ProductService {
     public static void insertDetailProduct(String id, String size, String color, String quantity){
         int quantityDB = Integer.parseInt(quantity);
         String iddt = "dtpd"+(countDetailProduct()+1);
+        int count = countDetailProduct();
+        while(true){
+            count +=1;
+            id="dtpd"+(count);
+            if(!idDetaiProduct(id)){
+                break;
+            }
+        }
         DBConnect dbConnect = DBConnect.getInstance();
         try {
             PreparedStatement ps = dbConnect.getConnection().prepareStatement("insert into detail_product values (?,?,?,?,?)");
@@ -803,6 +819,14 @@ public class ProductService {
     }
     public static void insertImg(String id,String img){
         String id_img = "img"+(countImg()+1);
+        int count = countImg();
+        while(true){
+            count +=1;
+            id="img"+(count);
+            if(!idImg(id)){
+                break;
+            }
+        }
         DBConnect dbConnect = DBConnect.getInstance();
         try {
             PreparedStatement ps = dbConnect.getConnection().prepareStatement("insert into image values (?,?,?,?)");
@@ -1280,5 +1304,49 @@ public class ProductService {
         }
         return list;
     }
-
+    public static boolean idProduct(String id){
+        boolean result=false;
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_product from product where id_product=?");
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                result=true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean idDetaiProduct(String id){
+        boolean result=false;
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_dp from detail_product where id_dp=?");
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                result=true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static boolean idImg(String id){
+        boolean result=false;
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_img from image where id_img=?");
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                result=true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
