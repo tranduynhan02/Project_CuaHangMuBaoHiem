@@ -739,8 +739,8 @@ public class ProductService {
         int count = countDetailProduct();
         while(true){
             count +=1;
-            id="dtpd"+(count);
-            if(!idDetaiProduct(id)){
+            iddt="dtpd"+(count);
+            if(!idDetaiProduct(iddt)){
                 break;
             }
         }
@@ -822,8 +822,8 @@ public class ProductService {
         int count = countImg();
         while(true){
             count +=1;
-            id="img"+(count);
-            if(!idImg(id)){
+            id_img="img"+(count);
+            if(!idImg(id_img)){
                 break;
             }
         }
