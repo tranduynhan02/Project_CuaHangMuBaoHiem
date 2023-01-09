@@ -35,9 +35,11 @@ public class DoLogin extends HttpServlet {
                 session.setAttribute("tendangnhap", username);
                 Customer customer = CustomerService.customer(username);
                 if (customer.getPermission() == 0){
-                    request.getRequestDispatcher("index.jsp").forward(request,response);
+                    response.sendRedirect("/Project_CuaHangMuBaoHiem_war/Home");
+                }else {
+
+                    response.sendRedirect("ManageProduct");
                 }
-                response.sendRedirect("ManageProduct");
             } else {
                 request.setAttribute("error", "Người dùng nhập không đúng Tên đăng nhập hoặc Mật khẩu.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

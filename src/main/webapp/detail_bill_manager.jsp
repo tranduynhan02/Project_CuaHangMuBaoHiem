@@ -65,18 +65,18 @@
               <li class="relative px-6 py-3">
 
                 <a
-                  class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                  href="ProductManagement.jsp"
+                        class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                        href="/Project_CuaHangMuBaoHiem_war/ManageProduct"
                 >
                   <svg
-                    class="w-5 h-5"
-                    aria-hidden="true"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                          class="w-5 h-5"
+                          aria-hidden="true"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                   >
                     <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                   </svg>
@@ -84,13 +84,13 @@
                 </a>
               </li>
               <li class="relative px-6 py-3">
-                  <span
-                  class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                  aria-hidden="true"
+                <span
+                        class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                        aria-hidden="true"
                 ></span>
                 <a
                         class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                        href="bill_manager.jsp"
+                        href="/Project_CuaHangMuBaoHiem_war/list-bill"
                 >
                   <svg
                           class="w-5 h-5"
@@ -108,11 +108,8 @@
                 </a>
               </li>
               <li class="relative px-6 py-3">
-
-                <a
-                        class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                        href="customer_manager.jsp"
-                >
+                <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                   href="/Project_CuaHangMuBaoHiem_war/list-customer">
                   <svg
                           class="w-5 h-5"
                           aria-hidden="true"
@@ -125,18 +122,29 @@
                   >
                     <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                   </svg>
-                  <span class="ml-4">Quản lí khách hàng</span>
+                  <span class="ml-4">Quản lý khách hàng</span>
+                </a>
+              </li>
+              <li class="relative px-6 py-3">
+                <a
+                        class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                        href="/Project_CuaHangMuBaoHiem_war/ManageHome"
+                >
+                  <svg
+                          class="w-5 h-5"
+                          aria-hidden="true"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor">
+                    <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                  </svg>
+                  <span class="ml-4">Quản lý trang chủ</span>
                 </a>
               </li>
             </ul>
-            <div class="px-6 my-6">
-              <button
-                class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-              >
-                Tạo mới sản phẩm
-                <span class="ml-2" aria-hidden="true">+</span>
-              </button>
-            </div>
           </div>
         </aside>
         <!-- Mobile sidebar -->
