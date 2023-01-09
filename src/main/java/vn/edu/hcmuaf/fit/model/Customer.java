@@ -32,6 +32,10 @@ public class Customer implements Serializable {
 
     }
 
+    public Customer(int permission) {
+        this.permission = permission;
+    }
+
     public String getId_customer() {
         return id_customer;
     }

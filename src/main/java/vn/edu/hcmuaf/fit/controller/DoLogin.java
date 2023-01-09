@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.controller;
 
+import vn.edu.hcmuaf.fit.model.Customer;
 import vn.edu.hcmuaf.fit.service.CustomerService;
 
 import javax.servlet.ServletException;
@@ -32,7 +33,11 @@ public class DoLogin extends HttpServlet {
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else if (CustomerService.checkLogin(username, CustomerService.toMD5(password)) == true) {
                 session.setAttribute("tendangnhap", username);
-                response.sendRedirect("index.jsp");
+                Customer customer = CustomerService.customer(username);
+                if (customer.getPermission() == 0){
+                    request.getRequestDispatcher("index.jsp").forward(request,response);
+                }
+                response.sendRedirect("ManageProduct");
             } else {
                 request.setAttribute("error", "Người dùng nhập không đúng Tên đăng nhập hoặc Mật khẩu.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);

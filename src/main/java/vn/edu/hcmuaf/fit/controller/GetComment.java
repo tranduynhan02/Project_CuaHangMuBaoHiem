@@ -18,7 +18,7 @@ public class GetComment extends HttpServlet {
         String mess = request.getParameter("mess");
         int star = Integer.parseInt(request.getParameter("star"));
         Customer customer = (Customer) request.getSession().getAttribute("tendangnhap");
-        ProductService.addComment(customer.getId(),idPro,mess,star);
+        ProductService.addComment(customer.getId_customer(),idPro,mess,star);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/detail?id="+idPro);
 
     }
