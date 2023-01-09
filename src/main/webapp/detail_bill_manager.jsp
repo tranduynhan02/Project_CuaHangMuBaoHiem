@@ -392,7 +392,7 @@
                          <%=ProductService.getQuantity(bill.getId(),s)%>
                         </td>
                         <td class="px-4 py-3 text-sm">
-                          15/10/2022
+                          <%=bill.getDate()%>
                         </td>
                       </tr>
                     <%}%>
