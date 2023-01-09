@@ -17,9 +17,8 @@ public class Contact extends HttpServlet {
         String email = request.getParameter("email");
         String subject = request.getParameter("subject");
         String content = request.getParameter("content");
-
         ContactService.getInstance().insert(name,email,subject,content);
-//        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/contact.jsp");
+        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/contact.jsp");
     }
 
     @Override
