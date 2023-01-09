@@ -16,7 +16,7 @@ public class CancelBill extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id_bill = request.getParameter("id");
         ProductService.cancel_bill(id_bill);
-        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/");
+        response.sendRedirect("/Project_CuaHangMuBaoHiem_war/Home");
     }
 
     @Override

@@ -80,11 +80,11 @@
             List<String> list = (List<String>)request.getAttribute("list");
             NumberFormat nf = new NumberFormat();
             for(String s: list){
-              Product p = ProductService.getProduct(s);
+              Product p = ProductService.getProduct(ProductService.getIdProductByIddp(s));
           %>
           <div class="d-flex justify-content-between">
             <p><%=p.getName()%></p>
-            <p><%=nf.numberFormat(p.getPrice()*(1-(long)p.getDiscount()))%>đ</p>
+            <p><%=nf.numberFormat(p.getPrice()-p.getPrice()*(long)p.getDiscount())%>đ</p>
           </div>
           <%}%>
 
@@ -95,8 +95,8 @@
             <%
               long price = 0;
               for(String s:list){
-                Product p = ProductService.getProduct(s);
-                price += p.getPrice()*(1-(long)p.getDiscount());
+                Product p = ProductService.getProduct(ProductService.getIdProductByIddp(s));
+                price += p.getPrice()-p.getPrice()*(long)p.getDiscount();
               }%>
             <h6><%=nf.numberFormat(price)%>đ</h6>
           </div>
@@ -113,7 +113,7 @@
         </div>
       </div>
       <div>
-      <a href="http://localhost:8080/Project_CuaHangMuBaoHiem_war/index.jsp"><button style="background: #FFD333;font-weight: bold;margin-left: 62px;color: white ;border:0;height: 50px; width: 180px">VỀ TRANG CHỦ</button></a>
+      <a href="/Project_CuaHangMuBaoHiem_war/Home"><button style="background: #FFD333;font-weight: bold;margin-left: 62px;color: white ;border:0;height: 50px; width: 180px">VỀ TRANG CHỦ</button></a>
 
         <a href="/Project_CuaHangMuBaoHiem_war/cancel_bill?id=<%=request.getAttribute("id_bill")%>"><button onclick="cancel()" id="delete_bill" style="background: red;font-weight: bold;margin-left: 47px;color: white ;border: 0;height: 50px; width: 180px">HỦY ĐƠN ĐẶT HÀNG</button></a>
     </div>

@@ -1349,4 +1349,32 @@ public class ProductService {
         }
         return result;
     }
+    public static String getIdProductByIddp(String id_dp){
+        String result="";
+        try{
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id_product from detail_product where id_dp=?");
+            ps.setString(1,id_dp);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                result+=rs.getString(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    public static String getIdCusByUserName(String username){
+        String result="";
+        try{
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id_customer from customer where username=?");
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                result+=rs.getString(1);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

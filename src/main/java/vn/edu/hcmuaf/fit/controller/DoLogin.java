@@ -36,10 +36,10 @@ public class DoLogin extends HttpServlet {
                 Customer customer = CustomerService.customer(username);
                 if (customer.getPermission() == 0){
                     response.sendRedirect("/Project_CuaHangMuBaoHiem_war/Home");
-                }else{
+                }else {
+
                     response.sendRedirect("ManageProduct");
                 }
-
             } else {
                 request.setAttribute("error", "Người dùng nhập không đúng Tên đăng nhập hoặc Mật khẩu.");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
