@@ -13,7 +13,8 @@ public class ReciveProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id_bill = request.getParameter("id_bill");
         ProductService.updateStatus(id_bill,"Đã nhận");
-        response.sendRedirect("notification.html");
+        request.setAttribute("id_bill",id_bill);
+        request.getRequestDispatcher("notification.jsp").forward(request,response);
     }
 
     @Override

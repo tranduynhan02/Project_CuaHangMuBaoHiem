@@ -1126,6 +1126,20 @@ public class ProductService {
             }
             return result;
         }
+    public static List<Bill> getListBillByIdCustomer (String id_cus) {
+        List<Bill> result = new ArrayList<Bill>();
+        try {
+            PreparedStatement ps = DBConnect.getInstance().getConnection().prepareStatement("select id from bill where id_customer=?");
+            ps.setString(1,id_cus);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(getBill(rs.getString("id")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
         public static List<Product> totalProductBill ( int month, int year) throws SQLException {
             List<Product> list_product = new ArrayList<Product>();
             List<Bill> list = getBillByDate(month, year);
