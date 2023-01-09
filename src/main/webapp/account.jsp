@@ -1,4 +1,5 @@
-<%--
+<%@ page import="vn.edu.hcmuaf.fit.service.CustomerService" %>
+<%@ page import="vn.edu.hcmuaf.fit.model.Customer" %><%--
 Created by IntelliJ IDEA.
 User: ACER
 Date: 11/6/2022
@@ -59,6 +60,11 @@ To change this template use File | Settings | File Templates.
                    aria-controls="#v-pills-reset_pw" aria-selected="false">Đổi mật khẩu</a>
             </div>
         </div>
+        <% String error = (String) request.getAttribute("error");%>
+        <% String success = (String) request.getAttribute("success");%>
+        <% String username = (String) session.getAttribute("tendangnhap");
+            Customer cus = CustomerService.customer(username);
+        %>
         <div class="col-9">
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-info" role="tabpanel"
@@ -66,6 +72,8 @@ To change this template use File | Settings | File Templates.
                     <div class="form-account">
                         <form action="/Project_CuaHangMuBaoHiem_war/DoProfile">
                             <div class="title">Thông tin cá nhân</div>
+                            <span style="color: green; font-size: 18px; text-align: center;"><%=(success != null && success != "") ? success : ""%>
+                </span>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-6">
@@ -74,11 +82,11 @@ To change this template use File | Settings | File Templates.
                                                class="form-control"
                                                placeholder="Nhập Họ và tên"
                                                name="name"
-                                               value="">
+                                               value="<%= cus.getName()!=null? cus.getName():"" %>">
                                     </div>
                                     <div class="col-6">
                                         <label class="form-label">Email *</label>
-                                        <div class="form-control no_text">
+                                        <div class="form-control no_text"><%= cus.getEmail() %>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +98,7 @@ To change this template use File | Settings | File Templates.
                                                 class="form-control"
                                                 placeholder="Nhập Số điện thoại"
                                                 name="phone"
-                                                value="">
+                                                value="<%= cus.getPhone()!=null? cus.getPhone():"" %>">
                                     </div>
                                     <div class="col-6">
                                         <label class="form-label">Địa chỉ *</label>
@@ -99,10 +107,12 @@ To change this template use File | Settings | File Templates.
                                                 class="form-control"
                                                 placeholder="Nhập địa chỉ"
                                                 name="address"
-                                                value="">
+                                                value="<%= cus.getAddress()!=null? cus.getAddress():"" %>">
                                     </div>
                                 </div>
                             </div>
+                            <span style="color: red; font-size: 18px; text-align: center;"><%=(error != null && error != "") ? error : ""%>
+                </span>
                             <div class="form-group">
                                 <div class="f-btn">
                                     <button type="submit"> Lưu</button>

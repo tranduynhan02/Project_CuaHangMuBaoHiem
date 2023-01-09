@@ -42,7 +42,7 @@ public class CustomerService {
 
     public static void changePassword(String username, String pass_old, String pass_new) throws SQLException {
         DBConnect dbConnect = DBConnect.getInstance();
-        String sql = "select * from customer where username = ? and password = ?";
+        String sql = "select username, password from customer where username = ? and password = ?";
         PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
         pre.setString(1, username);
         pre.setString(2, pass_old);
@@ -68,7 +68,7 @@ public class CustomerService {
     public static void resetPassword(String email) throws SQLException {
         DBConnect dbConnect = DBConnect.getInstance();
         String password = GetRandom();
-        String sql = "select * from customer where email = ?";
+        String sql = "select email, password from customer where email = ?";
         PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
         pre.setString(1, email);
         ResultSet rs = pre.executeQuery();
@@ -94,15 +94,16 @@ public class CustomerService {
         pre.setString(1, username);
         ResultSet rs = pre.executeQuery();
         if (rs.next()) {
-            customer = new Customer(Integer.parseInt(rs.getString("permission")));
+            customer = new Customer(rs.getString("name"), rs.getString("email"), rs.getString("phone"), rs.getString("address"), Integer.parseInt(rs.getString("permission")));
         }
         return customer;
     }
 
+
     public static boolean checkLogin(String username, String password) throws SQLException {
         boolean isLogin = false;
         DBConnect dbConnect = DBConnect.getInstance();
-        String sql = "select * from customer where username = ? and password = ?";
+        String sql = "select username, password from customer where username = ? and password = ?";
         PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
         pre.setString(1, username);
         pre.setString(2, password);
@@ -116,7 +117,7 @@ public class CustomerService {
     public static boolean checkUsername(String username) throws SQLException {
         boolean isUsername = false;
         DBConnect dbConnect = DBConnect.getInstance();
-        String sql = "select * from customer where username = ?";
+        String sql = "select username from customer where username = ?";
         PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
         pre.setString(1, username);
         ResultSet rs = pre.executeQuery();
@@ -129,7 +130,7 @@ public class CustomerService {
     public static boolean checkEmail(String email) throws SQLException {
         boolean isEmail = false;
         DBConnect dbConnect = DBConnect.getInstance();
-        String sql = "select * from customer where email = ?";
+        String sql = "select email from customer where email = ?";
         PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
         pre.setString(1, email);
         ResultSet rs = pre.executeQuery();
@@ -155,7 +156,7 @@ public class CustomerService {
     public static int checkActive(String username) throws SQLException {
         int isActive = 0;
         DBConnect dbConnect = DBConnect.getInstance();
-        String sql = "select * from customer where username = ?";
+        String sql = "select username, active from customer where username = ?";
         PreparedStatement pre = dbConnect.getConnection().prepareStatement(sql);
         pre.setString(1, username);
         ResultSet rs = pre.executeQuery();
