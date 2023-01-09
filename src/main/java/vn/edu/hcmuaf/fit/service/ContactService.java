@@ -33,6 +33,14 @@ public class ContactService {
     }
     public void insert(String name, String email, String subject, String content) {
         String id = "ct"+(quantity()+1);
+        int count = quantity();
+        while(true){
+            count +=1;
+            id="ct"+(count);
+            if(!idContact(id)){
+                break;
+            }
+        }
         LocalDate localDate = LocalDate.now();
         int year = localDate.getYear();
         int mont = localDate.getMonthValue();
@@ -135,6 +143,21 @@ public class ContactService {
             }
         }
 
+        return result;
+    }
+    public boolean idContact(String id){
+        boolean result=false;
+        try {
+            DBConnect dbConnect = DBConnect.getInstance();
+            PreparedStatement ps = dbConnect.getConnection().prepareStatement("select id_contact from contacts where id_contact=?");
+            ps.setString(1,id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                result=true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return result;
     }
     public static void main(String[] args) throws SQLException {
