@@ -3,7 +3,7 @@
     margin: auto;
     font-size: 14px;
     justify-content: center;
-    padding: 60px;
+    padding: 40px;
     border-radius: 5px;
     background-image: url("http://localhost:8080/WebProject_war/img/login/nendangnhap.png");
     /*opacity: 0.5;*/
@@ -24,7 +24,6 @@
     padding: 30px;
 }
 .form-group{
-    padding-bottom: 10px;
     border-radius: 5px;
     position: relative;
     margin: auto;
@@ -32,7 +31,7 @@
 .form-group .icon {
     position: absolute;
     width: 20px;
-    height: 48px;
+    height: 40px;
     padding-left: 10px;
 }
 .form-group input {
@@ -82,4 +81,28 @@
 .form-footer a:hover{
     color: #FFD333;
     border: 1px solid #FFD333;
+}
+.container-fluid .row .col-lg-9 .collapse .navbar-nav ul{
+    display: none;
+    position: absolute;
+    padding: 0px;
+    margin-top: 8px;
+    margin-left: -130px;
+}
+.container-fluid .row .col-lg-9 .collapse .navbar-nav ul li{
+    list-style-type: none;
+    width: 160px;
+    height: 40px;
+    text-align: left;
+    padding-top: 8px;
+    padding-left: 10px;
+    background-color: #3D464D;
+    border-top: 1px solid #FFD333;
+}
+.container-fluid .row .col-lg-9 .collapse .navbar-nav ul li a{
+    margin-top: 10px;
+    text-decoration: none;
+}
+.container-fluid .row .col-lg-9 .collapse .navbar-nav.ml-auto div:hover ul{
+    display: block;
 }
