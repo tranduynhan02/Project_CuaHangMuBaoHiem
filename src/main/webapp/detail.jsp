@@ -1,5 +1,11 @@
 <%@ page import="vn.edu.hcmuaf.fit.model.Product" %>
-<%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %><%--
+<%@ page import="vn.edu.hcmuaf.fit.model.NumberFormat" %>
+
+<%@ page import="java.util.Map" %>
+
+<%@ page import="java.util.List" %>
+
+<%@ page import="vn.edu.hcmuaf.fit.service.ProductService" %><%--
 Created by IntelliJ IDEA.
 User: ACER
 Date: 11/6/2022
@@ -85,17 +91,18 @@ To change this template use File | Settings | File Templates.
 <% NumberFormat nf = new NumberFormat();
     Product p= (Product) request.getAttribute("product"); %>
 <!-- Shop Detail Start -->
+<%Map<String,String> listComment = ProductService.getListComment(p.getId());%>
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
         <div class="col-lg-5 mb-30">
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="<%= p.getImg().get(0)%>" alt="Image">
+                        <img class="w-100 h-100" <%if(p.getImg().size()<=0){%>src="img/noimage.jpg"<%}else{%>src="<%= p.getImg().get(0).getImg()%>"<%}%> alt="Image">
                     </div>
                     <% for(int i = 1;i<p.getImg().size();i++){%>
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="<%=p.getImg().get(i)%>" alt="Image">
+                        <img class="w-100 h-100" src="<%=p.getImg().get(i).getImg()%>" alt="Image">
                     </div>
 
                     <%}%>
@@ -114,62 +121,49 @@ To change this template use File | Settings | File Templates.
                 <h3><%=p.getName()%></h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                        <%for (int j=1;j<=p.getStar();j++){%>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <%}
+                            if ((p.getStar()*10)%10!=0){
+                        %>
+                        <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                        <%}%>
                     </div>
-                    <small class="pt-1">(<%= p.getAmount() %> Reviews)</small>
+                    <small class="pt-1">(<%= p.getAmount() %> đánh giá)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat(p.getPrice()) %>đ</h3>
-                <p class="mb-4">Mô tả sản phẩm</p>
+                <h3 class="font-weight-semi-bold mb-4"><%= nf.numberFormat((long) (p.getPrice()-p.getPrice()*p.getDiscount())) %>đ</h3>
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Kích thước:</strong>
-                    <form>
+                    <form id="size" action="/Project_CuaHangMuBaoHiem_war/AddDetail">
+                        <input type="hidden" name="id" value="<%= p.getId() %>">
+                        <% int i=1; for(String size : p.getListSize()){ i++;%>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-2" name="size">
-                            <label class="custom-control-label" for="size-2">S</label>
+                            <input type="radio" required="required" class="custom-control-input" id="size-<%=i%>" name="size"  value="<%= size %>">
+                            <label class="custom-control-label" for="size-<%=i%>"><%= size %></label>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-3" name="size">
-                            <label class="custom-control-label" for="size-3">M</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-4" name="size">
-                            <label class="custom-control-label" for="size-4">L</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-5" name="size">
-                            <label class="custom-control-label" for="size-5">XL</label>
-                        </div>
-                    </form>
+
+                        <%}%>
                 </div>
+
                 <div class="d-flex mb-4">
                     <strong class="text-dark mr-3">Màu sắc:</strong>
-                    <form>
+                        <% int j=0; for(String color : p.getListColor()){ j++;%>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-1" name="color">
-                            <label class="custom-control-label" for="color-1">Black</label>
+                            <input type="radio"  required="required" class="custom-control-input" id="color-<%=j%>" name="color" value="<%= color%>">
+                            <label class="custom-control-label" for="color-<%=j%>"><%= color %></label>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-2" name="color">
-                            <label class="custom-control-label" for="color-2">White</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-3" name="color">
-                            <label class="custom-control-label" for="color-3">Red</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="color-4" name="color">
-                            <label class="custom-control-label" for="color-4">Blue</label>
-                        </div>
-                    </form>
+                        <%}%>
+
                 </div>
+                <div>
+
+                </div>
+                <p id="color1234" class="help-block text-danger"></p>
+
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus">
+                            <button class="btn btn-primary btn-minus" type="button">
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
@@ -177,18 +171,15 @@ To change this template use File | Settings | File Templates.
                         <input type="text" class="form-control bg-secondary border-0 text-center" name="quantity" style="height: 30px" value="1">
 
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
+                            <button class="btn btn-primary btn-plus" type="button">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-
-
-                    <a href="<%="/Project_CuaHangMuBaoHiem_war/Add?id=" + p.getId()%>"><button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
-                        giỏ hàng</button></a>
-
-
+                    <button type="submit" class="btn btn-primary px-3" onclick="check()"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào
+                        giỏ hàng</button>
                 </div>
+                </form>
                 <div class="d-flex pt-2">
                     <strong class="text-dark mr-2">Chia sẻ:</strong>
                     <div class="d-inline-flex">
@@ -214,61 +205,60 @@ To change this template use File | Settings | File Templates.
             <div class="bg-light p-30">
                 <div class="nav nav-tabs mb-4">
                     <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Mô tả sản phẩm</a>
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Bình luận (0)</a>
+
+                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Bình luận (<%=listComment.size()%>)</a>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        <h4 class="mb-3">Product Description</h4>
+                        <h4 class="mb-3">Mô tả sản phẩm</h4>
                         <p><%=p.getDecrispe()%></p>
                     </div>
 
                     <div class="tab-pane fade" id="tab-pane-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Product Name"</h4>
-                                <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                                    <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                                        <div class="text-primary mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
+                        <div class="row" style="overflow: auto">
+                            <div style="float:left;width:680px; padding-right:0px;">
+                                <%for(String key:listComment.keySet()){%>
+                                <div class="col-md-6">
+                                    <div class="media mb-4" style="width: 600px;">
+                                        <div class="media-body" >
+                                            <h6><%=ProductService.getCustomer(key).getName()%><small> - <i><%=ProductService.getDateComment(key,p.getId(),listComment.get(key))%></i></small></h6>
+                                            <div class="text-primary mb-2">
+                                                <%int star = ProductService.getStarComment(key,p.getId(),listComment.get(key));
+                                                    for(int a=0;a<star;a++){%>
+                                                <i class="fas fa-star"></i>
+                                                <%}%>
+                                            </div>
+                                            <p><%=listComment.get(key)%></p>
                                         </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
                                     </div>
                                 </div>
+                                <%}%>
                             </div>
-                            <div class="col-md-6">
-                                <form action="/Project_CuaHangMuaBaoHiem_war/getComment" method="post">
+                            <div class="col-md-6" style="float: right; width: 500px;">
+
                                 <h4 class="mb-4">Viết đánh giá</h4>
-                                <div class="d-flex my-3">
-                                    <p class="mb-0 mr-2">Đánh giá * :</p>
-                                    <div class="text-primary">
-                                        <input class="star star-5" id="star-5" value="5" type="radio" name="star"/>
-                                        <label class="star star-5" for="star-5"></label>
-                                        <input class="star star-4" id="star-4" value="4" type="radio" name="star"/>
-                                        <label class="star star-4" for="star-4"></label>
-                                        <input class="star star-3" id="star-3" value="3" type="radio" name="star"/>
-                                        <label class="star star-3" for="star-3"></label>
-                                        <input class="star star-2" id="star-2" value="2" type="radio" name="star"/>
-                                        <label class="star star-2" for="star-2"></label>
-                                        <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star"/>
-                                        <label class="star star-1" for="star-1"></label>
+                                <form action="/Project_CuaHangMuBaoHiem_war/get-comment" method="get">
+                                    <div class="d-flex my-3">
+                                        <p class="mb-0 mr-2">Đánh giá * :</p>
+                                        <div class="text-primary">
+                                            <input class="star star-5" id="star-5" value="5" type="radio" name="star">
+                                            <label class="star star-5" for="star-5"></label>
+                                            <input class="star star-4" id="star-4" value="4" type="radio" name="star">
+                                            <label class="star star-4" for="star-4"></label>
+                                            <input class="star star-3" id="star-3" value="3" type="radio" name="star">
+                                            <label class="star star-3" for="star-3"></label>
+                                            <input class="star star-2" id="star-2" value="2" type="radio" name="star">
+                                            <label class="star star-2" for="star-2"></label>
+                                            <input class="star star-1" id="star-1" value="1" type="radio" checked="checked" name="star">
+                                            <label class="star star-1" for="star-1"></label>
+                                        </div>
                                     </div>
-                                </div>
                                     <div class="form-group">
                                         <label for="message">Bình luận *</label>
                                         <textarea id="message" name="mess" cols="30" rows="5" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" name="id_Cus" value="2" class="form-control" id="name">
-<%--                                        value = idCus --%>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" name="id_Pro" value="p.getId" class="form-control" id="email">
+                                        <input type="hidden" name="id_Pro" value="1" class="form-control" id="email">
                                     </div>
                                     <div class="form-group mb-0">
                                         <input type="submit" value="Gửi" class="btn btn-primary px-3">
@@ -276,6 +266,7 @@ To change this template use File | Settings | File Templates.
                                 </form>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -287,135 +278,41 @@ To change this template use File | Settings | File Templates.
 
 <!-- Products Start -->
 <div class="container-fluid py-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May Also Like</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Có thể bạn cũng thích</span></h2>
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
+                <% List<Product> list = ProductService.listType(p.getType(),p.getId());
+                for(Product pd : list){
+                %>
+
                 <div class="product-item bg-light">
                     <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product5.jpg" alt="">
+                        <img class="img-fluid w-100" <%if(pd.getImg().size()<=0){%>src="img/noimage.jpg"<%}else{%> src="<%=pd.getImg().get(0).getImg()%>" <%}%> alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="<%= "/Project_CuaHangMuBaoHiem_war/detail?id="+pd.getId() %>"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">GRS A760k nửa đầu</a>
+                        <a class="h6 text-decoration-none text-truncate" href="<%= "/Project_CuaHangMuBaoHiem_war/detail?id="+pd.getId() %>"><%= pd.getName() %></a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h5><%=nf.numberFormat((long)(pd.getPrice()-pd.getPrice()*pd.getDiscount()))%>đ</h5><h6 class="text-muted ml-2"><del><%=nf.numberFormat(pd.getPrice())%>đ</del></h6>
                         </div>
+                        <% if(p.sumQuantity()<=0) {%>Hết hàng<%}else{%> Còn: <%=p.sumQuantity()%><%}%>
                         <div class="d-flex align-items-center justify-content-center mb-1">
+                            <%for (int x=1;x<=pd.getStar();x++){%>
                             <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <%}
+                                if ((pd.getStar()*10)%10!=0){
+                            %>
+                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                            <%}%>
+                            <small>(<%=pd.getAmount()%>)</small>
                         </div>
                     </div>
                 </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product6.png" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 922</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product7.png" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">GRS 760 kính to</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product8.png" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Zeus 613B nón 3/4</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/product3.jpg" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Nón GRS 966-1</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
+
+                <%}%>
             </div>
         </div>
     </div>
@@ -444,6 +341,7 @@ To change this template use File | Settings | File Templates.
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
+<script src="js/addDetail.js"></script>
 </body>
 
 </html>

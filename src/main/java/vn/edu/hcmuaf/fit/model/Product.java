@@ -1,5 +1,9 @@
 package vn.edu.hcmuaf.fit.model;
 
+import vn.edu.hcmuaf.fit.service.ProductService;
+
+import java.security.Key;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Product{
@@ -10,7 +14,7 @@ public class Product{
 
     private String type;
     private double discount;
-    private List<String> img;
+    private List<ImageProduct> img;
     private double star;
     private int amount;
     private Map<String, List<String>> comment;
@@ -30,7 +34,7 @@ public class Product{
         this.brand = brand;
         this.type = type;
         this.discount = discount;
-        this.img = new ArrayList<String>();
+        this.img = new ArrayList<ImageProduct>();
         this.star = star;
         this.amount = amount;
         this.comment = new HashMap<String, List<String>>();
@@ -40,7 +44,8 @@ public class Product{
     }
 
     public String getId() {
-        return detail.get(0).getId();
+        return this.id;
+
     }
 
     public void setId(String id) {
@@ -87,11 +92,11 @@ public class Product{
         this.discount = discount;
     }
 
-    public List<String> getImg() {
+    public List<ImageProduct> getImg() {
         return img;
     }
 
-    public void setImg(List<String> img) {
+    public void setImg(List<ImageProduct> img) {
         this.img = img;
     }
 
@@ -168,5 +173,51 @@ public class Product{
                 ", release=" + release +
                 ", detail=" + detail +
                 '}';
+    }
+    public int sumQuantity() {
+        int sum = 0;
+        for(DetailProduct dp : detail){
+            sum+= dp.getQuantity();
+        }
+        return sum;
+    }
+    public String getKey(){
+        return this.id+""+this.getDetail().get(0).getId();
+    }
+    public List<String> getListSize(){
+        List<String> list = new LinkedList<String>();
+        for(DetailProduct size : getDetail()){
+            if(!list.contains(size.getSize())){
+                list.add(size.getSize());
+            }
+        }
+        return list;
+    }
+    public List<String> getListColor(){
+        List<String> list = new LinkedList<String>();
+        for(DetailProduct size : getDetail()){
+            if(!list.contains(size.getColor())){
+                list.add(size.getColor());
+            }
+        }
+        return list;
+    }
+    public int getQuantitySizeColor(String size,String color){
+        int sum = 0;
+        for(DetailProduct dp : getDetail()){
+            if(dp.getSize().equalsIgnoreCase(size) && dp.getColor().equalsIgnoreCase(color)){
+                sum = dp.getQuantity();
+            }
+        }
+        return sum;
+    }
+    public int getQuantitySize(String size){
+        int sum = 0;
+        for(DetailProduct dp : getDetail()){
+            if(dp.getSize().equalsIgnoreCase(size)){
+                sum += dp.getQuantity();
+            }
+        }
+        return sum;
     }
 }

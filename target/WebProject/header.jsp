@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="cart" class="vn.edu.hcmuaf.fit.model.Cart" scope="session"/>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -30,13 +31,14 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="fontawesome-free-6.2.1/css/all.css" rel="stylesheet">
 </head>
 <body>
 <!-- Topbar Start -->
 <div class="container-fluid">
     <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
-            <a href="index.jsp" class="text-decoration-none">
+            <a href="/Project_CuaHangMuBaoHiem_war/Home" class="text-decoration-none">
                 <span class="h1 text-uppercase text-primary bg-dark px-2">Helmets</span>
                 <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
             </a>
@@ -46,8 +48,8 @@
                 <div class="input-group">
                     <input type="text" name="text" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm">
                     <div class="input-group-append">
-                        <input type="submit" value="Tìm kiếm" class="input-group-text bg-transparent text-primary">
-                        <%--                                <i class="fa fa-search"></i>--%>
+                            <input type="submit" value="Tìm kiếm" class="input-group-text bg-transparent text-primary">
+<%--                                <i class="fa fa-search"></i>--%>
                     </div>
                 </div>
             </form>
@@ -65,18 +67,16 @@
 <div class="container-fluid bg-dark mb-30">
     <div class="row px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
-               href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+            <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
                 <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Danh mục sản phẩm</h6>
                 <i class="fa fa-angle-down text-dark"></i>
             </a>
-            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
-                 id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+            <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                 <div class="navbar-nav w-100">
-                    <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm fullface</a>
-                    <a href="shop.jsp" class="nav-item nav-link">Nón bảo hiểm 3/4</a>
-                    <a href="shop.jsp" class="nav-item nav-link">Nón nửa đầu</a>
-                    <a href="shop.jsp" class="nav-item nav-link">Nón trẻ em</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/ListFullface" class="nav-item nav-link">Nón bảo hiểm fullface</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/List3_4" class="nav-item nav-link">Nón bảo hiểm 3/4</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/ListNuaDau" class="nav-item nav-link">Nón nửa đầu</a>
+                    <a href="/Project_CuaHangMuBaoHiem_war/ListChildren" class="nav-item nav-link">Nón trẻ em</a>
                 </div>
             </nav>
         </div>
@@ -91,47 +91,20 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="index.jsp" class="nav-item nav-link">Trang chủ</a>
+                        <a href="/Project_CuaHangMuBaoHiem_war/Home" class="nav-item nav-link">Trang chủ</a>
                         <a href="/Project_CuaHangMuBaoHiem_war/list-product" class="nav-item nav-link">Sản phẩm</a>
-                        <a href="publicshop.jsp" class="nav-item nav-link">Thương hiệu</a>
+                        <a href="list_brand.jsp" class="nav-item nav-link">Thương hiệu</a>
                         <a href="contact.jsp" class="nav-item nav-link">Liên hệ</a>
                     </div>
-                    <div class="navbar-nav ml-auto py-0">
-                        <div class="navbar-nav ml-auto py-0">
-                            <% String s = (String) request.getSession().getAttribute("tendangnhap");%>
-                            <% if (s == null) {%>
-                            <div class="navbar-nav ml-auto py-0">
-                                <a href="login.jsp" class="nav-item nav-link">
-                                    <i class="fas fa-user text-primary" style="padding-top: 4px"></i>
-                                </a>
-                            </div>
-                            <% } else { %>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i
-                                        class="fas fa-user text-primary"
-                                        style="padding-top: 4px; padding-right: 4px; "></i><%=s%>
-                                </a>
-                                <div class="dropdown-menu bg-dark border-bt-primary m-0">
-                                    <a href="account.jsp" class="dropdown-item text-primary">Thông tin</a>
-                                    <a href="DoLogout" class="dropdown-item text-primary">Đăng xuất</a>
-                                </div>
-                            </div>
-                            <% }%>
+                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <a href="login.jsp" class="btn px-0">
+                            <i class="fas fa-user text-primary"></i>
+                        </a>
+                        <a href="/Project_CuaHangMuBaoHiem_war/ListProductInCart" class="btn px-0 ml-3">
+                            <i class="fas fa-shopping-cart text-primary"></i>
 
-                            <div class="navbar-nav ml-auto py-0">
-                                <a href="/Project_CuaHangMuBaoHiem_war/ListProductInCart" class="nav-item nav-link">
-                                    <i class="fas fa-shopping-cart text-primary"></i>
-                                    <% Cart cart = (Cart) request.getSession().getAttribute("cart");
-                                        if (cart == null) {
-                                            cart = new Cart();
-                                        }
-                                        request.getSession().setAttribute("cart", cart);
-                                    %>
-                                    <span class="badge text-secondary border border-secondary rounded-circle"
-                                          style="padding-bottom: 2px;"><%=cart.getQuanlity()%></span>
-                                </a>
-                            </div>
-                        </div>
+                            <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><%=cart.getQuanlity()%></span>
+                        </a>
                     </div>
                 </div>
             </nav>

@@ -51,8 +51,6 @@
         </div>
     </div>
     <!-- Breadcrumb End -->
-
-
     <!-- Cart Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -61,8 +59,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Sản phẩm</th>
-                         </th>   <th>Giá tiền</th>
-                            <th>Số lượng
+                            <th>Kích thước</th>
+                            <th>Màu sắc</th>
+                         <th>Giá tiền</th>
+                            <th>Số lượng</th>
                             <th>Tổng tiền</th>
                             <th>Xóa</th>
                         </tr>
@@ -72,15 +72,15 @@
                             for(Product p: cart.getListProduct()){
                         %>
                         <tr>
-                            <td class="align-middle"><div style="float: left"><img src="<%= p.getImg().get(0) %>" alt="" style="width: 50px;"> <%= p.getName() %></div></td>
-                            <td class="align-middle"><%=nf.numberFormat(p.getPrice())%>đ</td>
+                            <td class="align-middle"><div style="float: left"><img <%if(p.getImg().size()<=0){%>src="img/noimage.jpg" <%}else{%>src="<%= p.getImg().get(0).getImg() %>"<%}%> alt="" style="width: 50px;"> <%= p.getName() %></div></td>
+                            <td class="align-middle"><%=p.getDetail().get(0).getSize()%></td>
+                            <td class="align-middle"><%=p.getDetail().get(0).getColor()%></td>
+                            <td class="align-middle"><%=nf.numberFormat((long) (p.getPrice()-p.getPrice()*p.getDiscount()))%>đ</td>
                             <td class="align-middle">
-
-
                                 <div class="input-group mx-auto" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <form action="/Project_CuaHangMuBaoHiem_war/Minus" method="get">
-                                            <input type="hidden" name="minus" value="<%= p.getId() %>">
+                                            <input type="hidden" name="minus" value="<%= p.getKey() %>">
                                             <button type="submit" class="btn btn-sm btn-primary btn"> <i class="fa fa-minus"></i></button>
                                         </form>
                                     </div>
@@ -88,18 +88,26 @@
                                     <div class="input-group-btn">
                                         <form method="get" action="/Project_CuaHangMuBaoHiem_war/Plus">
                                             <input type="hidden" name="plus" value="<%= p.getId() %>">
-                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <input type="hidden" name="size" value="<%= p.getDetail().get(0).getSize() %>">
+                                            <input type="hidden" name="color" value="<%= p.getDetail().get(0).getColor() %>">
+                                            <%if(p.getQuantity() >= p.getDetail().get(0).getQuantity()){%>
+                                        <button class="btn btn-sm btn-primary btn-plus" disabled>
                                             <i class="fa fa-plus"></i>
                                         </button>
+                                            <%}else{%>
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <%}%>
                                         </form>
                                     </div>
                                 </div>
 
                             </td>
-                            <td class="align-middle"><%= nf.numberFormat(p.getPrice()*p.getQuantity()) %>đ</td>
+                            <td class="align-middle"><%= nf.numberFormat((long) ((p.getPrice()-p.getPrice()*p.getDiscount())*p.getQuantity())) %>đ</td>
                             <td class="align-middle">
                                 <form method="get" action="/Project_CuaHangMuBaoHiem_war/Delete">
-                                <input type="hidden" name="delete" value="<%= p.getId() %>">
+                                <input type="hidden" name="delete" value="<%= p.getKey() %>">
                                 <button class="btn btn-sm btn-danger" ><i class="fa fa-times"></i></button>
                             </form></td>
                         </tr>
@@ -108,14 +116,7 @@
                 </table>
             </div>
             <div class="col-lg-4">
-                <form class="mb-30" >
-                    <div class="input-group">
-                        <input type="text" class="form-control border-0 p-4" placeholder="Mã giảm giá">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Áp dụng phiếu giảm giá</button>
-                        </div>
-                    </div>
-                </form>
+
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Giỏ hàng</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom pb-2">

@@ -8,9 +8,6 @@ To change this template use File | Settings | File Templates.
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>HelmetsShop</title>
@@ -33,8 +30,9 @@ To change this template use File | Settings | File Templates.
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/account.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/account.css">
 </head>
 
 <body>
@@ -46,16 +44,10 @@ To change this template use File | Settings | File Templates.
 <section class="nav-vertical">
     <div class="row">
         <div class="col-3">
-            <%--            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">--%>
-            <%--                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-info" role="tab"--%>
-            <%--                   aria-controls="v-pills-info" aria-selected="true">Thông tin cá nhân</a>--%>
-            <%--                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-reset_pw" role="tab"--%>
-            <%--                   aria-controls="#v-pills-reset_pw" aria-selected="false">Đổi mật khẩu</a>--%>
-            <%--            </div>--%>
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-home-tab" href="account.jsp" role="tab"
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-info" role="tab"
                    aria-controls="v-pills-info" aria-selected="true">Thông tin cá nhân</a>
-                <a class="nav-link" id="v-pills-profile-tab" href="change-password.jsp" role="tab"
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-reset_pw" role="tab"
                    aria-controls="#v-pills-reset_pw" aria-selected="false">Đổi mật khẩu</a>
             </div>
         </div>
@@ -64,7 +56,7 @@ To change this template use File | Settings | File Templates.
                 <div class="tab-pane fade show active" id="v-pills-info" role="tabpanel"
                      aria-labelledby="v-pills-info-tab">
                     <div class="form-account">
-                        <form action="/Project_CuaHangMuBaoHiem_war/DoProfile">
+                        <form action="">
                             <div class="title">Thông tin cá nhân</div>
                             <div class="form-group">
                                 <div class="row">
@@ -73,13 +65,14 @@ To change this template use File | Settings | File Templates.
                                         <input type="text"
                                                class="form-control"
                                                placeholder="Nhập Họ và tên"
-                                               name="name"
                                                value="">
                                     </div>
                                     <div class="col-6">
-                                        <label class="form-label">Email *</label>
-                                        <div class="form-control no_text">
-                                        </div>
+                                        <label for="inputEmail" class="form-label">Email *</label>
+                                        <input
+                                                type="email" class="form-control" id="inputEmail"
+                                                placeholder=" Nhập email"
+                                                value="">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -89,7 +82,6 @@ To change this template use File | Settings | File Templates.
                                                 type="text"
                                                 class="form-control"
                                                 placeholder="Nhập Số điện thoại"
-                                                name="phone"
                                                 value="">
                                     </div>
                                     <div class="col-6">
@@ -98,7 +90,6 @@ To change this template use File | Settings | File Templates.
                                                 type="text"
                                                 class="form-control"
                                                 placeholder="Nhập địa chỉ"
-                                                name="address"
                                                 value="">
                                     </div>
                                 </div>
@@ -113,11 +104,10 @@ To change this template use File | Settings | File Templates.
                 </div>
                 <div class="tab-pane fade" id="v-pills-reset_pw" role="tabpanel" aria-labelledby="v-pills-reset_pw-tab">
                     <div class="form-account">
-                        <form action="/Project_CuaHangMuBaoHiem_war/doChangePassword" method="post">
+                        <form action="">
                             <div class="title">Đổi mật khẩu</div>
                             <div class="form-group-rp">
-                                <input type="password" class="form-control" placeholder="Mật khẩu hiện tại"
-                                       name="pass_old">
+                                <input type="password" class="form-control" placeholder="Mật khẩu cũ" name="pass_old">
                                 <input type="password" class="form-control" placeholder="Mật khẩu mới" name="pass_new">
                                 <input type="password" class="form-control" placeholder="Nhập lại mật khẩu"
                                        name="confirm_pwn">
