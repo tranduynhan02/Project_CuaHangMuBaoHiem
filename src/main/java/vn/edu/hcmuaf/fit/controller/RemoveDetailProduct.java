@@ -13,7 +13,7 @@ public class RemoveDetailProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id_dp= request.getParameter("id_dp");
         String id_product = request.getParameter("id");
-//        ProductService.removeDetailProduct(id_dp);
+        ProductService.removeDetailProduct(id_dp);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/DetailProduct?id=" + id_product);
     }
 

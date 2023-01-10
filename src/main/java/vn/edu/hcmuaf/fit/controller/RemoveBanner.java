@@ -12,7 +12,7 @@ public class RemoveBanner extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-//        SlideShowService.getInstance().removeBanner(id);
+        SlideShowService.getInstance().removeBanner(id);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/ManageHome");
     }
 

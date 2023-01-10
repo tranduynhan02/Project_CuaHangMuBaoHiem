@@ -173,7 +173,7 @@
             </div>
             <div class="ml-2">
               <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
+                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sắp xếp</button>
                 <div class="dropdown-menu dropdown-menu-right">
 
                   <a class="dropdown-item" href="/Project_CuaHangMuBaoHiem_war/sort?text=new">Mới nhất</a>

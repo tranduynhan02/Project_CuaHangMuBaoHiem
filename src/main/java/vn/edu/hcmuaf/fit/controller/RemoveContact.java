@@ -12,7 +12,7 @@ public class RemoveContact extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-//        ContactService.getInstance().remove(id);
+        ContactService.getInstance().remove(id);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/ManageContact");
     }
 

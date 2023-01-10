@@ -12,7 +12,7 @@ public class RemoveSlideShow extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-//        SlideShowService.getInstance().removeSlideShow(id);
+        SlideShowService.getInstance().removeSlideShow(id);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/ManageHome");
     }
 
