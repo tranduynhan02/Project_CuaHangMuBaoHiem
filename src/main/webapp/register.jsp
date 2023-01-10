@@ -47,7 +47,8 @@ To change this template use File | Settings | File Templates.
 <% String email = (String) request.getParameter("email");%>
 <% String username = (String) request.getParameter("username");%>
 <section>
-    <div class="form-container">
+    <div class="form-container "
+         style="background: url('//localhost:8080/Project_CuaHangMuBaoHiem_war/img/login/nendangnhap.png')">
         <div class="form-login">
             <form action="/Project_CuaHangMuBaoHiem_war/doRegister" method="post">
                 <div class="title">Đăng ký</div>
@@ -77,7 +78,7 @@ To change this template use File | Settings | File Templates.
                     <input type="password" id="password" class="form-control" placeholder="Mật khẩu" name="password">
                     <p style="color: red">Mật khẩu phải chứa tối thiểu 6 ký tự.</p>
                 </div>
-F
+                F
                 <div class="form-group">
                     <div class="icon d-flex align-items-center justify-content-center">
                         <span class="fa-solid fa-lock"></span></div>

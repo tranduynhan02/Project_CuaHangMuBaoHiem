@@ -13,7 +13,7 @@ public class RemoveImage extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id_img= request.getParameter("id_img");
         String id_product = request.getParameter("id");
-//        ProductService.removeImage(id_img);
+        ProductService.removeImage(id_img);
         response.sendRedirect("/Project_CuaHangMuBaoHiem_war/DetailProduct?id=" + id_product);
     }
 
